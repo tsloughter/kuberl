@@ -1,0 +1,18 @@
+{application, kuberl,
+ [{description, "Erlang Kubernetes client"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {applications,
+    [kernel,
+     stdlib,
+     ssl,
+     hackney,
+     ctx
+    ]},
+  {env, [{host, "localhost:8001"}]},
+  {modules, []},
+
+  {maintainers, ["Tristan Sloughter"]},
+  {licenses, ["Apache 2"]},
+  {links, [{"Github", "https://github.com/tsloughter/kuberl"}]}
+]}.

@@ -1,0 +1,24 @@
+{"1.1.0",
+[{<<"augle">>,{pkg,<<"augle">>,<<"0.3.0">>},0},
+ {<<"certifi">>,{pkg,<<"certifi">>,<<"2.0.0">>},1},
+ {<<"ctx">>,{pkg,<<"ctx">>,<<"0.1.0">>},0},
+ {<<"hackney">>,{pkg,<<"hackney">>,<<"1.10.1">>},0},
+ {<<"idna">>,{pkg,<<"idna">>,<<"5.1.0">>},1},
+ {<<"jsx">>,{pkg,<<"jsx">>,<<"2.8.3">>},0},
+ {<<"metrics">>,{pkg,<<"metrics">>,<<"1.0.1">>},1},
+ {<<"mimerl">>,{pkg,<<"mimerl">>,<<"1.0.2">>},1},
+ {<<"ssl_verify_fun">>,{pkg,<<"ssl_verify_fun">>,<<"1.1.1">>},1},
+ {<<"unicode_util_compat">>,{pkg,<<"unicode_util_compat">>,<<"0.3.1">>},2}]}.
+[
+{pkg_hash,[
+ {<<"augle">>, <<"25633E47BB163ECB74EB34628DB49B622FEC659137C2A3250FA5430965DF272B">>},
+ {<<"certifi">>, <<"A0C0E475107135F76B8C1D5BC7EFB33CD3815CB3CF3DEA7AEFDD174DABEAD064">>},
+ {<<"ctx">>, <<"A188F86F94A5743B4DBF1B3B9A4C7C714EE7764F66A9F9DA5B99BE93FA0F7F02">>},
+ {<<"hackney">>, <<"C38D0CA52EA80254936A32C45BB7EB414E7A96A521B4CE76D00A69753B157F21">>},
+ {<<"idna">>, <<"D72B4EFFEB324AD5DA3CAB1767CB16B17939004E789D8C0AD5B70F3CEA20C89A">>},
+ {<<"jsx">>, <<"A05252D381885240744D955FBE3CF810504EB2567164824E19303EA59EEF62CF">>},
+ {<<"metrics">>, <<"25F094DEA2CDA98213CECC3AEFF09E940299D950904393B2A29D191C346A8486">>},
+ {<<"mimerl">>, <<"993F9B0E084083405ED8252B99460C4F0563E41729AB42D9074FD5E52439BE88">>},
+ {<<"ssl_verify_fun">>, <<"28A4D65B7F59893BC2C7DE786DEC1E1555BD742D336043FE644AE956C3497FBE">>},
+ {<<"unicode_util_compat">>, <<"A1F612A7B512638634A603C8F401892AFBF99B8CE93A45041F8AACA99CADB85E">>}]}
+].

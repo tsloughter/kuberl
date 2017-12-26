@@ -1,0 +1,29 @@
+-module(kuberl_v1_replication_controller_status).
+
+-export([encode/1]).
+
+-export_type([kuberl_v1_replication_controller_status/0]).
+
+-type kuberl_v1_replication_controller_status() ::
+    #{ 'availableReplicas' => integer(),
+       'conditions' => list(),
+       'fullyLabeledReplicas' => integer(),
+       'observedGeneration' => integer(),
+       'readyReplicas' => integer(),
+       'replicas' := integer()
+     }.
+
+encode(#{ 'availableReplicas' := AvailableReplicas,
+          'conditions' := Conditions,
+          'fullyLabeledReplicas' := FullyLabeledReplicas,
+          'observedGeneration' := ObservedGeneration,
+          'readyReplicas' := ReadyReplicas,
+          'replicas' := Replicas
+        }) ->
+    #{ 'availableReplicas' => AvailableReplicas,
+       'conditions' => Conditions,
+       'fullyLabeledReplicas' => FullyLabeledReplicas,
+       'observedGeneration' => ObservedGeneration,
+       'readyReplicas' => ReadyReplicas,
+       'replicas' => Replicas
+     }.
