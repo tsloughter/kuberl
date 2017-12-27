@@ -32,7 +32,7 @@
          replace_namespaced_role/4, replace_namespaced_role/5,
          replace_namespaced_role_binding/4, replace_namespaced_role_binding/5]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% create a ClusterRole

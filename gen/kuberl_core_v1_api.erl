@@ -241,7 +241,7 @@
          replace_persistent_volume/3, replace_persistent_volume/4,
          replace_persistent_volume_status/3, replace_persistent_volume_status/4]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% connect DELETE requests to proxy of Pod

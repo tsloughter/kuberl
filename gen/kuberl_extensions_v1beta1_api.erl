@@ -71,7 +71,7 @@
          replace_namespaced_replication_controller_dummy_scale/4, replace_namespaced_replication_controller_dummy_scale/5,
          replace_pod_security_policy/3, replace_pod_security_policy/4]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% create a DaemonSet

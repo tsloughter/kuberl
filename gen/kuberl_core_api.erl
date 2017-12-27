@@ -2,7 +2,7 @@
 
 -export([get_api_versions/1, get_api_versions/2]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% get available API versions

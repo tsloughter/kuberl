@@ -10,7 +10,7 @@
          read_namespaced_pod_preset/3, read_namespaced_pod_preset/4,
          replace_namespaced_pod_preset/4, replace_namespaced_pod_preset/5]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% create a PodPreset

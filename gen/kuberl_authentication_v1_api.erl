@@ -3,7 +3,7 @@
 -export([create_token_review/2, create_token_review/3,
          get_api_resources/1, get_api_resources/2]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% create a TokenReview

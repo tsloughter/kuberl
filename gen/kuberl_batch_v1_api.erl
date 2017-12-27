@@ -13,7 +13,7 @@
          replace_namespaced_job/4, replace_namespaced_job/5,
          replace_namespaced_job_status/4, replace_namespaced_job_status/5]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% create a Job

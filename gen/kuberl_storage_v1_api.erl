@@ -9,7 +9,7 @@
          read_storage_class/2, read_storage_class/3,
          replace_storage_class/3, replace_storage_class/4]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% create a StorageClass

@@ -10,7 +10,7 @@
          replace_custom_resource_definition/3, replace_custom_resource_definition/4,
          replace_custom_resource_definition_status/3, replace_custom_resource_definition_status/4]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% create a CustomResourceDefinition

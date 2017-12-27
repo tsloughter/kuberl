@@ -9,7 +9,7 @@
          read_priority_class/2, read_priority_class/3,
          replace_priority_class/3, replace_priority_class/4]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% create a PriorityClass

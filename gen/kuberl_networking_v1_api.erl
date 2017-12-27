@@ -10,7 +10,7 @@
          read_namespaced_network_policy/3, read_namespaced_network_policy/4,
          replace_namespaced_network_policy/4, replace_namespaced_network_policy/5]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% create a NetworkPolicy

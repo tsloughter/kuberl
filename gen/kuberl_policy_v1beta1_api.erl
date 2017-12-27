@@ -13,7 +13,7 @@
          replace_namespaced_pod_disruption_budget/4, replace_namespaced_pod_disruption_budget/5,
          replace_namespaced_pod_disruption_budget_status/4, replace_namespaced_pod_disruption_budget_status/5]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% create a PodDisruptionBudget

@@ -11,7 +11,7 @@
          replace_cluster_custom_object/6, replace_cluster_custom_object/7,
          replace_namespaced_custom_object/7, replace_namespaced_custom_object/8]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% Creates a cluster scoped Custom object

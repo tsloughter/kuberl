@@ -39,7 +39,7 @@
          replace_namespaced_stateful_set_scale/4, replace_namespaced_stateful_set_scale/5,
          replace_namespaced_stateful_set_status/4, replace_namespaced_stateful_set_status/5]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% create a ControllerRevision

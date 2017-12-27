@@ -2,7 +2,7 @@
 
 -export([get_api_group/1, get_api_group/2]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% get information of a group

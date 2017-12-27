@@ -11,7 +11,7 @@
          replace_certificate_signing_request_approval/3, replace_certificate_signing_request_approval/4,
          replace_certificate_signing_request_status/3, replace_certificate_signing_request_status/4]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% create a CertificateSigningRequest

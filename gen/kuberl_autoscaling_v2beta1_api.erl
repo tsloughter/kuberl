@@ -13,7 +13,7 @@
          replace_namespaced_horizontal_pod_autoscaler/4, replace_namespaced_horizontal_pod_autoscaler/5,
          replace_namespaced_horizontal_pod_autoscaler_status/4, replace_namespaced_horizontal_pod_autoscaler_status/5]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% create a HorizontalPodAutoscaler

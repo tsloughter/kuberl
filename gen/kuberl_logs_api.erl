@@ -3,7 +3,7 @@
 -export([log_file_handler/2, log_file_handler/3,
          log_file_list_handler/1, log_file_list_handler/2]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% 

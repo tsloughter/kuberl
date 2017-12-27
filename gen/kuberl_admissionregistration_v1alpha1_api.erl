@@ -16,7 +16,7 @@
          replace_external_admission_hook_configuration/3, replace_external_admission_hook_configuration/4,
          replace_initializer_configuration/3, replace_initializer_configuration/4]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% create an ExternalAdmissionHookConfiguration

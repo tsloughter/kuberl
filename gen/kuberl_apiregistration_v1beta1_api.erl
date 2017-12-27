@@ -10,7 +10,7 @@
          replace_api_service/3, replace_api_service/4,
          replace_api_service_status/3, replace_api_service_status/4]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% create an APIService

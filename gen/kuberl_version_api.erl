@@ -2,7 +2,7 @@
 
 -export([get_code/1, get_code/2]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% get the code version

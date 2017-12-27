@@ -6,7 +6,7 @@
          create_subject_access_review/2, create_subject_access_review/3,
          get_api_resources/1, get_api_resources/2]).
 
--define(BASE_URL, <<"">>).
+-define(BASE_URL, "").
 
 %% @doc 
 %% create a LocalSubjectAccessReview
