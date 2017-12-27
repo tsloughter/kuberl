@@ -31,6 +31,8 @@
                last_version :: undefined | integer(),
                backoff :: undefined | unicode:chardata()}).
 
+-define(RECONNECT_TIMEOUT, timer:seconds(1)).
+
 start_link(CbModule, ApiModule, ApiMethod, RequiredArgs, Optional, CbArgs) ->
     gen_statem:start_link(?MODULE, [CbModule, ApiModule, ApiMethod, RequiredArgs, Optional, CbArgs], []).
 
@@ -50,7 +52,7 @@ init([CbModule, ApiModule, ApiMethod, RequiredArgs, Optional, CbArgs]) ->
                                decode_fun=undefined,
                                cb_module=CbModule,
                                cb_data=CbData,
-                               backoff=undefined,
+                               backoff=backoff:init(timer:seconds(1), timer:seconds(10)),
                                last_version=LastVersion}, {next_event, internal, connect}};
         ignore ->
             ignore;
@@ -61,38 +63,61 @@ init([CbModule, ApiModule, ApiMethod, RequiredArgs, Optional, CbArgs]) ->
 callback_mode() ->
     state_functions.
 
-closed(internal, connect, Data=#data{api_call={ApiModule, ApiMethod},
-                                     required_args=RequiredArgs,
-                                     optional_args=Optional,
-                                     last_version=LastVersion}) ->
+closed(state_timeout, connect, Data) ->
+    try_request(Data);
+closed(internal, connect, Data) ->
+    try_request(Data).
+
+try_request(Data=#data{api_call={ApiModule, ApiMethod},
+                       required_args=RequiredArgs,
+                       optional_args=Optional,
+                       last_version=LastVersion,
+                       backoff=Backoff}) ->
     OptionalParams = maps:get(params, Optional, #{}),
     Optional1 = Optional#{params => OptionalParams#{resourceVersion => LastVersion}},
     ApplyArgs = RequiredArgs++[Optional1],
-    {ok, ClientRef} = erlang:apply(ApiModule, ApiMethod, ApplyArgs),
-    {next_state, open, Data#data{client_ref=ClientRef}}.
+    try erlang:apply(ApiModule, ApiMethod, ApplyArgs) of
+        {ok, ClientRef} ->
+            {_, B1} = backoff:succeed(Backoff),
+            {next_state, open, Data#data{client_ref=ClientRef,
+                                         backoff=B1}}
+    catch
+        _:_ ->
+            T = backoff:get(Backoff),
+            {_, B1} = backoff:fail(Backoff),
+            {keep_state, Data#data{client_ref=undefined,
+                                   backoff=B1}, [{state_timeout, T, connect}]}
+    end.
 
 open(Type, Event, Data) ->
     handle_event(Type, Event, Data).
 
-handle_event(info, {hackney_response, Ref, {status, _StatusInt, _Reason}}, _Data=#data{client_ref=Ref}) ->
+handle_event(info, {hackney_response, ClientRef, {status, _StatusInt, _Reason}}, #data{client_ref=ClientRef}) ->
     keep_state_and_data;
-handle_event(info, {hackney_response, Ref, {headers, _Headers}}, _Data=#data{client_ref=Ref}) ->
+handle_event(info, {hackney_response, ClientRef, {headers, _Headers}}, #data{client_ref=ClientRef}) ->
     keep_state_and_data;
-handle_event(info, {hackney_response, Ref, {error, {closed, timeout}}}, Data=#data{client_ref=Ref}) ->
-    {next_state, closed, Data#data{client_ref=undefined,
-                                   decode_fun=undefined}, {next_event, internal, connect}};
-handle_event(info, {hackney_response, Ref, Bin}, Data=#data{cb_module=CbModule,
-                                                            cb_data=CbData,
-                                                            decode_fun=DecodeFun,
-                                                            client_ref=Ref,
-                                                            last_version=LastVersion}) when is_binary(Bin) ->
+handle_event(info, {hackney_response, ClientRef, Bin}, Data=#data{cb_module=CbModule,
+                                                                  cb_data=CbData,
+                                                                  decode_fun=DecodeFun,
+                                                                  client_ref=ClientRef,
+                                                                  last_version=LastVersion}) when is_binary(Bin) ->
     {ok, NewDecodeFun, NewCbData, NewLastVersion} = handle_data(Bin, DecodeFun, CbModule, CbData, LastVersion),
     {keep_state, Data#data{decode_fun=NewDecodeFun,
                            cb_data=NewCbData,
                            last_version=NewLastVersion}};
-handle_event(info, _, _Data) ->
-    keep_state_and_data.
+handle_event(info, {hackney_response, ClientRef, {error, {closed, timeout}}}, Data=#data{client_ref=ClientRef}) ->
+    {next_state, closed, Data#data{client_ref=undefined,
+                                   decode_fun=undefined}, [{state_timeout, ?RECONNECT_TIMEOUT, connect}]};
+handle_event(info, {hackney_response, ClientRef, done}, Data=#data{client_ref=ClientRef}) ->
+    %% Our work is never done. Reconnect like we would on a {closed, timeout}
+    {next_state, closed, Data#data{client_ref=undefined,
+                                   decode_fun=undefined}, [{state_timeout, ?RECONNECT_TIMEOUT, connect}]}.
 
+terminate(Reason, _State, #data{cb_module=CbModule,
+                                cb_data=CbData,
+                                client_ref=undefined}) ->
+    CbModule:terminate(Reason, CbData),
+    ok;
 terminate(Reason, _State, #data{cb_module=CbModule,
                                 cb_data=CbData,
                                 client_ref=ClientRef}) ->

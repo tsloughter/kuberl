@@ -8,7 +8,7 @@
          terminate/2]).
 
 example() ->
-    kuberl_watch:start_link(?MODULE, kuberl_core_v1_api, list_pod_for_all_namespaces, [ctx:with_values(#{})], #{}, []).
+    kuberl_watch:start_link(?MODULE, kuberl_core_v1_api, list_pod_for_all_namespaces, [ctx:background()], #{}, []).
 
 init([]) ->
     {ok, []}.
@@ -26,5 +26,6 @@ handle_event(error, #{message := Message}, State) ->
     io:format("Error : ~p~n", [Message]),
     {ok, State}.
 
-terminate(_Reason, _State) ->
+terminate(Reason, _State) ->
+    io:format("Terminating : ~p~n", [Reason]),
     ok.
