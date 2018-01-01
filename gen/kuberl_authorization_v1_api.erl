@@ -23,7 +23,7 @@ create_namespaced_local_subject_access_review(Ctx, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -43,7 +43,7 @@ create_self_subject_access_review(Ctx, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -63,7 +63,7 @@ create_self_subject_rules_review(Ctx, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -83,7 +83,7 @@ create_subject_access_review(Ctx, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -103,7 +103,7 @@ get_api_resources(Ctx, Optional) ->
     QS = [],
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"application/json">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json">>, <<"application/yaml">>, <<"application/vnd.kubernetes.protobuf">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).

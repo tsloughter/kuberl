@@ -20,7 +20,7 @@ log_file_handler(Ctx, Logpath, Optional) ->
     QS = [],
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -40,7 +40,7 @@ log_file_list_handler(Ctx, Optional) ->
     QS = [],
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).

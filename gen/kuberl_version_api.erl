@@ -19,7 +19,7 @@ get_code(Ctx, Optional) ->
     QS = [],
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"application/json">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).

@@ -30,7 +30,7 @@ create_namespaced_pod_disruption_budget(Ctx, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -50,7 +50,7 @@ delete_collection_namespaced_pod_disruption_budget(Ctx, Namespace, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'continue', 'fieldSelector', 'includeUninitialized', 'labelSelector', 'limit', 'resourceVersion', 'timeoutSeconds', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -70,7 +70,7 @@ delete_namespaced_pod_disruption_budget(Ctx, Name, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'gracePeriodSeconds', 'orphanDependents', 'propagationPolicy'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -90,7 +90,7 @@ get_api_resources(Ctx, Optional) ->
     QS = [],
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"application/json">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json">>, <<"application/yaml">>, <<"application/vnd.kubernetes.protobuf">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -110,7 +110,7 @@ list_namespaced_pod_disruption_budget(Ctx, Namespace, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'continue', 'fieldSelector', 'includeUninitialized', 'labelSelector', 'limit', 'resourceVersion', 'timeoutSeconds', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -130,7 +130,7 @@ list_pod_disruption_budget_for_all_namespaces(Ctx, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['continue', 'fieldSelector', 'includeUninitialized', 'labelSelector', 'limit', 'pretty', 'resourceVersion', 'timeoutSeconds', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -150,7 +150,7 @@ patch_namespaced_pod_disruption_budget(Ctx, Name, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"application/json-patch+json">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -170,7 +170,7 @@ patch_namespaced_pod_disruption_budget_status(Ctx, Name, Namespace, Body, Option
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"application/json-patch+json">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -190,7 +190,7 @@ read_namespaced_pod_disruption_budget(Ctx, Name, Namespace, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'exact', 'export'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -210,7 +210,7 @@ read_namespaced_pod_disruption_budget_status(Ctx, Name, Namespace, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -230,7 +230,7 @@ replace_namespaced_pod_disruption_budget(Ctx, Name, Namespace, Body, Optional) -
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -250,7 +250,7 @@ replace_namespaced_pod_disruption_budget_status(Ctx, Name, Namespace, Body, Opti
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).

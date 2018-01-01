@@ -56,7 +56,7 @@ create_namespaced_controller_revision(Ctx, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -76,7 +76,7 @@ create_namespaced_deployment(Ctx, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -96,7 +96,7 @@ create_namespaced_deployment_rollback(Ctx, Name, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -116,7 +116,7 @@ create_namespaced_stateful_set(Ctx, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -136,7 +136,7 @@ delete_collection_namespaced_controller_revision(Ctx, Namespace, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'continue', 'fieldSelector', 'includeUninitialized', 'labelSelector', 'limit', 'resourceVersion', 'timeoutSeconds', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -156,7 +156,7 @@ delete_collection_namespaced_deployment(Ctx, Namespace, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'continue', 'fieldSelector', 'includeUninitialized', 'labelSelector', 'limit', 'resourceVersion', 'timeoutSeconds', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -176,7 +176,7 @@ delete_collection_namespaced_stateful_set(Ctx, Namespace, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'continue', 'fieldSelector', 'includeUninitialized', 'labelSelector', 'limit', 'resourceVersion', 'timeoutSeconds', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -196,7 +196,7 @@ delete_namespaced_controller_revision(Ctx, Name, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'gracePeriodSeconds', 'orphanDependents', 'propagationPolicy'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -216,7 +216,7 @@ delete_namespaced_deployment(Ctx, Name, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'gracePeriodSeconds', 'orphanDependents', 'propagationPolicy'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -236,7 +236,7 @@ delete_namespaced_stateful_set(Ctx, Name, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'gracePeriodSeconds', 'orphanDependents', 'propagationPolicy'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -256,7 +256,7 @@ get_api_resources(Ctx, Optional) ->
     QS = [],
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"application/json">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json">>, <<"application/yaml">>, <<"application/vnd.kubernetes.protobuf">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -276,7 +276,7 @@ list_controller_revision_for_all_namespaces(Ctx, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['continue', 'fieldSelector', 'includeUninitialized', 'labelSelector', 'limit', 'pretty', 'resourceVersion', 'timeoutSeconds', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -296,7 +296,7 @@ list_deployment_for_all_namespaces(Ctx, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['continue', 'fieldSelector', 'includeUninitialized', 'labelSelector', 'limit', 'pretty', 'resourceVersion', 'timeoutSeconds', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -316,7 +316,7 @@ list_namespaced_controller_revision(Ctx, Namespace, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'continue', 'fieldSelector', 'includeUninitialized', 'labelSelector', 'limit', 'resourceVersion', 'timeoutSeconds', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -336,7 +336,7 @@ list_namespaced_deployment(Ctx, Namespace, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'continue', 'fieldSelector', 'includeUninitialized', 'labelSelector', 'limit', 'resourceVersion', 'timeoutSeconds', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -356,7 +356,7 @@ list_namespaced_stateful_set(Ctx, Namespace, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'continue', 'fieldSelector', 'includeUninitialized', 'labelSelector', 'limit', 'resourceVersion', 'timeoutSeconds', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -376,7 +376,7 @@ list_stateful_set_for_all_namespaces(Ctx, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['continue', 'fieldSelector', 'includeUninitialized', 'labelSelector', 'limit', 'pretty', 'resourceVersion', 'timeoutSeconds', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -396,7 +396,7 @@ patch_namespaced_controller_revision(Ctx, Name, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"application/json-patch+json">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -416,7 +416,7 @@ patch_namespaced_deployment(Ctx, Name, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"application/json-patch+json">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -436,7 +436,7 @@ patch_namespaced_deployment_scale(Ctx, Name, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"application/json-patch+json">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -456,7 +456,7 @@ patch_namespaced_deployment_status(Ctx, Name, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"application/json-patch+json">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -476,7 +476,7 @@ patch_namespaced_stateful_set(Ctx, Name, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"application/json-patch+json">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -496,7 +496,7 @@ patch_namespaced_stateful_set_scale(Ctx, Name, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"application/json-patch+json">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -516,7 +516,7 @@ patch_namespaced_stateful_set_status(Ctx, Name, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"application/json-patch+json">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -536,7 +536,7 @@ read_namespaced_controller_revision(Ctx, Name, Namespace, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'exact', 'export'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -556,7 +556,7 @@ read_namespaced_deployment(Ctx, Name, Namespace, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'exact', 'export'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -576,7 +576,7 @@ read_namespaced_deployment_scale(Ctx, Name, Namespace, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -596,7 +596,7 @@ read_namespaced_deployment_status(Ctx, Name, Namespace, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -616,7 +616,7 @@ read_namespaced_stateful_set(Ctx, Name, Namespace, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'exact', 'export'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -636,7 +636,7 @@ read_namespaced_stateful_set_scale(Ctx, Name, Namespace, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -656,7 +656,7 @@ read_namespaced_stateful_set_status(Ctx, Name, Namespace, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -676,7 +676,7 @@ replace_namespaced_controller_revision(Ctx, Name, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -696,7 +696,7 @@ replace_namespaced_deployment(Ctx, Name, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -716,7 +716,7 @@ replace_namespaced_deployment_scale(Ctx, Name, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -736,7 +736,7 @@ replace_namespaced_deployment_status(Ctx, Name, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -756,7 +756,7 @@ replace_namespaced_stateful_set(Ctx, Name, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -776,7 +776,7 @@ replace_namespaced_stateful_set_scale(Ctx, Name, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -796,7 +796,7 @@ replace_namespaced_stateful_set_status(Ctx, Name, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).

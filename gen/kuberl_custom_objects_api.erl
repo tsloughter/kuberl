@@ -28,7 +28,7 @@ create_cluster_custom_object(Ctx, Group, Version, Plural, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -48,7 +48,7 @@ create_namespaced_custom_object(Ctx, Group, Version, Namespace, Plural, Body, Op
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -68,7 +68,7 @@ delete_cluster_custom_object(Ctx, Group, Version, Plural, Name, Body, Optional) 
     QS = lists:flatten([])++kuberl_utils:optional_params(['gracePeriodSeconds', 'orphanDependents', 'propagationPolicy'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -88,7 +88,7 @@ delete_namespaced_custom_object(Ctx, Group, Version, Namespace, Plural, Name, Bo
     QS = lists:flatten([])++kuberl_utils:optional_params(['gracePeriodSeconds', 'orphanDependents', 'propagationPolicy'], _OptionalParams),
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -108,7 +108,7 @@ get_cluster_custom_object(Ctx, Group, Version, Plural, Name, Optional) ->
     QS = [],
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -128,7 +128,7 @@ get_namespaced_custom_object(Ctx, Group, Version, Namespace, Plural, Name, Optio
     QS = [],
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -148,7 +148,7 @@ list_cluster_custom_object(Ctx, Group, Version, Plural, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'labelSelector', 'resourceVersion', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -168,7 +168,7 @@ list_namespaced_custom_object(Ctx, Group, Version, Namespace, Plural, Optional) 
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'labelSelector', 'resourceVersion', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -188,7 +188,7 @@ replace_cluster_custom_object(Ctx, Group, Version, Plural, Name, Body, Optional)
     QS = [],
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
@@ -208,7 +208,7 @@ replace_namespaced_custom_object(Ctx, Group, Version, Namespace, Plural, Name, B
     QS = [],
     Headers = [],
     Body1 = Body,
-    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
+    ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
     kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).

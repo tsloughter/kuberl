@@ -1,6 +1,7 @@
 -module(kuberl_utils).
 
 -export([request/7,
+         select_header_content_type/1,
          optional_params/2]).
 
 -type response_info() :: #{status  := integer(),
@@ -46,3 +47,13 @@ decode_response(Headers, Body) ->
 optional_params([], _Params) -> [];
 optional_params(Keys, Params) ->
     [{Key, maps:get(Key, Params)} || Key <- Keys, maps:is_key(Key, Params)].
+
+select_header_content_type([]) ->
+    [];
+select_header_content_type(ContentTypes) ->
+    case lists:member(<<"application/json">>, ContentTypes) orelse lists:member(<<"*/*">>, ContentTypes) of
+        true ->
+            [{<<"Content-Type">>, <<"application/json">>}];
+        false ->
+            [{<<"Content-Type">>, hd(ContentTypes)}]
+    end.
