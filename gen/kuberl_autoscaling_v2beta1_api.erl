@@ -30,9 +30,10 @@ create_namespaced_horizontal_pod_autoscaler(Ctx, Namespace, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% delete collection of HorizontalPodAutoscaler
@@ -49,9 +50,10 @@ delete_collection_namespaced_horizontal_pod_autoscaler(Ctx, Namespace, Optional)
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'continue', 'fieldSelector', 'includeUninitialized', 'labelSelector', 'limit', 'resourceVersion', 'timeoutSeconds', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% delete a HorizontalPodAutoscaler
@@ -68,9 +70,10 @@ delete_namespaced_horizontal_pod_autoscaler(Ctx, Name, Namespace, Body, Optional
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'gracePeriodSeconds', 'orphanDependents', 'propagationPolicy'], _OptionalParams),
     Headers = [],
     Body1 = Body,
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% get available resources
@@ -87,9 +90,10 @@ get_api_resources(Ctx, Optional) ->
     QS = [],
     Headers = [],
     Body1 = [],
+    ContentTypeHeader = [{<<"Content-Type">>, <<"application/json">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% list or watch objects of kind HorizontalPodAutoscaler
@@ -106,9 +110,10 @@ list_horizontal_pod_autoscaler_for_all_namespaces(Ctx, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['continue', 'fieldSelector', 'includeUninitialized', 'labelSelector', 'limit', 'pretty', 'resourceVersion', 'timeoutSeconds', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% list or watch objects of kind HorizontalPodAutoscaler
@@ -125,9 +130,10 @@ list_namespaced_horizontal_pod_autoscaler(Ctx, Namespace, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'continue', 'fieldSelector', 'includeUninitialized', 'labelSelector', 'limit', 'resourceVersion', 'timeoutSeconds', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% partially update the specified HorizontalPodAutoscaler
@@ -144,9 +150,10 @@ patch_namespaced_horizontal_pod_autoscaler(Ctx, Name, Namespace, Body, Optional)
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
+    ContentTypeHeader = [{<<"Content-Type">>, <<"application/json-patch+json">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% partially update status of the specified HorizontalPodAutoscaler
@@ -163,9 +170,10 @@ patch_namespaced_horizontal_pod_autoscaler_status(Ctx, Name, Namespace, Body, Op
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
+    ContentTypeHeader = [{<<"Content-Type">>, <<"application/json-patch+json">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% read the specified HorizontalPodAutoscaler
@@ -182,9 +190,10 @@ read_namespaced_horizontal_pod_autoscaler(Ctx, Name, Namespace, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'exact', 'export'], _OptionalParams),
     Headers = [],
     Body1 = [],
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% read status of the specified HorizontalPodAutoscaler
@@ -201,9 +210,10 @@ read_namespaced_horizontal_pod_autoscaler_status(Ctx, Name, Namespace, Optional)
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = [],
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% replace the specified HorizontalPodAutoscaler
@@ -220,9 +230,10 @@ replace_namespaced_horizontal_pod_autoscaler(Ctx, Name, Namespace, Body, Optiona
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% replace status of the specified HorizontalPodAutoscaler
@@ -239,8 +250,9 @@ replace_namespaced_horizontal_pod_autoscaler_status(Ctx, Name, Namespace, Body, 
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 

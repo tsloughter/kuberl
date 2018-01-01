@@ -28,9 +28,10 @@ create_cluster_custom_object(Ctx, Group, Version, Plural, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
+    ContentTypeHeader = [],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% Creates a namespace scoped Custom object
@@ -47,9 +48,10 @@ create_namespaced_custom_object(Ctx, Group, Version, Namespace, Plural, Body, Op
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
+    ContentTypeHeader = [],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% Deletes the specified cluster scoped custom object
@@ -66,9 +68,10 @@ delete_cluster_custom_object(Ctx, Group, Version, Plural, Name, Body, Optional) 
     QS = lists:flatten([])++kuberl_utils:optional_params(['gracePeriodSeconds', 'orphanDependents', 'propagationPolicy'], _OptionalParams),
     Headers = [],
     Body1 = Body,
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% Deletes the specified namespace scoped custom object
@@ -85,9 +88,10 @@ delete_namespaced_custom_object(Ctx, Group, Version, Namespace, Plural, Name, Bo
     QS = lists:flatten([])++kuberl_utils:optional_params(['gracePeriodSeconds', 'orphanDependents', 'propagationPolicy'], _OptionalParams),
     Headers = [],
     Body1 = Body,
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% Returns a cluster scoped custom object
@@ -104,9 +108,10 @@ get_cluster_custom_object(Ctx, Group, Version, Plural, Name, Optional) ->
     QS = [],
     Headers = [],
     Body1 = [],
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% Returns a namespace scoped custom object
@@ -123,9 +128,10 @@ get_namespaced_custom_object(Ctx, Group, Version, Namespace, Plural, Name, Optio
     QS = [],
     Headers = [],
     Body1 = [],
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% list or watch cluster scoped custom objects
@@ -142,9 +148,10 @@ list_cluster_custom_object(Ctx, Group, Version, Plural, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'labelSelector', 'resourceVersion', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% list or watch namespace scoped custom objects
@@ -161,9 +168,10 @@ list_namespaced_custom_object(Ctx, Group, Version, Namespace, Plural, Optional) 
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'labelSelector', 'resourceVersion', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% replace the specified cluster scoped custom object
@@ -180,9 +188,10 @@ replace_cluster_custom_object(Ctx, Group, Version, Plural, Name, Body, Optional)
     QS = [],
     Headers = [],
     Body1 = Body,
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% replace the specified namespace scoped custom object
@@ -199,8 +208,9 @@ replace_namespaced_custom_object(Ctx, Group, Version, Namespace, Plural, Name, B
     QS = [],
     Headers = [],
     Body1 = Body,
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 

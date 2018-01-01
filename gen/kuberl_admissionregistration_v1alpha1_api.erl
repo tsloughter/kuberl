@@ -33,9 +33,10 @@ create_external_admission_hook_configuration(Ctx, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% create an InitializerConfiguration
@@ -52,9 +53,10 @@ create_initializer_configuration(Ctx, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% delete collection of ExternalAdmissionHookConfiguration
@@ -71,9 +73,10 @@ delete_collection_external_admission_hook_configuration(Ctx, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'continue', 'fieldSelector', 'includeUninitialized', 'labelSelector', 'limit', 'resourceVersion', 'timeoutSeconds', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% delete collection of InitializerConfiguration
@@ -90,9 +93,10 @@ delete_collection_initializer_configuration(Ctx, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'continue', 'fieldSelector', 'includeUninitialized', 'labelSelector', 'limit', 'resourceVersion', 'timeoutSeconds', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% delete an ExternalAdmissionHookConfiguration
@@ -109,9 +113,10 @@ delete_external_admission_hook_configuration(Ctx, Name, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'gracePeriodSeconds', 'orphanDependents', 'propagationPolicy'], _OptionalParams),
     Headers = [],
     Body1 = Body,
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% delete an InitializerConfiguration
@@ -128,9 +133,10 @@ delete_initializer_configuration(Ctx, Name, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'gracePeriodSeconds', 'orphanDependents', 'propagationPolicy'], _OptionalParams),
     Headers = [],
     Body1 = Body,
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% get available resources
@@ -147,9 +153,10 @@ get_api_resources(Ctx, Optional) ->
     QS = [],
     Headers = [],
     Body1 = [],
+    ContentTypeHeader = [{<<"Content-Type">>, <<"application/json">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% list or watch objects of kind ExternalAdmissionHookConfiguration
@@ -166,9 +173,10 @@ list_external_admission_hook_configuration(Ctx, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'continue', 'fieldSelector', 'includeUninitialized', 'labelSelector', 'limit', 'resourceVersion', 'timeoutSeconds', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% list or watch objects of kind InitializerConfiguration
@@ -185,9 +193,10 @@ list_initializer_configuration(Ctx, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'continue', 'fieldSelector', 'includeUninitialized', 'labelSelector', 'limit', 'resourceVersion', 'timeoutSeconds', 'watch'], _OptionalParams),
     Headers = [],
     Body1 = [],
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% partially update the specified ExternalAdmissionHookConfiguration
@@ -204,9 +213,10 @@ patch_external_admission_hook_configuration(Ctx, Name, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
+    ContentTypeHeader = [{<<"Content-Type">>, <<"application/json-patch+json">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% partially update the specified InitializerConfiguration
@@ -223,9 +233,10 @@ patch_initializer_configuration(Ctx, Name, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
+    ContentTypeHeader = [{<<"Content-Type">>, <<"application/json-patch+json">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% read the specified ExternalAdmissionHookConfiguration
@@ -242,9 +253,10 @@ read_external_admission_hook_configuration(Ctx, Name, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'exact', 'export'], _OptionalParams),
     Headers = [],
     Body1 = [],
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% read the specified InitializerConfiguration
@@ -261,9 +273,10 @@ read_initializer_configuration(Ctx, Name, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty', 'exact', 'export'], _OptionalParams),
     Headers = [],
     Body1 = [],
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% replace the specified ExternalAdmissionHookConfiguration
@@ -280,9 +293,10 @@ replace_external_admission_hook_configuration(Ctx, Name, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 %% @doc 
 %% replace the specified InitializerConfiguration
@@ -299,8 +313,9 @@ replace_initializer_configuration(Ctx, Name, Body, Optional) ->
     QS = lists:flatten([])++kuberl_utils:optional_params(['pretty'], _OptionalParams),
     Headers = [],
     Body1 = Body,
+    ContentTypeHeader = [{<<"Content-Type">>, <<"*/*">>}],
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
 
 
