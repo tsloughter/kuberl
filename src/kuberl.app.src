@@ -15,5 +15,10 @@
 
   {maintainers, ["Tristan Sloughter"]},
   {licenses, ["Apache 2"]},
-  {links, [{"Github", "https://github.com/tsloughter/kuberl"}]}
+  {links, [{"Github", "https://github.com/tsloughter/kuberl"}]},
+  {files, ["src", "gen", "c_src", "include", "rebar.config.script",
+           "priv", "rebar.config", "rebar.lock",
+           "README*", "readme*",
+           "LICENSE*", "license*",
+           "NOTICE"]}
 ]}.
