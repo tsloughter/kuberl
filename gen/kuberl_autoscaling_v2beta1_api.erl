@@ -24,6 +24,7 @@ create_namespaced_horizontal_pod_autoscaler(Ctx, Namespace, Body) ->
 -spec create_namespaced_horizontal_pod_autoscaler(ctx:ctx(), binary(), kuberl_v2beta1_horizontal_pod_autoscaler:kuberl_v2beta1_horizontal_pod_autoscaler(), maps:map()) -> {ok, kuberl_v2beta1_horizontal_pod_autoscaler:kuberl_v2beta1_horizontal_pod_autoscaler(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_horizontal_pod_autoscaler(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/apis/autoscaling/v2beta1/namespaces/", Namespace, "/horizontalpodautoscalers"],
@@ -33,7 +34,7 @@ create_namespaced_horizontal_pod_autoscaler(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of HorizontalPodAutoscaler
@@ -44,6 +45,7 @@ delete_collection_namespaced_horizontal_pod_autoscaler(Ctx, Namespace) ->
 -spec delete_collection_namespaced_horizontal_pod_autoscaler(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_horizontal_pod_autoscaler(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/autoscaling/v2beta1/namespaces/", Namespace, "/horizontalpodautoscalers"],
@@ -53,7 +55,7 @@ delete_collection_namespaced_horizontal_pod_autoscaler(Ctx, Namespace, Optional)
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a HorizontalPodAutoscaler
@@ -64,6 +66,7 @@ delete_namespaced_horizontal_pod_autoscaler(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_horizontal_pod_autoscaler(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_horizontal_pod_autoscaler(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/autoscaling/v2beta1/namespaces/", Namespace, "/horizontalpodautoscalers/", Name, ""],
@@ -73,7 +76,7 @@ delete_namespaced_horizontal_pod_autoscaler(Ctx, Name, Namespace, Body, Optional
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% get available resources
@@ -84,6 +87,7 @@ get_api_resources(Ctx) ->
 -spec get_api_resources(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_api_resource_list:kuberl_v1_api_resource_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 get_api_resources(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/autoscaling/v2beta1/"],
@@ -93,7 +97,7 @@ get_api_resources(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json">>, <<"application/yaml">>, <<"application/vnd.kubernetes.protobuf">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind HorizontalPodAutoscaler
@@ -104,6 +108,7 @@ list_horizontal_pod_autoscaler_for_all_namespaces(Ctx) ->
 -spec list_horizontal_pod_autoscaler_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v2beta1_horizontal_pod_autoscaler_list:kuberl_v2beta1_horizontal_pod_autoscaler_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_horizontal_pod_autoscaler_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/autoscaling/v2beta1/horizontalpodautoscalers"],
@@ -113,7 +118,7 @@ list_horizontal_pod_autoscaler_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind HorizontalPodAutoscaler
@@ -124,6 +129,7 @@ list_namespaced_horizontal_pod_autoscaler(Ctx, Namespace) ->
 -spec list_namespaced_horizontal_pod_autoscaler(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v2beta1_horizontal_pod_autoscaler_list:kuberl_v2beta1_horizontal_pod_autoscaler_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_horizontal_pod_autoscaler(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/autoscaling/v2beta1/namespaces/", Namespace, "/horizontalpodautoscalers"],
@@ -133,7 +139,7 @@ list_namespaced_horizontal_pod_autoscaler(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified HorizontalPodAutoscaler
@@ -144,6 +150,7 @@ patch_namespaced_horizontal_pod_autoscaler(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_horizontal_pod_autoscaler(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v2beta1_horizontal_pod_autoscaler:kuberl_v2beta1_horizontal_pod_autoscaler(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_horizontal_pod_autoscaler(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/autoscaling/v2beta1/namespaces/", Namespace, "/horizontalpodautoscalers/", Name, ""],
@@ -153,7 +160,7 @@ patch_namespaced_horizontal_pod_autoscaler(Ctx, Name, Namespace, Body, Optional)
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update status of the specified HorizontalPodAutoscaler
@@ -164,6 +171,7 @@ patch_namespaced_horizontal_pod_autoscaler_status(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_horizontal_pod_autoscaler_status(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v2beta1_horizontal_pod_autoscaler:kuberl_v2beta1_horizontal_pod_autoscaler(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_horizontal_pod_autoscaler_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/autoscaling/v2beta1/namespaces/", Namespace, "/horizontalpodautoscalers/", Name, "/status"],
@@ -173,7 +181,7 @@ patch_namespaced_horizontal_pod_autoscaler_status(Ctx, Name, Namespace, Body, Op
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified HorizontalPodAutoscaler
@@ -184,6 +192,7 @@ read_namespaced_horizontal_pod_autoscaler(Ctx, Name, Namespace) ->
 -spec read_namespaced_horizontal_pod_autoscaler(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v2beta1_horizontal_pod_autoscaler:kuberl_v2beta1_horizontal_pod_autoscaler(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_horizontal_pod_autoscaler(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/autoscaling/v2beta1/namespaces/", Namespace, "/horizontalpodautoscalers/", Name, ""],
@@ -193,7 +202,7 @@ read_namespaced_horizontal_pod_autoscaler(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read status of the specified HorizontalPodAutoscaler
@@ -204,6 +213,7 @@ read_namespaced_horizontal_pod_autoscaler_status(Ctx, Name, Namespace) ->
 -spec read_namespaced_horizontal_pod_autoscaler_status(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v2beta1_horizontal_pod_autoscaler:kuberl_v2beta1_horizontal_pod_autoscaler(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_horizontal_pod_autoscaler_status(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/autoscaling/v2beta1/namespaces/", Namespace, "/horizontalpodautoscalers/", Name, "/status"],
@@ -213,7 +223,7 @@ read_namespaced_horizontal_pod_autoscaler_status(Ctx, Name, Namespace, Optional)
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified HorizontalPodAutoscaler
@@ -224,6 +234,7 @@ replace_namespaced_horizontal_pod_autoscaler(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_horizontal_pod_autoscaler(ctx:ctx(), binary(), binary(), kuberl_v2beta1_horizontal_pod_autoscaler:kuberl_v2beta1_horizontal_pod_autoscaler(), maps:map()) -> {ok, kuberl_v2beta1_horizontal_pod_autoscaler:kuberl_v2beta1_horizontal_pod_autoscaler(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_horizontal_pod_autoscaler(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/autoscaling/v2beta1/namespaces/", Namespace, "/horizontalpodautoscalers/", Name, ""],
@@ -233,7 +244,7 @@ replace_namespaced_horizontal_pod_autoscaler(Ctx, Name, Namespace, Body, Optiona
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace status of the specified HorizontalPodAutoscaler
@@ -244,6 +255,7 @@ replace_namespaced_horizontal_pod_autoscaler_status(Ctx, Name, Namespace, Body) 
 -spec replace_namespaced_horizontal_pod_autoscaler_status(ctx:ctx(), binary(), binary(), kuberl_v2beta1_horizontal_pod_autoscaler:kuberl_v2beta1_horizontal_pod_autoscaler(), maps:map()) -> {ok, kuberl_v2beta1_horizontal_pod_autoscaler:kuberl_v2beta1_horizontal_pod_autoscaler(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_horizontal_pod_autoscaler_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/autoscaling/v2beta1/namespaces/", Namespace, "/horizontalpodautoscalers/", Name, "/status"],
@@ -253,6 +265,6 @@ replace_namespaced_horizontal_pod_autoscaler_status(Ctx, Name, Namespace, Body, 
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 

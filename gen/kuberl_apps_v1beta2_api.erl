@@ -74,6 +74,7 @@ create_namespaced_controller_revision(Ctx, Namespace, Body) ->
 -spec create_namespaced_controller_revision(ctx:ctx(), binary(), kuberl_v1beta2_controller_revision:kuberl_v1beta2_controller_revision(), maps:map()) -> {ok, kuberl_v1beta2_controller_revision:kuberl_v1beta2_controller_revision(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_controller_revision(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/controllerrevisions"],
@@ -83,7 +84,7 @@ create_namespaced_controller_revision(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a DaemonSet
@@ -94,6 +95,7 @@ create_namespaced_daemon_set(Ctx, Namespace, Body) ->
 -spec create_namespaced_daemon_set(ctx:ctx(), binary(), kuberl_v1beta2_daemon_set:kuberl_v1beta2_daemon_set(), maps:map()) -> {ok, kuberl_v1beta2_daemon_set:kuberl_v1beta2_daemon_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_daemon_set(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/daemonsets"],
@@ -103,7 +105,7 @@ create_namespaced_daemon_set(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a Deployment
@@ -114,6 +116,7 @@ create_namespaced_deployment(Ctx, Namespace, Body) ->
 -spec create_namespaced_deployment(ctx:ctx(), binary(), kuberl_v1beta2_deployment:kuberl_v1beta2_deployment(), maps:map()) -> {ok, kuberl_v1beta2_deployment:kuberl_v1beta2_deployment(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_deployment(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/deployments"],
@@ -123,7 +126,7 @@ create_namespaced_deployment(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a ReplicaSet
@@ -134,6 +137,7 @@ create_namespaced_replica_set(Ctx, Namespace, Body) ->
 -spec create_namespaced_replica_set(ctx:ctx(), binary(), kuberl_v1beta2_replica_set:kuberl_v1beta2_replica_set(), maps:map()) -> {ok, kuberl_v1beta2_replica_set:kuberl_v1beta2_replica_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_replica_set(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/replicasets"],
@@ -143,7 +147,7 @@ create_namespaced_replica_set(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a StatefulSet
@@ -154,6 +158,7 @@ create_namespaced_stateful_set(Ctx, Namespace, Body) ->
 -spec create_namespaced_stateful_set(ctx:ctx(), binary(), kuberl_v1beta2_stateful_set:kuberl_v1beta2_stateful_set(), maps:map()) -> {ok, kuberl_v1beta2_stateful_set:kuberl_v1beta2_stateful_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_stateful_set(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/statefulsets"],
@@ -163,7 +168,7 @@ create_namespaced_stateful_set(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of ControllerRevision
@@ -174,6 +179,7 @@ delete_collection_namespaced_controller_revision(Ctx, Namespace) ->
 -spec delete_collection_namespaced_controller_revision(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_controller_revision(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/controllerrevisions"],
@@ -183,7 +189,7 @@ delete_collection_namespaced_controller_revision(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of DaemonSet
@@ -194,6 +200,7 @@ delete_collection_namespaced_daemon_set(Ctx, Namespace) ->
 -spec delete_collection_namespaced_daemon_set(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_daemon_set(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/daemonsets"],
@@ -203,7 +210,7 @@ delete_collection_namespaced_daemon_set(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of Deployment
@@ -214,6 +221,7 @@ delete_collection_namespaced_deployment(Ctx, Namespace) ->
 -spec delete_collection_namespaced_deployment(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_deployment(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/deployments"],
@@ -223,7 +231,7 @@ delete_collection_namespaced_deployment(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of ReplicaSet
@@ -234,6 +242,7 @@ delete_collection_namespaced_replica_set(Ctx, Namespace) ->
 -spec delete_collection_namespaced_replica_set(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_replica_set(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/replicasets"],
@@ -243,7 +252,7 @@ delete_collection_namespaced_replica_set(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of StatefulSet
@@ -254,6 +263,7 @@ delete_collection_namespaced_stateful_set(Ctx, Namespace) ->
 -spec delete_collection_namespaced_stateful_set(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_stateful_set(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/statefulsets"],
@@ -263,7 +273,7 @@ delete_collection_namespaced_stateful_set(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a ControllerRevision
@@ -274,6 +284,7 @@ delete_namespaced_controller_revision(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_controller_revision(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_controller_revision(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/controllerrevisions/", Name, ""],
@@ -283,7 +294,7 @@ delete_namespaced_controller_revision(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a DaemonSet
@@ -294,6 +305,7 @@ delete_namespaced_daemon_set(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_daemon_set(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_daemon_set(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/daemonsets/", Name, ""],
@@ -303,7 +315,7 @@ delete_namespaced_daemon_set(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a Deployment
@@ -314,6 +326,7 @@ delete_namespaced_deployment(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_deployment(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_deployment(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/deployments/", Name, ""],
@@ -323,7 +336,7 @@ delete_namespaced_deployment(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a ReplicaSet
@@ -334,6 +347,7 @@ delete_namespaced_replica_set(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_replica_set(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_replica_set(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/replicasets/", Name, ""],
@@ -343,7 +357,7 @@ delete_namespaced_replica_set(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a StatefulSet
@@ -354,6 +368,7 @@ delete_namespaced_stateful_set(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_stateful_set(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_stateful_set(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/statefulsets/", Name, ""],
@@ -363,7 +378,7 @@ delete_namespaced_stateful_set(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% get available resources
@@ -374,6 +389,7 @@ get_api_resources(Ctx) ->
 -spec get_api_resources(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_api_resource_list:kuberl_v1_api_resource_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 get_api_resources(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/"],
@@ -383,7 +399,7 @@ get_api_resources(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json">>, <<"application/yaml">>, <<"application/vnd.kubernetes.protobuf">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind ControllerRevision
@@ -394,6 +410,7 @@ list_controller_revision_for_all_namespaces(Ctx) ->
 -spec list_controller_revision_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1beta2_controller_revision_list:kuberl_v1beta2_controller_revision_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_controller_revision_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/controllerrevisions"],
@@ -403,7 +420,7 @@ list_controller_revision_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind DaemonSet
@@ -414,6 +431,7 @@ list_daemon_set_for_all_namespaces(Ctx) ->
 -spec list_daemon_set_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1beta2_daemon_set_list:kuberl_v1beta2_daemon_set_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_daemon_set_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/daemonsets"],
@@ -423,7 +441,7 @@ list_daemon_set_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind Deployment
@@ -434,6 +452,7 @@ list_deployment_for_all_namespaces(Ctx) ->
 -spec list_deployment_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1beta2_deployment_list:kuberl_v1beta2_deployment_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_deployment_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/deployments"],
@@ -443,7 +462,7 @@ list_deployment_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind ControllerRevision
@@ -454,6 +473,7 @@ list_namespaced_controller_revision(Ctx, Namespace) ->
 -spec list_namespaced_controller_revision(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1beta2_controller_revision_list:kuberl_v1beta2_controller_revision_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_controller_revision(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/controllerrevisions"],
@@ -463,7 +483,7 @@ list_namespaced_controller_revision(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind DaemonSet
@@ -474,6 +494,7 @@ list_namespaced_daemon_set(Ctx, Namespace) ->
 -spec list_namespaced_daemon_set(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1beta2_daemon_set_list:kuberl_v1beta2_daemon_set_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_daemon_set(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/daemonsets"],
@@ -483,7 +504,7 @@ list_namespaced_daemon_set(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind Deployment
@@ -494,6 +515,7 @@ list_namespaced_deployment(Ctx, Namespace) ->
 -spec list_namespaced_deployment(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1beta2_deployment_list:kuberl_v1beta2_deployment_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_deployment(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/deployments"],
@@ -503,7 +525,7 @@ list_namespaced_deployment(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind ReplicaSet
@@ -514,6 +536,7 @@ list_namespaced_replica_set(Ctx, Namespace) ->
 -spec list_namespaced_replica_set(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1beta2_replica_set_list:kuberl_v1beta2_replica_set_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_replica_set(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/replicasets"],
@@ -523,7 +546,7 @@ list_namespaced_replica_set(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind StatefulSet
@@ -534,6 +557,7 @@ list_namespaced_stateful_set(Ctx, Namespace) ->
 -spec list_namespaced_stateful_set(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1beta2_stateful_set_list:kuberl_v1beta2_stateful_set_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_stateful_set(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/statefulsets"],
@@ -543,7 +567,7 @@ list_namespaced_stateful_set(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind ReplicaSet
@@ -554,6 +578,7 @@ list_replica_set_for_all_namespaces(Ctx) ->
 -spec list_replica_set_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1beta2_replica_set_list:kuberl_v1beta2_replica_set_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_replica_set_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/replicasets"],
@@ -563,7 +588,7 @@ list_replica_set_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind StatefulSet
@@ -574,6 +599,7 @@ list_stateful_set_for_all_namespaces(Ctx) ->
 -spec list_stateful_set_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1beta2_stateful_set_list:kuberl_v1beta2_stateful_set_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_stateful_set_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/statefulsets"],
@@ -583,7 +609,7 @@ list_stateful_set_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified ControllerRevision
@@ -594,6 +620,7 @@ patch_namespaced_controller_revision(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_controller_revision(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1beta2_controller_revision:kuberl_v1beta2_controller_revision(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_controller_revision(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/controllerrevisions/", Name, ""],
@@ -603,7 +630,7 @@ patch_namespaced_controller_revision(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified DaemonSet
@@ -614,6 +641,7 @@ patch_namespaced_daemon_set(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_daemon_set(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1beta2_daemon_set:kuberl_v1beta2_daemon_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_daemon_set(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/daemonsets/", Name, ""],
@@ -623,7 +651,7 @@ patch_namespaced_daemon_set(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update status of the specified DaemonSet
@@ -634,6 +662,7 @@ patch_namespaced_daemon_set_status(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_daemon_set_status(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1beta2_daemon_set:kuberl_v1beta2_daemon_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_daemon_set_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/daemonsets/", Name, "/status"],
@@ -643,7 +672,7 @@ patch_namespaced_daemon_set_status(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified Deployment
@@ -654,6 +683,7 @@ patch_namespaced_deployment(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_deployment(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1beta2_deployment:kuberl_v1beta2_deployment(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_deployment(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/deployments/", Name, ""],
@@ -663,7 +693,7 @@ patch_namespaced_deployment(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update scale of the specified Deployment
@@ -674,6 +704,7 @@ patch_namespaced_deployment_scale(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_deployment_scale(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1beta2_scale:kuberl_v1beta2_scale(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_deployment_scale(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/deployments/", Name, "/scale"],
@@ -683,7 +714,7 @@ patch_namespaced_deployment_scale(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update status of the specified Deployment
@@ -694,6 +725,7 @@ patch_namespaced_deployment_status(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_deployment_status(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1beta2_deployment:kuberl_v1beta2_deployment(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_deployment_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/deployments/", Name, "/status"],
@@ -703,7 +735,7 @@ patch_namespaced_deployment_status(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified ReplicaSet
@@ -714,6 +746,7 @@ patch_namespaced_replica_set(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_replica_set(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1beta2_replica_set:kuberl_v1beta2_replica_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_replica_set(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/replicasets/", Name, ""],
@@ -723,7 +756,7 @@ patch_namespaced_replica_set(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update scale of the specified ReplicaSet
@@ -734,6 +767,7 @@ patch_namespaced_replica_set_scale(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_replica_set_scale(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1beta2_scale:kuberl_v1beta2_scale(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_replica_set_scale(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/replicasets/", Name, "/scale"],
@@ -743,7 +777,7 @@ patch_namespaced_replica_set_scale(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update status of the specified ReplicaSet
@@ -754,6 +788,7 @@ patch_namespaced_replica_set_status(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_replica_set_status(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1beta2_replica_set:kuberl_v1beta2_replica_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_replica_set_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/replicasets/", Name, "/status"],
@@ -763,7 +798,7 @@ patch_namespaced_replica_set_status(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified StatefulSet
@@ -774,6 +809,7 @@ patch_namespaced_stateful_set(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_stateful_set(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1beta2_stateful_set:kuberl_v1beta2_stateful_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_stateful_set(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/statefulsets/", Name, ""],
@@ -783,7 +819,7 @@ patch_namespaced_stateful_set(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update scale of the specified StatefulSet
@@ -794,6 +830,7 @@ patch_namespaced_stateful_set_scale(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_stateful_set_scale(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1beta2_scale:kuberl_v1beta2_scale(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_stateful_set_scale(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/statefulsets/", Name, "/scale"],
@@ -803,7 +840,7 @@ patch_namespaced_stateful_set_scale(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update status of the specified StatefulSet
@@ -814,6 +851,7 @@ patch_namespaced_stateful_set_status(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_stateful_set_status(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1beta2_stateful_set:kuberl_v1beta2_stateful_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_stateful_set_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/statefulsets/", Name, "/status"],
@@ -823,7 +861,7 @@ patch_namespaced_stateful_set_status(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified ControllerRevision
@@ -834,6 +872,7 @@ read_namespaced_controller_revision(Ctx, Name, Namespace) ->
 -spec read_namespaced_controller_revision(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1beta2_controller_revision:kuberl_v1beta2_controller_revision(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_controller_revision(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/controllerrevisions/", Name, ""],
@@ -843,7 +882,7 @@ read_namespaced_controller_revision(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified DaemonSet
@@ -854,6 +893,7 @@ read_namespaced_daemon_set(Ctx, Name, Namespace) ->
 -spec read_namespaced_daemon_set(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1beta2_daemon_set:kuberl_v1beta2_daemon_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_daemon_set(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/daemonsets/", Name, ""],
@@ -863,7 +903,7 @@ read_namespaced_daemon_set(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read status of the specified DaemonSet
@@ -874,6 +914,7 @@ read_namespaced_daemon_set_status(Ctx, Name, Namespace) ->
 -spec read_namespaced_daemon_set_status(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1beta2_daemon_set:kuberl_v1beta2_daemon_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_daemon_set_status(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/daemonsets/", Name, "/status"],
@@ -883,7 +924,7 @@ read_namespaced_daemon_set_status(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified Deployment
@@ -894,6 +935,7 @@ read_namespaced_deployment(Ctx, Name, Namespace) ->
 -spec read_namespaced_deployment(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1beta2_deployment:kuberl_v1beta2_deployment(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_deployment(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/deployments/", Name, ""],
@@ -903,7 +945,7 @@ read_namespaced_deployment(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read scale of the specified Deployment
@@ -914,6 +956,7 @@ read_namespaced_deployment_scale(Ctx, Name, Namespace) ->
 -spec read_namespaced_deployment_scale(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1beta2_scale:kuberl_v1beta2_scale(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_deployment_scale(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/deployments/", Name, "/scale"],
@@ -923,7 +966,7 @@ read_namespaced_deployment_scale(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read status of the specified Deployment
@@ -934,6 +977,7 @@ read_namespaced_deployment_status(Ctx, Name, Namespace) ->
 -spec read_namespaced_deployment_status(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1beta2_deployment:kuberl_v1beta2_deployment(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_deployment_status(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/deployments/", Name, "/status"],
@@ -943,7 +987,7 @@ read_namespaced_deployment_status(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified ReplicaSet
@@ -954,6 +998,7 @@ read_namespaced_replica_set(Ctx, Name, Namespace) ->
 -spec read_namespaced_replica_set(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1beta2_replica_set:kuberl_v1beta2_replica_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_replica_set(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/replicasets/", Name, ""],
@@ -963,7 +1008,7 @@ read_namespaced_replica_set(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read scale of the specified ReplicaSet
@@ -974,6 +1019,7 @@ read_namespaced_replica_set_scale(Ctx, Name, Namespace) ->
 -spec read_namespaced_replica_set_scale(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1beta2_scale:kuberl_v1beta2_scale(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_replica_set_scale(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/replicasets/", Name, "/scale"],
@@ -983,7 +1029,7 @@ read_namespaced_replica_set_scale(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read status of the specified ReplicaSet
@@ -994,6 +1040,7 @@ read_namespaced_replica_set_status(Ctx, Name, Namespace) ->
 -spec read_namespaced_replica_set_status(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1beta2_replica_set:kuberl_v1beta2_replica_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_replica_set_status(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/replicasets/", Name, "/status"],
@@ -1003,7 +1050,7 @@ read_namespaced_replica_set_status(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified StatefulSet
@@ -1014,6 +1061,7 @@ read_namespaced_stateful_set(Ctx, Name, Namespace) ->
 -spec read_namespaced_stateful_set(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1beta2_stateful_set:kuberl_v1beta2_stateful_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_stateful_set(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/statefulsets/", Name, ""],
@@ -1023,7 +1071,7 @@ read_namespaced_stateful_set(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read scale of the specified StatefulSet
@@ -1034,6 +1082,7 @@ read_namespaced_stateful_set_scale(Ctx, Name, Namespace) ->
 -spec read_namespaced_stateful_set_scale(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1beta2_scale:kuberl_v1beta2_scale(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_stateful_set_scale(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/statefulsets/", Name, "/scale"],
@@ -1043,7 +1092,7 @@ read_namespaced_stateful_set_scale(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read status of the specified StatefulSet
@@ -1054,6 +1103,7 @@ read_namespaced_stateful_set_status(Ctx, Name, Namespace) ->
 -spec read_namespaced_stateful_set_status(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1beta2_stateful_set:kuberl_v1beta2_stateful_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_stateful_set_status(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/statefulsets/", Name, "/status"],
@@ -1063,7 +1113,7 @@ read_namespaced_stateful_set_status(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified ControllerRevision
@@ -1074,6 +1124,7 @@ replace_namespaced_controller_revision(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_controller_revision(ctx:ctx(), binary(), binary(), kuberl_v1beta2_controller_revision:kuberl_v1beta2_controller_revision(), maps:map()) -> {ok, kuberl_v1beta2_controller_revision:kuberl_v1beta2_controller_revision(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_controller_revision(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/controllerrevisions/", Name, ""],
@@ -1083,7 +1134,7 @@ replace_namespaced_controller_revision(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified DaemonSet
@@ -1094,6 +1145,7 @@ replace_namespaced_daemon_set(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_daemon_set(ctx:ctx(), binary(), binary(), kuberl_v1beta2_daemon_set:kuberl_v1beta2_daemon_set(), maps:map()) -> {ok, kuberl_v1beta2_daemon_set:kuberl_v1beta2_daemon_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_daemon_set(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/daemonsets/", Name, ""],
@@ -1103,7 +1155,7 @@ replace_namespaced_daemon_set(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace status of the specified DaemonSet
@@ -1114,6 +1166,7 @@ replace_namespaced_daemon_set_status(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_daemon_set_status(ctx:ctx(), binary(), binary(), kuberl_v1beta2_daemon_set:kuberl_v1beta2_daemon_set(), maps:map()) -> {ok, kuberl_v1beta2_daemon_set:kuberl_v1beta2_daemon_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_daemon_set_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/daemonsets/", Name, "/status"],
@@ -1123,7 +1176,7 @@ replace_namespaced_daemon_set_status(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified Deployment
@@ -1134,6 +1187,7 @@ replace_namespaced_deployment(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_deployment(ctx:ctx(), binary(), binary(), kuberl_v1beta2_deployment:kuberl_v1beta2_deployment(), maps:map()) -> {ok, kuberl_v1beta2_deployment:kuberl_v1beta2_deployment(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_deployment(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/deployments/", Name, ""],
@@ -1143,7 +1197,7 @@ replace_namespaced_deployment(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace scale of the specified Deployment
@@ -1154,6 +1208,7 @@ replace_namespaced_deployment_scale(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_deployment_scale(ctx:ctx(), binary(), binary(), kuberl_v1beta2_scale:kuberl_v1beta2_scale(), maps:map()) -> {ok, kuberl_v1beta2_scale:kuberl_v1beta2_scale(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_deployment_scale(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/deployments/", Name, "/scale"],
@@ -1163,7 +1218,7 @@ replace_namespaced_deployment_scale(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace status of the specified Deployment
@@ -1174,6 +1229,7 @@ replace_namespaced_deployment_status(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_deployment_status(ctx:ctx(), binary(), binary(), kuberl_v1beta2_deployment:kuberl_v1beta2_deployment(), maps:map()) -> {ok, kuberl_v1beta2_deployment:kuberl_v1beta2_deployment(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_deployment_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/deployments/", Name, "/status"],
@@ -1183,7 +1239,7 @@ replace_namespaced_deployment_status(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified ReplicaSet
@@ -1194,6 +1250,7 @@ replace_namespaced_replica_set(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_replica_set(ctx:ctx(), binary(), binary(), kuberl_v1beta2_replica_set:kuberl_v1beta2_replica_set(), maps:map()) -> {ok, kuberl_v1beta2_replica_set:kuberl_v1beta2_replica_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_replica_set(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/replicasets/", Name, ""],
@@ -1203,7 +1260,7 @@ replace_namespaced_replica_set(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace scale of the specified ReplicaSet
@@ -1214,6 +1271,7 @@ replace_namespaced_replica_set_scale(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_replica_set_scale(ctx:ctx(), binary(), binary(), kuberl_v1beta2_scale:kuberl_v1beta2_scale(), maps:map()) -> {ok, kuberl_v1beta2_scale:kuberl_v1beta2_scale(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_replica_set_scale(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/replicasets/", Name, "/scale"],
@@ -1223,7 +1281,7 @@ replace_namespaced_replica_set_scale(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace status of the specified ReplicaSet
@@ -1234,6 +1292,7 @@ replace_namespaced_replica_set_status(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_replica_set_status(ctx:ctx(), binary(), binary(), kuberl_v1beta2_replica_set:kuberl_v1beta2_replica_set(), maps:map()) -> {ok, kuberl_v1beta2_replica_set:kuberl_v1beta2_replica_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_replica_set_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/replicasets/", Name, "/status"],
@@ -1243,7 +1302,7 @@ replace_namespaced_replica_set_status(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified StatefulSet
@@ -1254,6 +1313,7 @@ replace_namespaced_stateful_set(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_stateful_set(ctx:ctx(), binary(), binary(), kuberl_v1beta2_stateful_set:kuberl_v1beta2_stateful_set(), maps:map()) -> {ok, kuberl_v1beta2_stateful_set:kuberl_v1beta2_stateful_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_stateful_set(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/statefulsets/", Name, ""],
@@ -1263,7 +1323,7 @@ replace_namespaced_stateful_set(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace scale of the specified StatefulSet
@@ -1274,6 +1334,7 @@ replace_namespaced_stateful_set_scale(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_stateful_set_scale(ctx:ctx(), binary(), binary(), kuberl_v1beta2_scale:kuberl_v1beta2_scale(), maps:map()) -> {ok, kuberl_v1beta2_scale:kuberl_v1beta2_scale(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_stateful_set_scale(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/statefulsets/", Name, "/scale"],
@@ -1283,7 +1344,7 @@ replace_namespaced_stateful_set_scale(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace status of the specified StatefulSet
@@ -1294,6 +1355,7 @@ replace_namespaced_stateful_set_status(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_stateful_set_status(ctx:ctx(), binary(), binary(), kuberl_v1beta2_stateful_set:kuberl_v1beta2_stateful_set(), maps:map()) -> {ok, kuberl_v1beta2_stateful_set:kuberl_v1beta2_stateful_set(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_stateful_set_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/apps/v1beta2/namespaces/", Namespace, "/statefulsets/", Name, "/status"],
@@ -1303,6 +1365,6 @@ replace_namespaced_stateful_set_status(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 

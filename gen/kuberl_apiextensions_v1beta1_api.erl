@@ -21,6 +21,7 @@ create_custom_resource_definition(Ctx, Body) ->
 -spec create_custom_resource_definition(ctx:ctx(), kuberl_v1beta1_custom_resource_definition:kuberl_v1beta1_custom_resource_definition(), maps:map()) -> {ok, kuberl_v1beta1_custom_resource_definition:kuberl_v1beta1_custom_resource_definition(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_custom_resource_definition(Ctx, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/apis/apiextensions.k8s.io/v1beta1/customresourcedefinitions"],
@@ -30,7 +31,7 @@ create_custom_resource_definition(Ctx, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of CustomResourceDefinition
@@ -41,6 +42,7 @@ delete_collection_custom_resource_definition(Ctx) ->
 -spec delete_collection_custom_resource_definition(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_custom_resource_definition(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/apiextensions.k8s.io/v1beta1/customresourcedefinitions"],
@@ -50,7 +52,7 @@ delete_collection_custom_resource_definition(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a CustomResourceDefinition
@@ -61,6 +63,7 @@ delete_custom_resource_definition(Ctx, Name, Body) ->
 -spec delete_custom_resource_definition(ctx:ctx(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_custom_resource_definition(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/apiextensions.k8s.io/v1beta1/customresourcedefinitions/", Name, ""],
@@ -70,7 +73,7 @@ delete_custom_resource_definition(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% get available resources
@@ -81,6 +84,7 @@ get_api_resources(Ctx) ->
 -spec get_api_resources(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_api_resource_list:kuberl_v1_api_resource_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 get_api_resources(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apiextensions.k8s.io/v1beta1/"],
@@ -90,7 +94,7 @@ get_api_resources(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json">>, <<"application/yaml">>, <<"application/vnd.kubernetes.protobuf">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind CustomResourceDefinition
@@ -101,6 +105,7 @@ list_custom_resource_definition(Ctx) ->
 -spec list_custom_resource_definition(ctx:ctx(), maps:map()) -> {ok, kuberl_v1beta1_custom_resource_definition_list:kuberl_v1beta1_custom_resource_definition_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_custom_resource_definition(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apiextensions.k8s.io/v1beta1/customresourcedefinitions"],
@@ -110,7 +115,7 @@ list_custom_resource_definition(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified CustomResourceDefinition
@@ -121,6 +126,7 @@ patch_custom_resource_definition(Ctx, Name, Body) ->
 -spec patch_custom_resource_definition(ctx:ctx(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1beta1_custom_resource_definition:kuberl_v1beta1_custom_resource_definition(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_custom_resource_definition(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/apiextensions.k8s.io/v1beta1/customresourcedefinitions/", Name, ""],
@@ -130,7 +136,7 @@ patch_custom_resource_definition(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified CustomResourceDefinition
@@ -141,6 +147,7 @@ read_custom_resource_definition(Ctx, Name) ->
 -spec read_custom_resource_definition(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1beta1_custom_resource_definition:kuberl_v1beta1_custom_resource_definition(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_custom_resource_definition(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/apiextensions.k8s.io/v1beta1/customresourcedefinitions/", Name, ""],
@@ -150,7 +157,7 @@ read_custom_resource_definition(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified CustomResourceDefinition
@@ -161,6 +168,7 @@ replace_custom_resource_definition(Ctx, Name, Body) ->
 -spec replace_custom_resource_definition(ctx:ctx(), binary(), kuberl_v1beta1_custom_resource_definition:kuberl_v1beta1_custom_resource_definition(), maps:map()) -> {ok, kuberl_v1beta1_custom_resource_definition:kuberl_v1beta1_custom_resource_definition(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_custom_resource_definition(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/apiextensions.k8s.io/v1beta1/customresourcedefinitions/", Name, ""],
@@ -170,7 +178,7 @@ replace_custom_resource_definition(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace status of the specified CustomResourceDefinition
@@ -181,6 +189,7 @@ replace_custom_resource_definition_status(Ctx, Name, Body) ->
 -spec replace_custom_resource_definition_status(ctx:ctx(), binary(), kuberl_v1beta1_custom_resource_definition:kuberl_v1beta1_custom_resource_definition(), maps:map()) -> {ok, kuberl_v1beta1_custom_resource_definition:kuberl_v1beta1_custom_resource_definition(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_custom_resource_definition_status(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/apiextensions.k8s.io/v1beta1/customresourcedefinitions/", Name, "/status"],
@@ -190,6 +199,6 @@ replace_custom_resource_definition_status(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 

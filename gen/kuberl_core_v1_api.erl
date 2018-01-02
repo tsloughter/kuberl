@@ -252,6 +252,7 @@ connect_delete_namespaced_pod_proxy(Ctx, Name, Namespace) ->
 -spec connect_delete_namespaced_pod_proxy(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_delete_namespaced_pod_proxy(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/proxy"],
@@ -261,7 +262,7 @@ connect_delete_namespaced_pod_proxy(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect DELETE requests to proxy of Pod
@@ -272,6 +273,7 @@ connect_delete_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path) ->
 -spec connect_delete_namespaced_pod_proxy_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_delete_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/proxy/", Path, ""],
@@ -281,7 +283,7 @@ connect_delete_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path, Option
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect DELETE requests to proxy of Service
@@ -292,6 +294,7 @@ connect_delete_namespaced_service_proxy(Ctx, Name, Namespace) ->
 -spec connect_delete_namespaced_service_proxy(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_delete_namespaced_service_proxy(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, "/proxy"],
@@ -301,7 +304,7 @@ connect_delete_namespaced_service_proxy(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect DELETE requests to proxy of Service
@@ -312,6 +315,7 @@ connect_delete_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path) ->
 -spec connect_delete_namespaced_service_proxy_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_delete_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, "/proxy/", Path, ""],
@@ -321,7 +325,7 @@ connect_delete_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path, Op
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect DELETE requests to proxy of Node
@@ -332,6 +336,7 @@ connect_delete_node_proxy(Ctx, Name) ->
 -spec connect_delete_node_proxy(ctx:ctx(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_delete_node_proxy(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/nodes/", Name, "/proxy"],
@@ -341,7 +346,7 @@ connect_delete_node_proxy(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect DELETE requests to proxy of Node
@@ -352,6 +357,7 @@ connect_delete_node_proxy_with_path(Ctx, Name, Path) ->
 -spec connect_delete_node_proxy_with_path(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_delete_node_proxy_with_path(Ctx, Name, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/nodes/", Name, "/proxy/", Path, ""],
@@ -361,7 +367,7 @@ connect_delete_node_proxy_with_path(Ctx, Name, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect GET requests to attach of Pod
@@ -372,6 +378,7 @@ connect_get_namespaced_pod_attach(Ctx, Name, Namespace) ->
 -spec connect_get_namespaced_pod_attach(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_get_namespaced_pod_attach(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/attach"],
@@ -381,7 +388,7 @@ connect_get_namespaced_pod_attach(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect GET requests to exec of Pod
@@ -392,6 +399,7 @@ connect_get_namespaced_pod_exec(Ctx, Name, Namespace) ->
 -spec connect_get_namespaced_pod_exec(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_get_namespaced_pod_exec(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/exec"],
@@ -401,7 +409,7 @@ connect_get_namespaced_pod_exec(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect GET requests to portforward of Pod
@@ -412,6 +420,7 @@ connect_get_namespaced_pod_portforward(Ctx, Name, Namespace) ->
 -spec connect_get_namespaced_pod_portforward(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_get_namespaced_pod_portforward(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/portforward"],
@@ -421,7 +430,7 @@ connect_get_namespaced_pod_portforward(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect GET requests to proxy of Pod
@@ -432,6 +441,7 @@ connect_get_namespaced_pod_proxy(Ctx, Name, Namespace) ->
 -spec connect_get_namespaced_pod_proxy(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_get_namespaced_pod_proxy(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/proxy"],
@@ -441,7 +451,7 @@ connect_get_namespaced_pod_proxy(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect GET requests to proxy of Pod
@@ -452,6 +462,7 @@ connect_get_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path) ->
 -spec connect_get_namespaced_pod_proxy_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_get_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/proxy/", Path, ""],
@@ -461,7 +472,7 @@ connect_get_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path, Optional)
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect GET requests to proxy of Service
@@ -472,6 +483,7 @@ connect_get_namespaced_service_proxy(Ctx, Name, Namespace) ->
 -spec connect_get_namespaced_service_proxy(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_get_namespaced_service_proxy(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, "/proxy"],
@@ -481,7 +493,7 @@ connect_get_namespaced_service_proxy(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect GET requests to proxy of Service
@@ -492,6 +504,7 @@ connect_get_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path) ->
 -spec connect_get_namespaced_service_proxy_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_get_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, "/proxy/", Path, ""],
@@ -501,7 +514,7 @@ connect_get_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path, Optio
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect GET requests to proxy of Node
@@ -512,6 +525,7 @@ connect_get_node_proxy(Ctx, Name) ->
 -spec connect_get_node_proxy(ctx:ctx(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_get_node_proxy(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/nodes/", Name, "/proxy"],
@@ -521,7 +535,7 @@ connect_get_node_proxy(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect GET requests to proxy of Node
@@ -532,6 +546,7 @@ connect_get_node_proxy_with_path(Ctx, Name, Path) ->
 -spec connect_get_node_proxy_with_path(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_get_node_proxy_with_path(Ctx, Name, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/nodes/", Name, "/proxy/", Path, ""],
@@ -541,7 +556,7 @@ connect_get_node_proxy_with_path(Ctx, Name, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect HEAD requests to proxy of Pod
@@ -552,6 +567,7 @@ connect_head_namespaced_pod_proxy(Ctx, Name, Namespace) ->
 -spec connect_head_namespaced_pod_proxy(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_head_namespaced_pod_proxy(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = head,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/proxy"],
@@ -561,7 +577,7 @@ connect_head_namespaced_pod_proxy(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect HEAD requests to proxy of Pod
@@ -572,6 +588,7 @@ connect_head_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path) ->
 -spec connect_head_namespaced_pod_proxy_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_head_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = head,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/proxy/", Path, ""],
@@ -581,7 +598,7 @@ connect_head_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path, Optional
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect HEAD requests to proxy of Service
@@ -592,6 +609,7 @@ connect_head_namespaced_service_proxy(Ctx, Name, Namespace) ->
 -spec connect_head_namespaced_service_proxy(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_head_namespaced_service_proxy(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = head,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, "/proxy"],
@@ -601,7 +619,7 @@ connect_head_namespaced_service_proxy(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect HEAD requests to proxy of Service
@@ -612,6 +630,7 @@ connect_head_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path) ->
 -spec connect_head_namespaced_service_proxy_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_head_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = head,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, "/proxy/", Path, ""],
@@ -621,7 +640,7 @@ connect_head_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path, Opti
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect HEAD requests to proxy of Node
@@ -632,6 +651,7 @@ connect_head_node_proxy(Ctx, Name) ->
 -spec connect_head_node_proxy(ctx:ctx(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_head_node_proxy(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = head,
     Path = ["/api/v1/nodes/", Name, "/proxy"],
@@ -641,7 +661,7 @@ connect_head_node_proxy(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect HEAD requests to proxy of Node
@@ -652,6 +672,7 @@ connect_head_node_proxy_with_path(Ctx, Name, Path) ->
 -spec connect_head_node_proxy_with_path(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_head_node_proxy_with_path(Ctx, Name, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = head,
     Path = ["/api/v1/nodes/", Name, "/proxy/", Path, ""],
@@ -661,7 +682,7 @@ connect_head_node_proxy_with_path(Ctx, Name, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect OPTIONS requests to proxy of Pod
@@ -672,6 +693,7 @@ connect_options_namespaced_pod_proxy(Ctx, Name, Namespace) ->
 -spec connect_options_namespaced_pod_proxy(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_options_namespaced_pod_proxy(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = options,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/proxy"],
@@ -681,7 +703,7 @@ connect_options_namespaced_pod_proxy(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect OPTIONS requests to proxy of Pod
@@ -692,6 +714,7 @@ connect_options_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path) ->
 -spec connect_options_namespaced_pod_proxy_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_options_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = options,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/proxy/", Path, ""],
@@ -701,7 +724,7 @@ connect_options_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path, Optio
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect OPTIONS requests to proxy of Service
@@ -712,6 +735,7 @@ connect_options_namespaced_service_proxy(Ctx, Name, Namespace) ->
 -spec connect_options_namespaced_service_proxy(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_options_namespaced_service_proxy(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = options,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, "/proxy"],
@@ -721,7 +745,7 @@ connect_options_namespaced_service_proxy(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect OPTIONS requests to proxy of Service
@@ -732,6 +756,7 @@ connect_options_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path) -
 -spec connect_options_namespaced_service_proxy_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_options_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = options,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, "/proxy/", Path, ""],
@@ -741,7 +766,7 @@ connect_options_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path, O
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect OPTIONS requests to proxy of Node
@@ -752,6 +777,7 @@ connect_options_node_proxy(Ctx, Name) ->
 -spec connect_options_node_proxy(ctx:ctx(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_options_node_proxy(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = options,
     Path = ["/api/v1/nodes/", Name, "/proxy"],
@@ -761,7 +787,7 @@ connect_options_node_proxy(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect OPTIONS requests to proxy of Node
@@ -772,6 +798,7 @@ connect_options_node_proxy_with_path(Ctx, Name, Path) ->
 -spec connect_options_node_proxy_with_path(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_options_node_proxy_with_path(Ctx, Name, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = options,
     Path = ["/api/v1/nodes/", Name, "/proxy/", Path, ""],
@@ -781,7 +808,7 @@ connect_options_node_proxy_with_path(Ctx, Name, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect PATCH requests to proxy of Pod
@@ -792,6 +819,7 @@ connect_patch_namespaced_pod_proxy(Ctx, Name, Namespace) ->
 -spec connect_patch_namespaced_pod_proxy(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_patch_namespaced_pod_proxy(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/proxy"],
@@ -801,7 +829,7 @@ connect_patch_namespaced_pod_proxy(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect PATCH requests to proxy of Pod
@@ -812,6 +840,7 @@ connect_patch_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path) ->
 -spec connect_patch_namespaced_pod_proxy_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_patch_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/proxy/", Path, ""],
@@ -821,7 +850,7 @@ connect_patch_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path, Optiona
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect PATCH requests to proxy of Service
@@ -832,6 +861,7 @@ connect_patch_namespaced_service_proxy(Ctx, Name, Namespace) ->
 -spec connect_patch_namespaced_service_proxy(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_patch_namespaced_service_proxy(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, "/proxy"],
@@ -841,7 +871,7 @@ connect_patch_namespaced_service_proxy(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect PATCH requests to proxy of Service
@@ -852,6 +882,7 @@ connect_patch_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path) ->
 -spec connect_patch_namespaced_service_proxy_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_patch_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, "/proxy/", Path, ""],
@@ -861,7 +892,7 @@ connect_patch_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path, Opt
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect PATCH requests to proxy of Node
@@ -872,6 +903,7 @@ connect_patch_node_proxy(Ctx, Name) ->
 -spec connect_patch_node_proxy(ctx:ctx(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_patch_node_proxy(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/nodes/", Name, "/proxy"],
@@ -881,7 +913,7 @@ connect_patch_node_proxy(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect PATCH requests to proxy of Node
@@ -892,6 +924,7 @@ connect_patch_node_proxy_with_path(Ctx, Name, Path) ->
 -spec connect_patch_node_proxy_with_path(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_patch_node_proxy_with_path(Ctx, Name, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/nodes/", Name, "/proxy/", Path, ""],
@@ -901,7 +934,7 @@ connect_patch_node_proxy_with_path(Ctx, Name, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect POST requests to attach of Pod
@@ -912,6 +945,7 @@ connect_post_namespaced_pod_attach(Ctx, Name, Namespace) ->
 -spec connect_post_namespaced_pod_attach(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_post_namespaced_pod_attach(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/attach"],
@@ -921,7 +955,7 @@ connect_post_namespaced_pod_attach(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect POST requests to exec of Pod
@@ -932,6 +966,7 @@ connect_post_namespaced_pod_exec(Ctx, Name, Namespace) ->
 -spec connect_post_namespaced_pod_exec(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_post_namespaced_pod_exec(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/exec"],
@@ -941,7 +976,7 @@ connect_post_namespaced_pod_exec(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect POST requests to portforward of Pod
@@ -952,6 +987,7 @@ connect_post_namespaced_pod_portforward(Ctx, Name, Namespace) ->
 -spec connect_post_namespaced_pod_portforward(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_post_namespaced_pod_portforward(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/portforward"],
@@ -961,7 +997,7 @@ connect_post_namespaced_pod_portforward(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect POST requests to proxy of Pod
@@ -972,6 +1008,7 @@ connect_post_namespaced_pod_proxy(Ctx, Name, Namespace) ->
 -spec connect_post_namespaced_pod_proxy(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_post_namespaced_pod_proxy(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/proxy"],
@@ -981,7 +1018,7 @@ connect_post_namespaced_pod_proxy(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect POST requests to proxy of Pod
@@ -992,6 +1029,7 @@ connect_post_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path) ->
 -spec connect_post_namespaced_pod_proxy_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_post_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/proxy/", Path, ""],
@@ -1001,7 +1039,7 @@ connect_post_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path, Optional
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect POST requests to proxy of Service
@@ -1012,6 +1050,7 @@ connect_post_namespaced_service_proxy(Ctx, Name, Namespace) ->
 -spec connect_post_namespaced_service_proxy(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_post_namespaced_service_proxy(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, "/proxy"],
@@ -1021,7 +1060,7 @@ connect_post_namespaced_service_proxy(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect POST requests to proxy of Service
@@ -1032,6 +1071,7 @@ connect_post_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path) ->
 -spec connect_post_namespaced_service_proxy_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_post_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, "/proxy/", Path, ""],
@@ -1041,7 +1081,7 @@ connect_post_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path, Opti
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect POST requests to proxy of Node
@@ -1052,6 +1092,7 @@ connect_post_node_proxy(Ctx, Name) ->
 -spec connect_post_node_proxy(ctx:ctx(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_post_node_proxy(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/nodes/", Name, "/proxy"],
@@ -1061,7 +1102,7 @@ connect_post_node_proxy(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect POST requests to proxy of Node
@@ -1072,6 +1113,7 @@ connect_post_node_proxy_with_path(Ctx, Name, Path) ->
 -spec connect_post_node_proxy_with_path(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_post_node_proxy_with_path(Ctx, Name, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/nodes/", Name, "/proxy/", Path, ""],
@@ -1081,7 +1123,7 @@ connect_post_node_proxy_with_path(Ctx, Name, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect PUT requests to proxy of Pod
@@ -1092,6 +1134,7 @@ connect_put_namespaced_pod_proxy(Ctx, Name, Namespace) ->
 -spec connect_put_namespaced_pod_proxy(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_put_namespaced_pod_proxy(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/proxy"],
@@ -1101,7 +1144,7 @@ connect_put_namespaced_pod_proxy(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect PUT requests to proxy of Pod
@@ -1112,6 +1155,7 @@ connect_put_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path) ->
 -spec connect_put_namespaced_pod_proxy_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_put_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/proxy/", Path, ""],
@@ -1121,7 +1165,7 @@ connect_put_namespaced_pod_proxy_with_path(Ctx, Name, Namespace, Path, Optional)
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect PUT requests to proxy of Service
@@ -1132,6 +1176,7 @@ connect_put_namespaced_service_proxy(Ctx, Name, Namespace) ->
 -spec connect_put_namespaced_service_proxy(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_put_namespaced_service_proxy(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, "/proxy"],
@@ -1141,7 +1186,7 @@ connect_put_namespaced_service_proxy(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect PUT requests to proxy of Service
@@ -1152,6 +1197,7 @@ connect_put_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path) ->
 -spec connect_put_namespaced_service_proxy_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_put_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, "/proxy/", Path, ""],
@@ -1161,7 +1207,7 @@ connect_put_namespaced_service_proxy_with_path(Ctx, Name, Namespace, Path, Optio
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect PUT requests to proxy of Node
@@ -1172,6 +1218,7 @@ connect_put_node_proxy(Ctx, Name) ->
 -spec connect_put_node_proxy(ctx:ctx(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_put_node_proxy(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/nodes/", Name, "/proxy"],
@@ -1181,7 +1228,7 @@ connect_put_node_proxy(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% connect PUT requests to proxy of Node
@@ -1192,6 +1239,7 @@ connect_put_node_proxy_with_path(Ctx, Name, Path) ->
 -spec connect_put_node_proxy_with_path(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 connect_put_node_proxy_with_path(Ctx, Name, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/nodes/", Name, "/proxy/", Path, ""],
@@ -1201,7 +1249,7 @@ connect_put_node_proxy_with_path(Ctx, Name, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a Namespace
@@ -1212,6 +1260,7 @@ create_namespace(Ctx, Body) ->
 -spec create_namespace(ctx:ctx(), kuberl_v1_namespace:kuberl_v1_namespace(), maps:map()) -> {ok, kuberl_v1_namespace:kuberl_v1_namespace(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespace(Ctx, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces"],
@@ -1221,7 +1270,7 @@ create_namespace(Ctx, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a Binding
@@ -1232,6 +1281,7 @@ create_namespaced_binding(Ctx, Namespace, Body) ->
 -spec create_namespaced_binding(ctx:ctx(), binary(), kuberl_v1_binding:kuberl_v1_binding(), maps:map()) -> {ok, kuberl_v1_binding:kuberl_v1_binding(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_binding(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/bindings"],
@@ -1241,7 +1291,7 @@ create_namespaced_binding(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a ConfigMap
@@ -1252,6 +1302,7 @@ create_namespaced_config_map(Ctx, Namespace, Body) ->
 -spec create_namespaced_config_map(ctx:ctx(), binary(), kuberl_v1_config_map:kuberl_v1_config_map(), maps:map()) -> {ok, kuberl_v1_config_map:kuberl_v1_config_map(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_config_map(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/configmaps"],
@@ -1261,7 +1312,7 @@ create_namespaced_config_map(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create Endpoints
@@ -1272,6 +1323,7 @@ create_namespaced_endpoints(Ctx, Namespace, Body) ->
 -spec create_namespaced_endpoints(ctx:ctx(), binary(), kuberl_v1_endpoints:kuberl_v1_endpoints(), maps:map()) -> {ok, kuberl_v1_endpoints:kuberl_v1_endpoints(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_endpoints(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/endpoints"],
@@ -1281,7 +1333,7 @@ create_namespaced_endpoints(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create an Event
@@ -1292,6 +1344,7 @@ create_namespaced_event(Ctx, Namespace, Body) ->
 -spec create_namespaced_event(ctx:ctx(), binary(), kuberl_v1_event:kuberl_v1_event(), maps:map()) -> {ok, kuberl_v1_event:kuberl_v1_event(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_event(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/events"],
@@ -1301,7 +1354,7 @@ create_namespaced_event(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a LimitRange
@@ -1312,6 +1365,7 @@ create_namespaced_limit_range(Ctx, Namespace, Body) ->
 -spec create_namespaced_limit_range(ctx:ctx(), binary(), kuberl_v1_limit_range:kuberl_v1_limit_range(), maps:map()) -> {ok, kuberl_v1_limit_range:kuberl_v1_limit_range(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_limit_range(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/limitranges"],
@@ -1321,7 +1375,7 @@ create_namespaced_limit_range(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a PersistentVolumeClaim
@@ -1332,6 +1386,7 @@ create_namespaced_persistent_volume_claim(Ctx, Namespace, Body) ->
 -spec create_namespaced_persistent_volume_claim(ctx:ctx(), binary(), kuberl_v1_persistent_volume_claim:kuberl_v1_persistent_volume_claim(), maps:map()) -> {ok, kuberl_v1_persistent_volume_claim:kuberl_v1_persistent_volume_claim(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_persistent_volume_claim(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/persistentvolumeclaims"],
@@ -1341,7 +1396,7 @@ create_namespaced_persistent_volume_claim(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a Pod
@@ -1352,6 +1407,7 @@ create_namespaced_pod(Ctx, Namespace, Body) ->
 -spec create_namespaced_pod(ctx:ctx(), binary(), kuberl_v1_pod:kuberl_v1_pod(), maps:map()) -> {ok, kuberl_v1_pod:kuberl_v1_pod(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_pod(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/pods"],
@@ -1361,7 +1417,7 @@ create_namespaced_pod(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create binding of a Pod
@@ -1372,6 +1428,7 @@ create_namespaced_pod_binding(Ctx, Name, Namespace, Body) ->
 -spec create_namespaced_pod_binding(ctx:ctx(), binary(), binary(), kuberl_v1_binding:kuberl_v1_binding(), maps:map()) -> {ok, kuberl_v1_binding:kuberl_v1_binding(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_pod_binding(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/binding"],
@@ -1381,7 +1438,7 @@ create_namespaced_pod_binding(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create eviction of a Pod
@@ -1392,6 +1449,7 @@ create_namespaced_pod_eviction(Ctx, Name, Namespace, Body) ->
 -spec create_namespaced_pod_eviction(ctx:ctx(), binary(), binary(), kuberl_v1beta1_eviction:kuberl_v1beta1_eviction(), maps:map()) -> {ok, kuberl_v1beta1_eviction:kuberl_v1beta1_eviction(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_pod_eviction(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/eviction"],
@@ -1401,7 +1459,7 @@ create_namespaced_pod_eviction(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a PodTemplate
@@ -1412,6 +1470,7 @@ create_namespaced_pod_template(Ctx, Namespace, Body) ->
 -spec create_namespaced_pod_template(ctx:ctx(), binary(), kuberl_v1_pod_template:kuberl_v1_pod_template(), maps:map()) -> {ok, kuberl_v1_pod_template:kuberl_v1_pod_template(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_pod_template(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/podtemplates"],
@@ -1421,7 +1480,7 @@ create_namespaced_pod_template(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a ReplicationController
@@ -1432,6 +1491,7 @@ create_namespaced_replication_controller(Ctx, Namespace, Body) ->
 -spec create_namespaced_replication_controller(ctx:ctx(), binary(), kuberl_v1_replication_controller:kuberl_v1_replication_controller(), maps:map()) -> {ok, kuberl_v1_replication_controller:kuberl_v1_replication_controller(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_replication_controller(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/replicationcontrollers"],
@@ -1441,7 +1501,7 @@ create_namespaced_replication_controller(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a ResourceQuota
@@ -1452,6 +1512,7 @@ create_namespaced_resource_quota(Ctx, Namespace, Body) ->
 -spec create_namespaced_resource_quota(ctx:ctx(), binary(), kuberl_v1_resource_quota:kuberl_v1_resource_quota(), maps:map()) -> {ok, kuberl_v1_resource_quota:kuberl_v1_resource_quota(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_resource_quota(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/resourcequotas"],
@@ -1461,7 +1522,7 @@ create_namespaced_resource_quota(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a Secret
@@ -1472,6 +1533,7 @@ create_namespaced_secret(Ctx, Namespace, Body) ->
 -spec create_namespaced_secret(ctx:ctx(), binary(), kuberl_v1_secret:kuberl_v1_secret(), maps:map()) -> {ok, kuberl_v1_secret:kuberl_v1_secret(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_secret(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/secrets"],
@@ -1481,7 +1543,7 @@ create_namespaced_secret(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a Service
@@ -1492,6 +1554,7 @@ create_namespaced_service(Ctx, Namespace, Body) ->
 -spec create_namespaced_service(ctx:ctx(), binary(), kuberl_v1_service:kuberl_v1_service(), maps:map()) -> {ok, kuberl_v1_service:kuberl_v1_service(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_service(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/services"],
@@ -1501,7 +1564,7 @@ create_namespaced_service(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a ServiceAccount
@@ -1512,6 +1575,7 @@ create_namespaced_service_account(Ctx, Namespace, Body) ->
 -spec create_namespaced_service_account(ctx:ctx(), binary(), kuberl_v1_service_account:kuberl_v1_service_account(), maps:map()) -> {ok, kuberl_v1_service_account:kuberl_v1_service_account(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_service_account(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/namespaces/", Namespace, "/serviceaccounts"],
@@ -1521,7 +1585,7 @@ create_namespaced_service_account(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a Node
@@ -1532,6 +1596,7 @@ create_node(Ctx, Body) ->
 -spec create_node(ctx:ctx(), kuberl_v1_node:kuberl_v1_node(), maps:map()) -> {ok, kuberl_v1_node:kuberl_v1_node(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_node(Ctx, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/nodes"],
@@ -1541,7 +1606,7 @@ create_node(Ctx, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a PersistentVolume
@@ -1552,6 +1617,7 @@ create_persistent_volume(Ctx, Body) ->
 -spec create_persistent_volume(ctx:ctx(), kuberl_v1_persistent_volume:kuberl_v1_persistent_volume(), maps:map()) -> {ok, kuberl_v1_persistent_volume:kuberl_v1_persistent_volume(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_persistent_volume(Ctx, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/persistentvolumes"],
@@ -1561,7 +1627,7 @@ create_persistent_volume(Ctx, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of ConfigMap
@@ -1572,6 +1638,7 @@ delete_collection_namespaced_config_map(Ctx, Namespace) ->
 -spec delete_collection_namespaced_config_map(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_config_map(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/configmaps"],
@@ -1581,7 +1648,7 @@ delete_collection_namespaced_config_map(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of Endpoints
@@ -1592,6 +1659,7 @@ delete_collection_namespaced_endpoints(Ctx, Namespace) ->
 -spec delete_collection_namespaced_endpoints(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_endpoints(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/endpoints"],
@@ -1601,7 +1669,7 @@ delete_collection_namespaced_endpoints(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of Event
@@ -1612,6 +1680,7 @@ delete_collection_namespaced_event(Ctx, Namespace) ->
 -spec delete_collection_namespaced_event(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_event(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/events"],
@@ -1621,7 +1690,7 @@ delete_collection_namespaced_event(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of LimitRange
@@ -1632,6 +1701,7 @@ delete_collection_namespaced_limit_range(Ctx, Namespace) ->
 -spec delete_collection_namespaced_limit_range(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_limit_range(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/limitranges"],
@@ -1641,7 +1711,7 @@ delete_collection_namespaced_limit_range(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of PersistentVolumeClaim
@@ -1652,6 +1722,7 @@ delete_collection_namespaced_persistent_volume_claim(Ctx, Namespace) ->
 -spec delete_collection_namespaced_persistent_volume_claim(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_persistent_volume_claim(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/persistentvolumeclaims"],
@@ -1661,7 +1732,7 @@ delete_collection_namespaced_persistent_volume_claim(Ctx, Namespace, Optional) -
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of Pod
@@ -1672,6 +1743,7 @@ delete_collection_namespaced_pod(Ctx, Namespace) ->
 -spec delete_collection_namespaced_pod(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_pod(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/pods"],
@@ -1681,7 +1753,7 @@ delete_collection_namespaced_pod(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of PodTemplate
@@ -1692,6 +1764,7 @@ delete_collection_namespaced_pod_template(Ctx, Namespace) ->
 -spec delete_collection_namespaced_pod_template(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_pod_template(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/podtemplates"],
@@ -1701,7 +1774,7 @@ delete_collection_namespaced_pod_template(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of ReplicationController
@@ -1712,6 +1785,7 @@ delete_collection_namespaced_replication_controller(Ctx, Namespace) ->
 -spec delete_collection_namespaced_replication_controller(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_replication_controller(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/replicationcontrollers"],
@@ -1721,7 +1795,7 @@ delete_collection_namespaced_replication_controller(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of ResourceQuota
@@ -1732,6 +1806,7 @@ delete_collection_namespaced_resource_quota(Ctx, Namespace) ->
 -spec delete_collection_namespaced_resource_quota(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_resource_quota(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/resourcequotas"],
@@ -1741,7 +1816,7 @@ delete_collection_namespaced_resource_quota(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of Secret
@@ -1752,6 +1827,7 @@ delete_collection_namespaced_secret(Ctx, Namespace) ->
 -spec delete_collection_namespaced_secret(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_secret(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/secrets"],
@@ -1761,7 +1837,7 @@ delete_collection_namespaced_secret(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of ServiceAccount
@@ -1772,6 +1848,7 @@ delete_collection_namespaced_service_account(Ctx, Namespace) ->
 -spec delete_collection_namespaced_service_account(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_service_account(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/serviceaccounts"],
@@ -1781,7 +1858,7 @@ delete_collection_namespaced_service_account(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of Node
@@ -1792,6 +1869,7 @@ delete_collection_node(Ctx) ->
 -spec delete_collection_node(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_node(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/nodes"],
@@ -1801,7 +1879,7 @@ delete_collection_node(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of PersistentVolume
@@ -1812,6 +1890,7 @@ delete_collection_persistent_volume(Ctx) ->
 -spec delete_collection_persistent_volume(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_persistent_volume(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/persistentvolumes"],
@@ -1821,7 +1900,7 @@ delete_collection_persistent_volume(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a Namespace
@@ -1832,6 +1911,7 @@ delete_namespace(Ctx, Name, Body) ->
 -spec delete_namespace(ctx:ctx(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespace(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Name, ""],
@@ -1841,7 +1921,7 @@ delete_namespace(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a ConfigMap
@@ -1852,6 +1932,7 @@ delete_namespaced_config_map(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_config_map(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_config_map(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/configmaps/", Name, ""],
@@ -1861,7 +1942,7 @@ delete_namespaced_config_map(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete Endpoints
@@ -1872,6 +1953,7 @@ delete_namespaced_endpoints(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_endpoints(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_endpoints(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/endpoints/", Name, ""],
@@ -1881,7 +1963,7 @@ delete_namespaced_endpoints(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete an Event
@@ -1892,6 +1974,7 @@ delete_namespaced_event(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_event(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_event(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/events/", Name, ""],
@@ -1901,7 +1984,7 @@ delete_namespaced_event(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a LimitRange
@@ -1912,6 +1995,7 @@ delete_namespaced_limit_range(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_limit_range(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_limit_range(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/limitranges/", Name, ""],
@@ -1921,7 +2005,7 @@ delete_namespaced_limit_range(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a PersistentVolumeClaim
@@ -1932,6 +2016,7 @@ delete_namespaced_persistent_volume_claim(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_persistent_volume_claim(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_persistent_volume_claim(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/persistentvolumeclaims/", Name, ""],
@@ -1941,7 +2026,7 @@ delete_namespaced_persistent_volume_claim(Ctx, Name, Namespace, Body, Optional) 
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a Pod
@@ -1952,6 +2037,7 @@ delete_namespaced_pod(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_pod(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_pod(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, ""],
@@ -1961,7 +2047,7 @@ delete_namespaced_pod(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a PodTemplate
@@ -1972,6 +2058,7 @@ delete_namespaced_pod_template(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_pod_template(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_pod_template(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/podtemplates/", Name, ""],
@@ -1981,7 +2068,7 @@ delete_namespaced_pod_template(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a ReplicationController
@@ -1992,6 +2079,7 @@ delete_namespaced_replication_controller(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_replication_controller(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_replication_controller(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/replicationcontrollers/", Name, ""],
@@ -2001,7 +2089,7 @@ delete_namespaced_replication_controller(Ctx, Name, Namespace, Body, Optional) -
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a ResourceQuota
@@ -2012,6 +2100,7 @@ delete_namespaced_resource_quota(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_resource_quota(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_resource_quota(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/resourcequotas/", Name, ""],
@@ -2021,7 +2110,7 @@ delete_namespaced_resource_quota(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a Secret
@@ -2032,6 +2121,7 @@ delete_namespaced_secret(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_secret(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_secret(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/secrets/", Name, ""],
@@ -2041,7 +2131,7 @@ delete_namespaced_secret(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a Service
@@ -2052,6 +2142,7 @@ delete_namespaced_service(Ctx, Name, Namespace) ->
 -spec delete_namespaced_service(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_service(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, ""],
@@ -2061,7 +2152,7 @@ delete_namespaced_service(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a ServiceAccount
@@ -2072,6 +2163,7 @@ delete_namespaced_service_account(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_service_account(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_service_account(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/namespaces/", Namespace, "/serviceaccounts/", Name, ""],
@@ -2081,7 +2173,7 @@ delete_namespaced_service_account(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a Node
@@ -2092,6 +2184,7 @@ delete_node(Ctx, Name, Body) ->
 -spec delete_node(ctx:ctx(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_node(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/nodes/", Name, ""],
@@ -2101,7 +2194,7 @@ delete_node(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a PersistentVolume
@@ -2112,6 +2205,7 @@ delete_persistent_volume(Ctx, Name, Body) ->
 -spec delete_persistent_volume(ctx:ctx(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_persistent_volume(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/persistentvolumes/", Name, ""],
@@ -2121,7 +2215,7 @@ delete_persistent_volume(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% get available resources
@@ -2132,6 +2226,7 @@ get_api_resources(Ctx) ->
 -spec get_api_resources(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_api_resource_list:kuberl_v1_api_resource_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 get_api_resources(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/"],
@@ -2141,7 +2236,7 @@ get_api_resources(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json">>, <<"application/yaml">>, <<"application/vnd.kubernetes.protobuf">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list objects of kind ComponentStatus
@@ -2152,6 +2247,7 @@ list_component_status(Ctx) ->
 -spec list_component_status(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_component_status_list:kuberl_v1_component_status_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_component_status(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/componentstatuses"],
@@ -2161,7 +2257,7 @@ list_component_status(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind ConfigMap
@@ -2172,6 +2268,7 @@ list_config_map_for_all_namespaces(Ctx) ->
 -spec list_config_map_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_config_map_list:kuberl_v1_config_map_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_config_map_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/configmaps"],
@@ -2181,7 +2278,7 @@ list_config_map_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind Endpoints
@@ -2192,6 +2289,7 @@ list_endpoints_for_all_namespaces(Ctx) ->
 -spec list_endpoints_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_endpoints_list:kuberl_v1_endpoints_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_endpoints_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/endpoints"],
@@ -2201,7 +2299,7 @@ list_endpoints_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind Event
@@ -2212,6 +2310,7 @@ list_event_for_all_namespaces(Ctx) ->
 -spec list_event_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_event_list:kuberl_v1_event_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_event_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/events"],
@@ -2221,7 +2320,7 @@ list_event_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind LimitRange
@@ -2232,6 +2331,7 @@ list_limit_range_for_all_namespaces(Ctx) ->
 -spec list_limit_range_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_limit_range_list:kuberl_v1_limit_range_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_limit_range_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/limitranges"],
@@ -2241,7 +2341,7 @@ list_limit_range_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind Namespace
@@ -2252,6 +2352,7 @@ list_namespace(Ctx) ->
 -spec list_namespace(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_namespace_list:kuberl_v1_namespace_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespace(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces"],
@@ -2261,7 +2362,7 @@ list_namespace(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind ConfigMap
@@ -2272,6 +2373,7 @@ list_namespaced_config_map(Ctx, Namespace) ->
 -spec list_namespaced_config_map(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_config_map_list:kuberl_v1_config_map_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_config_map(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/configmaps"],
@@ -2281,7 +2383,7 @@ list_namespaced_config_map(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind Endpoints
@@ -2292,6 +2394,7 @@ list_namespaced_endpoints(Ctx, Namespace) ->
 -spec list_namespaced_endpoints(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_endpoints_list:kuberl_v1_endpoints_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_endpoints(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/endpoints"],
@@ -2301,7 +2404,7 @@ list_namespaced_endpoints(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind Event
@@ -2312,6 +2415,7 @@ list_namespaced_event(Ctx, Namespace) ->
 -spec list_namespaced_event(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_event_list:kuberl_v1_event_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_event(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/events"],
@@ -2321,7 +2425,7 @@ list_namespaced_event(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind LimitRange
@@ -2332,6 +2436,7 @@ list_namespaced_limit_range(Ctx, Namespace) ->
 -spec list_namespaced_limit_range(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_limit_range_list:kuberl_v1_limit_range_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_limit_range(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/limitranges"],
@@ -2341,7 +2446,7 @@ list_namespaced_limit_range(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind PersistentVolumeClaim
@@ -2352,6 +2457,7 @@ list_namespaced_persistent_volume_claim(Ctx, Namespace) ->
 -spec list_namespaced_persistent_volume_claim(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_persistent_volume_claim_list:kuberl_v1_persistent_volume_claim_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_persistent_volume_claim(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/persistentvolumeclaims"],
@@ -2361,7 +2467,7 @@ list_namespaced_persistent_volume_claim(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind Pod
@@ -2372,6 +2478,7 @@ list_namespaced_pod(Ctx, Namespace) ->
 -spec list_namespaced_pod(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_pod_list:kuberl_v1_pod_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_pod(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/pods"],
@@ -2381,7 +2488,7 @@ list_namespaced_pod(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind PodTemplate
@@ -2392,6 +2499,7 @@ list_namespaced_pod_template(Ctx, Namespace) ->
 -spec list_namespaced_pod_template(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_pod_template_list:kuberl_v1_pod_template_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_pod_template(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/podtemplates"],
@@ -2401,7 +2509,7 @@ list_namespaced_pod_template(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind ReplicationController
@@ -2412,6 +2520,7 @@ list_namespaced_replication_controller(Ctx, Namespace) ->
 -spec list_namespaced_replication_controller(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_replication_controller_list:kuberl_v1_replication_controller_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_replication_controller(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/replicationcontrollers"],
@@ -2421,7 +2530,7 @@ list_namespaced_replication_controller(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind ResourceQuota
@@ -2432,6 +2541,7 @@ list_namespaced_resource_quota(Ctx, Namespace) ->
 -spec list_namespaced_resource_quota(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_resource_quota_list:kuberl_v1_resource_quota_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_resource_quota(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/resourcequotas"],
@@ -2441,7 +2551,7 @@ list_namespaced_resource_quota(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind Secret
@@ -2452,6 +2562,7 @@ list_namespaced_secret(Ctx, Namespace) ->
 -spec list_namespaced_secret(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_secret_list:kuberl_v1_secret_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_secret(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/secrets"],
@@ -2461,7 +2572,7 @@ list_namespaced_secret(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind Service
@@ -2472,6 +2583,7 @@ list_namespaced_service(Ctx, Namespace) ->
 -spec list_namespaced_service(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_service_list:kuberl_v1_service_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_service(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/services"],
@@ -2481,7 +2593,7 @@ list_namespaced_service(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind ServiceAccount
@@ -2492,6 +2604,7 @@ list_namespaced_service_account(Ctx, Namespace) ->
 -spec list_namespaced_service_account(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_service_account_list:kuberl_v1_service_account_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_service_account(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/serviceaccounts"],
@@ -2501,7 +2614,7 @@ list_namespaced_service_account(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind Node
@@ -2512,6 +2625,7 @@ list_node(Ctx) ->
 -spec list_node(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_node_list:kuberl_v1_node_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_node(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/nodes"],
@@ -2521,7 +2635,7 @@ list_node(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind PersistentVolume
@@ -2532,6 +2646,7 @@ list_persistent_volume(Ctx) ->
 -spec list_persistent_volume(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_persistent_volume_list:kuberl_v1_persistent_volume_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_persistent_volume(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/persistentvolumes"],
@@ -2541,7 +2656,7 @@ list_persistent_volume(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind PersistentVolumeClaim
@@ -2552,6 +2667,7 @@ list_persistent_volume_claim_for_all_namespaces(Ctx) ->
 -spec list_persistent_volume_claim_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_persistent_volume_claim_list:kuberl_v1_persistent_volume_claim_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_persistent_volume_claim_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/persistentvolumeclaims"],
@@ -2561,7 +2677,7 @@ list_persistent_volume_claim_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind Pod
@@ -2572,6 +2688,7 @@ list_pod_for_all_namespaces(Ctx) ->
 -spec list_pod_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_pod_list:kuberl_v1_pod_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_pod_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/pods"],
@@ -2581,7 +2698,7 @@ list_pod_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind PodTemplate
@@ -2592,6 +2709,7 @@ list_pod_template_for_all_namespaces(Ctx) ->
 -spec list_pod_template_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_pod_template_list:kuberl_v1_pod_template_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_pod_template_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/podtemplates"],
@@ -2601,7 +2719,7 @@ list_pod_template_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind ReplicationController
@@ -2612,6 +2730,7 @@ list_replication_controller_for_all_namespaces(Ctx) ->
 -spec list_replication_controller_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_replication_controller_list:kuberl_v1_replication_controller_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_replication_controller_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/replicationcontrollers"],
@@ -2621,7 +2740,7 @@ list_replication_controller_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind ResourceQuota
@@ -2632,6 +2751,7 @@ list_resource_quota_for_all_namespaces(Ctx) ->
 -spec list_resource_quota_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_resource_quota_list:kuberl_v1_resource_quota_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_resource_quota_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/resourcequotas"],
@@ -2641,7 +2761,7 @@ list_resource_quota_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind Secret
@@ -2652,6 +2772,7 @@ list_secret_for_all_namespaces(Ctx) ->
 -spec list_secret_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_secret_list:kuberl_v1_secret_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_secret_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/secrets"],
@@ -2661,7 +2782,7 @@ list_secret_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind ServiceAccount
@@ -2672,6 +2793,7 @@ list_service_account_for_all_namespaces(Ctx) ->
 -spec list_service_account_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_service_account_list:kuberl_v1_service_account_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_service_account_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/serviceaccounts"],
@@ -2681,7 +2803,7 @@ list_service_account_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind Service
@@ -2692,6 +2814,7 @@ list_service_for_all_namespaces(Ctx) ->
 -spec list_service_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_service_list:kuberl_v1_service_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_service_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/services"],
@@ -2701,7 +2824,7 @@ list_service_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified Namespace
@@ -2712,6 +2835,7 @@ patch_namespace(Ctx, Name, Body) ->
 -spec patch_namespace(ctx:ctx(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_namespace:kuberl_v1_namespace(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespace(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Name, ""],
@@ -2721,7 +2845,7 @@ patch_namespace(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update status of the specified Namespace
@@ -2732,6 +2856,7 @@ patch_namespace_status(Ctx, Name, Body) ->
 -spec patch_namespace_status(ctx:ctx(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_namespace:kuberl_v1_namespace(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespace_status(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Name, "/status"],
@@ -2741,7 +2866,7 @@ patch_namespace_status(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified ConfigMap
@@ -2752,6 +2877,7 @@ patch_namespaced_config_map(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_config_map(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_config_map:kuberl_v1_config_map(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_config_map(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/configmaps/", Name, ""],
@@ -2761,7 +2887,7 @@ patch_namespaced_config_map(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified Endpoints
@@ -2772,6 +2898,7 @@ patch_namespaced_endpoints(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_endpoints(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_endpoints:kuberl_v1_endpoints(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_endpoints(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/endpoints/", Name, ""],
@@ -2781,7 +2908,7 @@ patch_namespaced_endpoints(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified Event
@@ -2792,6 +2919,7 @@ patch_namespaced_event(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_event(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_event:kuberl_v1_event(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_event(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/events/", Name, ""],
@@ -2801,7 +2929,7 @@ patch_namespaced_event(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified LimitRange
@@ -2812,6 +2940,7 @@ patch_namespaced_limit_range(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_limit_range(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_limit_range:kuberl_v1_limit_range(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_limit_range(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/limitranges/", Name, ""],
@@ -2821,7 +2950,7 @@ patch_namespaced_limit_range(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified PersistentVolumeClaim
@@ -2832,6 +2961,7 @@ patch_namespaced_persistent_volume_claim(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_persistent_volume_claim(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_persistent_volume_claim:kuberl_v1_persistent_volume_claim(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_persistent_volume_claim(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/persistentvolumeclaims/", Name, ""],
@@ -2841,7 +2971,7 @@ patch_namespaced_persistent_volume_claim(Ctx, Name, Namespace, Body, Optional) -
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update status of the specified PersistentVolumeClaim
@@ -2852,6 +2982,7 @@ patch_namespaced_persistent_volume_claim_status(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_persistent_volume_claim_status(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_persistent_volume_claim:kuberl_v1_persistent_volume_claim(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_persistent_volume_claim_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/persistentvolumeclaims/", Name, "/status"],
@@ -2861,7 +2992,7 @@ patch_namespaced_persistent_volume_claim_status(Ctx, Name, Namespace, Body, Opti
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified Pod
@@ -2872,6 +3003,7 @@ patch_namespaced_pod(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_pod(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_pod:kuberl_v1_pod(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_pod(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, ""],
@@ -2881,7 +3013,7 @@ patch_namespaced_pod(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update status of the specified Pod
@@ -2892,6 +3024,7 @@ patch_namespaced_pod_status(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_pod_status(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_pod:kuberl_v1_pod(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_pod_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/status"],
@@ -2901,7 +3034,7 @@ patch_namespaced_pod_status(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified PodTemplate
@@ -2912,6 +3045,7 @@ patch_namespaced_pod_template(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_pod_template(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_pod_template:kuberl_v1_pod_template(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_pod_template(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/podtemplates/", Name, ""],
@@ -2921,7 +3055,7 @@ patch_namespaced_pod_template(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified ReplicationController
@@ -2932,6 +3066,7 @@ patch_namespaced_replication_controller(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_replication_controller(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_replication_controller:kuberl_v1_replication_controller(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_replication_controller(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/replicationcontrollers/", Name, ""],
@@ -2941,7 +3076,7 @@ patch_namespaced_replication_controller(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update scale of the specified ReplicationController
@@ -2952,6 +3087,7 @@ patch_namespaced_replication_controller_scale(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_replication_controller_scale(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_scale:kuberl_v1_scale(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_replication_controller_scale(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/replicationcontrollers/", Name, "/scale"],
@@ -2961,7 +3097,7 @@ patch_namespaced_replication_controller_scale(Ctx, Name, Namespace, Body, Option
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update status of the specified ReplicationController
@@ -2972,6 +3108,7 @@ patch_namespaced_replication_controller_status(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_replication_controller_status(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_replication_controller:kuberl_v1_replication_controller(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_replication_controller_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/replicationcontrollers/", Name, "/status"],
@@ -2981,7 +3118,7 @@ patch_namespaced_replication_controller_status(Ctx, Name, Namespace, Body, Optio
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified ResourceQuota
@@ -2992,6 +3129,7 @@ patch_namespaced_resource_quota(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_resource_quota(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_resource_quota:kuberl_v1_resource_quota(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_resource_quota(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/resourcequotas/", Name, ""],
@@ -3001,7 +3139,7 @@ patch_namespaced_resource_quota(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update status of the specified ResourceQuota
@@ -3012,6 +3150,7 @@ patch_namespaced_resource_quota_status(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_resource_quota_status(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_resource_quota:kuberl_v1_resource_quota(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_resource_quota_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/resourcequotas/", Name, "/status"],
@@ -3021,7 +3160,7 @@ patch_namespaced_resource_quota_status(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified Secret
@@ -3032,6 +3171,7 @@ patch_namespaced_secret(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_secret(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_secret:kuberl_v1_secret(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_secret(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/secrets/", Name, ""],
@@ -3041,7 +3181,7 @@ patch_namespaced_secret(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified Service
@@ -3052,6 +3192,7 @@ patch_namespaced_service(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_service(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_service:kuberl_v1_service(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_service(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, ""],
@@ -3061,7 +3202,7 @@ patch_namespaced_service(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified ServiceAccount
@@ -3072,6 +3213,7 @@ patch_namespaced_service_account(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_service_account(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_service_account:kuberl_v1_service_account(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_service_account(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/serviceaccounts/", Name, ""],
@@ -3081,7 +3223,7 @@ patch_namespaced_service_account(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update status of the specified Service
@@ -3092,6 +3234,7 @@ patch_namespaced_service_status(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_service_status(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_service:kuberl_v1_service(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_service_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, "/status"],
@@ -3101,7 +3244,7 @@ patch_namespaced_service_status(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified Node
@@ -3112,6 +3255,7 @@ patch_node(Ctx, Name, Body) ->
 -spec patch_node(ctx:ctx(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_node:kuberl_v1_node(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_node(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/nodes/", Name, ""],
@@ -3121,7 +3265,7 @@ patch_node(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update status of the specified Node
@@ -3132,6 +3276,7 @@ patch_node_status(Ctx, Name, Body) ->
 -spec patch_node_status(ctx:ctx(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_node:kuberl_v1_node(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_node_status(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/nodes/", Name, "/status"],
@@ -3141,7 +3286,7 @@ patch_node_status(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified PersistentVolume
@@ -3152,6 +3297,7 @@ patch_persistent_volume(Ctx, Name, Body) ->
 -spec patch_persistent_volume(ctx:ctx(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_persistent_volume:kuberl_v1_persistent_volume(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_persistent_volume(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/persistentvolumes/", Name, ""],
@@ -3161,7 +3307,7 @@ patch_persistent_volume(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update status of the specified PersistentVolume
@@ -3172,6 +3318,7 @@ patch_persistent_volume_status(Ctx, Name, Body) ->
 -spec patch_persistent_volume_status(ctx:ctx(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1_persistent_volume:kuberl_v1_persistent_volume(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_persistent_volume_status(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/persistentvolumes/", Name, "/status"],
@@ -3181,7 +3328,7 @@ patch_persistent_volume_status(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy DELETE requests to Pod
@@ -3192,6 +3339,7 @@ proxy_delete_namespaced_pod(Ctx, Name, Namespace) ->
 -spec proxy_delete_namespaced_pod(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_delete_namespaced_pod(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/pods/", Name, ""],
@@ -3201,7 +3349,7 @@ proxy_delete_namespaced_pod(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy DELETE requests to Pod
@@ -3212,6 +3360,7 @@ proxy_delete_namespaced_pod_with_path(Ctx, Name, Namespace, Path) ->
 -spec proxy_delete_namespaced_pod_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_delete_namespaced_pod_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/pods/", Name, "/", Path, ""],
@@ -3221,7 +3370,7 @@ proxy_delete_namespaced_pod_with_path(Ctx, Name, Namespace, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy DELETE requests to Service
@@ -3232,6 +3381,7 @@ proxy_delete_namespaced_service(Ctx, Name, Namespace) ->
 -spec proxy_delete_namespaced_service(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_delete_namespaced_service(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/services/", Name, ""],
@@ -3241,7 +3391,7 @@ proxy_delete_namespaced_service(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy DELETE requests to Service
@@ -3252,6 +3402,7 @@ proxy_delete_namespaced_service_with_path(Ctx, Name, Namespace, Path) ->
 -spec proxy_delete_namespaced_service_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_delete_namespaced_service_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/services/", Name, "/", Path, ""],
@@ -3261,7 +3412,7 @@ proxy_delete_namespaced_service_with_path(Ctx, Name, Namespace, Path, Optional) 
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy DELETE requests to Node
@@ -3272,6 +3423,7 @@ proxy_delete_node(Ctx, Name) ->
 -spec proxy_delete_node(ctx:ctx(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_delete_node(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/proxy/nodes/", Name, ""],
@@ -3281,7 +3433,7 @@ proxy_delete_node(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy DELETE requests to Node
@@ -3292,6 +3444,7 @@ proxy_delete_node_with_path(Ctx, Name, Path) ->
 -spec proxy_delete_node_with_path(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_delete_node_with_path(Ctx, Name, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/api/v1/proxy/nodes/", Name, "/", Path, ""],
@@ -3301,7 +3454,7 @@ proxy_delete_node_with_path(Ctx, Name, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy GET requests to Pod
@@ -3312,6 +3465,7 @@ proxy_get_namespaced_pod(Ctx, Name, Namespace) ->
 -spec proxy_get_namespaced_pod(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_get_namespaced_pod(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/pods/", Name, ""],
@@ -3321,7 +3475,7 @@ proxy_get_namespaced_pod(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy GET requests to Pod
@@ -3332,6 +3486,7 @@ proxy_get_namespaced_pod_with_path(Ctx, Name, Namespace, Path) ->
 -spec proxy_get_namespaced_pod_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_get_namespaced_pod_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/pods/", Name, "/", Path, ""],
@@ -3341,7 +3496,7 @@ proxy_get_namespaced_pod_with_path(Ctx, Name, Namespace, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy GET requests to Service
@@ -3352,6 +3507,7 @@ proxy_get_namespaced_service(Ctx, Name, Namespace) ->
 -spec proxy_get_namespaced_service(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_get_namespaced_service(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/services/", Name, ""],
@@ -3361,7 +3517,7 @@ proxy_get_namespaced_service(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy GET requests to Service
@@ -3372,6 +3528,7 @@ proxy_get_namespaced_service_with_path(Ctx, Name, Namespace, Path) ->
 -spec proxy_get_namespaced_service_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_get_namespaced_service_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/services/", Name, "/", Path, ""],
@@ -3381,7 +3538,7 @@ proxy_get_namespaced_service_with_path(Ctx, Name, Namespace, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy GET requests to Node
@@ -3392,6 +3549,7 @@ proxy_get_node(Ctx, Name) ->
 -spec proxy_get_node(ctx:ctx(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_get_node(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/proxy/nodes/", Name, ""],
@@ -3401,7 +3559,7 @@ proxy_get_node(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy GET requests to Node
@@ -3412,6 +3570,7 @@ proxy_get_node_with_path(Ctx, Name, Path) ->
 -spec proxy_get_node_with_path(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_get_node_with_path(Ctx, Name, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/proxy/nodes/", Name, "/", Path, ""],
@@ -3421,7 +3580,7 @@ proxy_get_node_with_path(Ctx, Name, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy HEAD requests to Pod
@@ -3432,6 +3591,7 @@ proxy_head_namespaced_pod(Ctx, Name, Namespace) ->
 -spec proxy_head_namespaced_pod(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_head_namespaced_pod(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = head,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/pods/", Name, ""],
@@ -3441,7 +3601,7 @@ proxy_head_namespaced_pod(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy HEAD requests to Pod
@@ -3452,6 +3612,7 @@ proxy_head_namespaced_pod_with_path(Ctx, Name, Namespace, Path) ->
 -spec proxy_head_namespaced_pod_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_head_namespaced_pod_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = head,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/pods/", Name, "/", Path, ""],
@@ -3461,7 +3622,7 @@ proxy_head_namespaced_pod_with_path(Ctx, Name, Namespace, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy HEAD requests to Service
@@ -3472,6 +3633,7 @@ proxy_head_namespaced_service(Ctx, Name, Namespace) ->
 -spec proxy_head_namespaced_service(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_head_namespaced_service(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = head,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/services/", Name, ""],
@@ -3481,7 +3643,7 @@ proxy_head_namespaced_service(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy HEAD requests to Service
@@ -3492,6 +3654,7 @@ proxy_head_namespaced_service_with_path(Ctx, Name, Namespace, Path) ->
 -spec proxy_head_namespaced_service_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_head_namespaced_service_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = head,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/services/", Name, "/", Path, ""],
@@ -3501,7 +3664,7 @@ proxy_head_namespaced_service_with_path(Ctx, Name, Namespace, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy HEAD requests to Node
@@ -3512,6 +3675,7 @@ proxy_head_node(Ctx, Name) ->
 -spec proxy_head_node(ctx:ctx(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_head_node(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = head,
     Path = ["/api/v1/proxy/nodes/", Name, ""],
@@ -3521,7 +3685,7 @@ proxy_head_node(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy HEAD requests to Node
@@ -3532,6 +3696,7 @@ proxy_head_node_with_path(Ctx, Name, Path) ->
 -spec proxy_head_node_with_path(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_head_node_with_path(Ctx, Name, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = head,
     Path = ["/api/v1/proxy/nodes/", Name, "/", Path, ""],
@@ -3541,7 +3706,7 @@ proxy_head_node_with_path(Ctx, Name, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy OPTIONS requests to Pod
@@ -3552,6 +3717,7 @@ proxy_options_namespaced_pod(Ctx, Name, Namespace) ->
 -spec proxy_options_namespaced_pod(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_options_namespaced_pod(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = options,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/pods/", Name, ""],
@@ -3561,7 +3727,7 @@ proxy_options_namespaced_pod(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy OPTIONS requests to Pod
@@ -3572,6 +3738,7 @@ proxy_options_namespaced_pod_with_path(Ctx, Name, Namespace, Path) ->
 -spec proxy_options_namespaced_pod_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_options_namespaced_pod_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = options,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/pods/", Name, "/", Path, ""],
@@ -3581,7 +3748,7 @@ proxy_options_namespaced_pod_with_path(Ctx, Name, Namespace, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy OPTIONS requests to Service
@@ -3592,6 +3759,7 @@ proxy_options_namespaced_service(Ctx, Name, Namespace) ->
 -spec proxy_options_namespaced_service(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_options_namespaced_service(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = options,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/services/", Name, ""],
@@ -3601,7 +3769,7 @@ proxy_options_namespaced_service(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy OPTIONS requests to Service
@@ -3612,6 +3780,7 @@ proxy_options_namespaced_service_with_path(Ctx, Name, Namespace, Path) ->
 -spec proxy_options_namespaced_service_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_options_namespaced_service_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = options,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/services/", Name, "/", Path, ""],
@@ -3621,7 +3790,7 @@ proxy_options_namespaced_service_with_path(Ctx, Name, Namespace, Path, Optional)
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy OPTIONS requests to Node
@@ -3632,6 +3801,7 @@ proxy_options_node(Ctx, Name) ->
 -spec proxy_options_node(ctx:ctx(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_options_node(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = options,
     Path = ["/api/v1/proxy/nodes/", Name, ""],
@@ -3641,7 +3811,7 @@ proxy_options_node(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy OPTIONS requests to Node
@@ -3652,6 +3822,7 @@ proxy_options_node_with_path(Ctx, Name, Path) ->
 -spec proxy_options_node_with_path(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_options_node_with_path(Ctx, Name, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = options,
     Path = ["/api/v1/proxy/nodes/", Name, "/", Path, ""],
@@ -3661,7 +3832,7 @@ proxy_options_node_with_path(Ctx, Name, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy PATCH requests to Pod
@@ -3672,6 +3843,7 @@ proxy_patch_namespaced_pod(Ctx, Name, Namespace) ->
 -spec proxy_patch_namespaced_pod(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_patch_namespaced_pod(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/pods/", Name, ""],
@@ -3681,7 +3853,7 @@ proxy_patch_namespaced_pod(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy PATCH requests to Pod
@@ -3692,6 +3864,7 @@ proxy_patch_namespaced_pod_with_path(Ctx, Name, Namespace, Path) ->
 -spec proxy_patch_namespaced_pod_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_patch_namespaced_pod_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/pods/", Name, "/", Path, ""],
@@ -3701,7 +3874,7 @@ proxy_patch_namespaced_pod_with_path(Ctx, Name, Namespace, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy PATCH requests to Service
@@ -3712,6 +3885,7 @@ proxy_patch_namespaced_service(Ctx, Name, Namespace) ->
 -spec proxy_patch_namespaced_service(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_patch_namespaced_service(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/services/", Name, ""],
@@ -3721,7 +3895,7 @@ proxy_patch_namespaced_service(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy PATCH requests to Service
@@ -3732,6 +3906,7 @@ proxy_patch_namespaced_service_with_path(Ctx, Name, Namespace, Path) ->
 -spec proxy_patch_namespaced_service_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_patch_namespaced_service_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/services/", Name, "/", Path, ""],
@@ -3741,7 +3916,7 @@ proxy_patch_namespaced_service_with_path(Ctx, Name, Namespace, Path, Optional) -
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy PATCH requests to Node
@@ -3752,6 +3927,7 @@ proxy_patch_node(Ctx, Name) ->
 -spec proxy_patch_node(ctx:ctx(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_patch_node(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/proxy/nodes/", Name, ""],
@@ -3761,7 +3937,7 @@ proxy_patch_node(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy PATCH requests to Node
@@ -3772,6 +3948,7 @@ proxy_patch_node_with_path(Ctx, Name, Path) ->
 -spec proxy_patch_node_with_path(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_patch_node_with_path(Ctx, Name, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/api/v1/proxy/nodes/", Name, "/", Path, ""],
@@ -3781,7 +3958,7 @@ proxy_patch_node_with_path(Ctx, Name, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy POST requests to Pod
@@ -3792,6 +3969,7 @@ proxy_post_namespaced_pod(Ctx, Name, Namespace) ->
 -spec proxy_post_namespaced_pod(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_post_namespaced_pod(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/pods/", Name, ""],
@@ -3801,7 +3979,7 @@ proxy_post_namespaced_pod(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy POST requests to Pod
@@ -3812,6 +3990,7 @@ proxy_post_namespaced_pod_with_path(Ctx, Name, Namespace, Path) ->
 -spec proxy_post_namespaced_pod_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_post_namespaced_pod_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/pods/", Name, "/", Path, ""],
@@ -3821,7 +4000,7 @@ proxy_post_namespaced_pod_with_path(Ctx, Name, Namespace, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy POST requests to Service
@@ -3832,6 +4011,7 @@ proxy_post_namespaced_service(Ctx, Name, Namespace) ->
 -spec proxy_post_namespaced_service(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_post_namespaced_service(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/services/", Name, ""],
@@ -3841,7 +4021,7 @@ proxy_post_namespaced_service(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy POST requests to Service
@@ -3852,6 +4032,7 @@ proxy_post_namespaced_service_with_path(Ctx, Name, Namespace, Path) ->
 -spec proxy_post_namespaced_service_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_post_namespaced_service_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/services/", Name, "/", Path, ""],
@@ -3861,7 +4042,7 @@ proxy_post_namespaced_service_with_path(Ctx, Name, Namespace, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy POST requests to Node
@@ -3872,6 +4053,7 @@ proxy_post_node(Ctx, Name) ->
 -spec proxy_post_node(ctx:ctx(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_post_node(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/proxy/nodes/", Name, ""],
@@ -3881,7 +4063,7 @@ proxy_post_node(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy POST requests to Node
@@ -3892,6 +4074,7 @@ proxy_post_node_with_path(Ctx, Name, Path) ->
 -spec proxy_post_node_with_path(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_post_node_with_path(Ctx, Name, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/api/v1/proxy/nodes/", Name, "/", Path, ""],
@@ -3901,7 +4084,7 @@ proxy_post_node_with_path(Ctx, Name, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy PUT requests to Pod
@@ -3912,6 +4095,7 @@ proxy_put_namespaced_pod(Ctx, Name, Namespace) ->
 -spec proxy_put_namespaced_pod(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_put_namespaced_pod(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/pods/", Name, ""],
@@ -3921,7 +4105,7 @@ proxy_put_namespaced_pod(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy PUT requests to Pod
@@ -3932,6 +4116,7 @@ proxy_put_namespaced_pod_with_path(Ctx, Name, Namespace, Path) ->
 -spec proxy_put_namespaced_pod_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_put_namespaced_pod_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/pods/", Name, "/", Path, ""],
@@ -3941,7 +4126,7 @@ proxy_put_namespaced_pod_with_path(Ctx, Name, Namespace, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy PUT requests to Service
@@ -3952,6 +4137,7 @@ proxy_put_namespaced_service(Ctx, Name, Namespace) ->
 -spec proxy_put_namespaced_service(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_put_namespaced_service(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/services/", Name, ""],
@@ -3961,7 +4147,7 @@ proxy_put_namespaced_service(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy PUT requests to Service
@@ -3972,6 +4158,7 @@ proxy_put_namespaced_service_with_path(Ctx, Name, Namespace, Path) ->
 -spec proxy_put_namespaced_service_with_path(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_put_namespaced_service_with_path(Ctx, Name, Namespace, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/proxy/namespaces/", Namespace, "/services/", Name, "/", Path, ""],
@@ -3981,7 +4168,7 @@ proxy_put_namespaced_service_with_path(Ctx, Name, Namespace, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy PUT requests to Node
@@ -3992,6 +4179,7 @@ proxy_put_node(Ctx, Name) ->
 -spec proxy_put_node(ctx:ctx(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_put_node(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/proxy/nodes/", Name, ""],
@@ -4001,7 +4189,7 @@ proxy_put_node(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% proxy PUT requests to Node
@@ -4012,6 +4200,7 @@ proxy_put_node_with_path(Ctx, Name, Path) ->
 -spec proxy_put_node_with_path(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 proxy_put_node_with_path(Ctx, Name, Path, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/proxy/nodes/", Name, "/", Path, ""],
@@ -4021,7 +4210,7 @@ proxy_put_node_with_path(Ctx, Name, Path, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified ComponentStatus
@@ -4032,6 +4221,7 @@ read_component_status(Ctx, Name) ->
 -spec read_component_status(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_component_status:kuberl_v1_component_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_component_status(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/componentstatuses/", Name, ""],
@@ -4041,7 +4231,7 @@ read_component_status(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified Namespace
@@ -4052,6 +4242,7 @@ read_namespace(Ctx, Name) ->
 -spec read_namespace(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_namespace:kuberl_v1_namespace(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespace(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Name, ""],
@@ -4061,7 +4252,7 @@ read_namespace(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read status of the specified Namespace
@@ -4072,6 +4263,7 @@ read_namespace_status(Ctx, Name) ->
 -spec read_namespace_status(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_namespace:kuberl_v1_namespace(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespace_status(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Name, "/status"],
@@ -4081,7 +4273,7 @@ read_namespace_status(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified ConfigMap
@@ -4092,6 +4284,7 @@ read_namespaced_config_map(Ctx, Name, Namespace) ->
 -spec read_namespaced_config_map(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1_config_map:kuberl_v1_config_map(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_config_map(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/configmaps/", Name, ""],
@@ -4101,7 +4294,7 @@ read_namespaced_config_map(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified Endpoints
@@ -4112,6 +4305,7 @@ read_namespaced_endpoints(Ctx, Name, Namespace) ->
 -spec read_namespaced_endpoints(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1_endpoints:kuberl_v1_endpoints(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_endpoints(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/endpoints/", Name, ""],
@@ -4121,7 +4315,7 @@ read_namespaced_endpoints(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified Event
@@ -4132,6 +4326,7 @@ read_namespaced_event(Ctx, Name, Namespace) ->
 -spec read_namespaced_event(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1_event:kuberl_v1_event(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_event(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/events/", Name, ""],
@@ -4141,7 +4336,7 @@ read_namespaced_event(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified LimitRange
@@ -4152,6 +4347,7 @@ read_namespaced_limit_range(Ctx, Name, Namespace) ->
 -spec read_namespaced_limit_range(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1_limit_range:kuberl_v1_limit_range(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_limit_range(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/limitranges/", Name, ""],
@@ -4161,7 +4357,7 @@ read_namespaced_limit_range(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified PersistentVolumeClaim
@@ -4172,6 +4368,7 @@ read_namespaced_persistent_volume_claim(Ctx, Name, Namespace) ->
 -spec read_namespaced_persistent_volume_claim(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1_persistent_volume_claim:kuberl_v1_persistent_volume_claim(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_persistent_volume_claim(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/persistentvolumeclaims/", Name, ""],
@@ -4181,7 +4378,7 @@ read_namespaced_persistent_volume_claim(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read status of the specified PersistentVolumeClaim
@@ -4192,6 +4389,7 @@ read_namespaced_persistent_volume_claim_status(Ctx, Name, Namespace) ->
 -spec read_namespaced_persistent_volume_claim_status(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1_persistent_volume_claim:kuberl_v1_persistent_volume_claim(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_persistent_volume_claim_status(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/persistentvolumeclaims/", Name, "/status"],
@@ -4201,7 +4399,7 @@ read_namespaced_persistent_volume_claim_status(Ctx, Name, Namespace, Optional) -
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified Pod
@@ -4212,6 +4410,7 @@ read_namespaced_pod(Ctx, Name, Namespace) ->
 -spec read_namespaced_pod(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1_pod:kuberl_v1_pod(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_pod(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, ""],
@@ -4221,7 +4420,7 @@ read_namespaced_pod(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read log of the specified Pod
@@ -4232,6 +4431,7 @@ read_namespaced_pod_log(Ctx, Name, Namespace) ->
 -spec read_namespaced_pod_log(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, binary(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_pod_log(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/log"],
@@ -4241,7 +4441,7 @@ read_namespaced_pod_log(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read status of the specified Pod
@@ -4252,6 +4452,7 @@ read_namespaced_pod_status(Ctx, Name, Namespace) ->
 -spec read_namespaced_pod_status(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1_pod:kuberl_v1_pod(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_pod_status(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/status"],
@@ -4261,7 +4462,7 @@ read_namespaced_pod_status(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified PodTemplate
@@ -4272,6 +4473,7 @@ read_namespaced_pod_template(Ctx, Name, Namespace) ->
 -spec read_namespaced_pod_template(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1_pod_template:kuberl_v1_pod_template(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_pod_template(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/podtemplates/", Name, ""],
@@ -4281,7 +4483,7 @@ read_namespaced_pod_template(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified ReplicationController
@@ -4292,6 +4494,7 @@ read_namespaced_replication_controller(Ctx, Name, Namespace) ->
 -spec read_namespaced_replication_controller(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1_replication_controller:kuberl_v1_replication_controller(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_replication_controller(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/replicationcontrollers/", Name, ""],
@@ -4301,7 +4504,7 @@ read_namespaced_replication_controller(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read scale of the specified ReplicationController
@@ -4312,6 +4515,7 @@ read_namespaced_replication_controller_scale(Ctx, Name, Namespace) ->
 -spec read_namespaced_replication_controller_scale(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1_scale:kuberl_v1_scale(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_replication_controller_scale(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/replicationcontrollers/", Name, "/scale"],
@@ -4321,7 +4525,7 @@ read_namespaced_replication_controller_scale(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read status of the specified ReplicationController
@@ -4332,6 +4536,7 @@ read_namespaced_replication_controller_status(Ctx, Name, Namespace) ->
 -spec read_namespaced_replication_controller_status(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1_replication_controller:kuberl_v1_replication_controller(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_replication_controller_status(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/replicationcontrollers/", Name, "/status"],
@@ -4341,7 +4546,7 @@ read_namespaced_replication_controller_status(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified ResourceQuota
@@ -4352,6 +4557,7 @@ read_namespaced_resource_quota(Ctx, Name, Namespace) ->
 -spec read_namespaced_resource_quota(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1_resource_quota:kuberl_v1_resource_quota(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_resource_quota(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/resourcequotas/", Name, ""],
@@ -4361,7 +4567,7 @@ read_namespaced_resource_quota(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read status of the specified ResourceQuota
@@ -4372,6 +4578,7 @@ read_namespaced_resource_quota_status(Ctx, Name, Namespace) ->
 -spec read_namespaced_resource_quota_status(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1_resource_quota:kuberl_v1_resource_quota(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_resource_quota_status(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/resourcequotas/", Name, "/status"],
@@ -4381,7 +4588,7 @@ read_namespaced_resource_quota_status(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified Secret
@@ -4392,6 +4599,7 @@ read_namespaced_secret(Ctx, Name, Namespace) ->
 -spec read_namespaced_secret(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1_secret:kuberl_v1_secret(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_secret(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/secrets/", Name, ""],
@@ -4401,7 +4609,7 @@ read_namespaced_secret(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified Service
@@ -4412,6 +4620,7 @@ read_namespaced_service(Ctx, Name, Namespace) ->
 -spec read_namespaced_service(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1_service:kuberl_v1_service(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_service(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, ""],
@@ -4421,7 +4630,7 @@ read_namespaced_service(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified ServiceAccount
@@ -4432,6 +4641,7 @@ read_namespaced_service_account(Ctx, Name, Namespace) ->
 -spec read_namespaced_service_account(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1_service_account:kuberl_v1_service_account(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_service_account(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/serviceaccounts/", Name, ""],
@@ -4441,7 +4651,7 @@ read_namespaced_service_account(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read status of the specified Service
@@ -4452,6 +4662,7 @@ read_namespaced_service_status(Ctx, Name, Namespace) ->
 -spec read_namespaced_service_status(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1_service:kuberl_v1_service(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_service_status(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, "/status"],
@@ -4461,7 +4672,7 @@ read_namespaced_service_status(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified Node
@@ -4472,6 +4683,7 @@ read_node(Ctx, Name) ->
 -spec read_node(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_node:kuberl_v1_node(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_node(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/nodes/", Name, ""],
@@ -4481,7 +4693,7 @@ read_node(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read status of the specified Node
@@ -4492,6 +4704,7 @@ read_node_status(Ctx, Name) ->
 -spec read_node_status(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_node:kuberl_v1_node(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_node_status(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/nodes/", Name, "/status"],
@@ -4501,7 +4714,7 @@ read_node_status(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified PersistentVolume
@@ -4512,6 +4725,7 @@ read_persistent_volume(Ctx, Name) ->
 -spec read_persistent_volume(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_persistent_volume:kuberl_v1_persistent_volume(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_persistent_volume(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/persistentvolumes/", Name, ""],
@@ -4521,7 +4735,7 @@ read_persistent_volume(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read status of the specified PersistentVolume
@@ -4532,6 +4746,7 @@ read_persistent_volume_status(Ctx, Name) ->
 -spec read_persistent_volume_status(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_persistent_volume:kuberl_v1_persistent_volume(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_persistent_volume_status(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/api/v1/persistentvolumes/", Name, "/status"],
@@ -4541,7 +4756,7 @@ read_persistent_volume_status(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified Namespace
@@ -4552,6 +4767,7 @@ replace_namespace(Ctx, Name, Body) ->
 -spec replace_namespace(ctx:ctx(), binary(), kuberl_v1_namespace:kuberl_v1_namespace(), maps:map()) -> {ok, kuberl_v1_namespace:kuberl_v1_namespace(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespace(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Name, ""],
@@ -4561,7 +4777,7 @@ replace_namespace(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace finalize of the specified Namespace
@@ -4572,6 +4788,7 @@ replace_namespace_finalize(Ctx, Name, Body) ->
 -spec replace_namespace_finalize(ctx:ctx(), binary(), kuberl_v1_namespace:kuberl_v1_namespace(), maps:map()) -> {ok, kuberl_v1_namespace:kuberl_v1_namespace(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespace_finalize(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Name, "/finalize"],
@@ -4581,7 +4798,7 @@ replace_namespace_finalize(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace status of the specified Namespace
@@ -4592,6 +4809,7 @@ replace_namespace_status(Ctx, Name, Body) ->
 -spec replace_namespace_status(ctx:ctx(), binary(), kuberl_v1_namespace:kuberl_v1_namespace(), maps:map()) -> {ok, kuberl_v1_namespace:kuberl_v1_namespace(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespace_status(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Name, "/status"],
@@ -4601,7 +4819,7 @@ replace_namespace_status(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified ConfigMap
@@ -4612,6 +4830,7 @@ replace_namespaced_config_map(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_config_map(ctx:ctx(), binary(), binary(), kuberl_v1_config_map:kuberl_v1_config_map(), maps:map()) -> {ok, kuberl_v1_config_map:kuberl_v1_config_map(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_config_map(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/configmaps/", Name, ""],
@@ -4621,7 +4840,7 @@ replace_namespaced_config_map(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified Endpoints
@@ -4632,6 +4851,7 @@ replace_namespaced_endpoints(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_endpoints(ctx:ctx(), binary(), binary(), kuberl_v1_endpoints:kuberl_v1_endpoints(), maps:map()) -> {ok, kuberl_v1_endpoints:kuberl_v1_endpoints(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_endpoints(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/endpoints/", Name, ""],
@@ -4641,7 +4861,7 @@ replace_namespaced_endpoints(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified Event
@@ -4652,6 +4872,7 @@ replace_namespaced_event(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_event(ctx:ctx(), binary(), binary(), kuberl_v1_event:kuberl_v1_event(), maps:map()) -> {ok, kuberl_v1_event:kuberl_v1_event(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_event(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/events/", Name, ""],
@@ -4661,7 +4882,7 @@ replace_namespaced_event(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified LimitRange
@@ -4672,6 +4893,7 @@ replace_namespaced_limit_range(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_limit_range(ctx:ctx(), binary(), binary(), kuberl_v1_limit_range:kuberl_v1_limit_range(), maps:map()) -> {ok, kuberl_v1_limit_range:kuberl_v1_limit_range(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_limit_range(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/limitranges/", Name, ""],
@@ -4681,7 +4903,7 @@ replace_namespaced_limit_range(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified PersistentVolumeClaim
@@ -4692,6 +4914,7 @@ replace_namespaced_persistent_volume_claim(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_persistent_volume_claim(ctx:ctx(), binary(), binary(), kuberl_v1_persistent_volume_claim:kuberl_v1_persistent_volume_claim(), maps:map()) -> {ok, kuberl_v1_persistent_volume_claim:kuberl_v1_persistent_volume_claim(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_persistent_volume_claim(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/persistentvolumeclaims/", Name, ""],
@@ -4701,7 +4924,7 @@ replace_namespaced_persistent_volume_claim(Ctx, Name, Namespace, Body, Optional)
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace status of the specified PersistentVolumeClaim
@@ -4712,6 +4935,7 @@ replace_namespaced_persistent_volume_claim_status(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_persistent_volume_claim_status(ctx:ctx(), binary(), binary(), kuberl_v1_persistent_volume_claim:kuberl_v1_persistent_volume_claim(), maps:map()) -> {ok, kuberl_v1_persistent_volume_claim:kuberl_v1_persistent_volume_claim(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_persistent_volume_claim_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/persistentvolumeclaims/", Name, "/status"],
@@ -4721,7 +4945,7 @@ replace_namespaced_persistent_volume_claim_status(Ctx, Name, Namespace, Body, Op
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified Pod
@@ -4732,6 +4956,7 @@ replace_namespaced_pod(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_pod(ctx:ctx(), binary(), binary(), kuberl_v1_pod:kuberl_v1_pod(), maps:map()) -> {ok, kuberl_v1_pod:kuberl_v1_pod(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_pod(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, ""],
@@ -4741,7 +4966,7 @@ replace_namespaced_pod(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace status of the specified Pod
@@ -4752,6 +4977,7 @@ replace_namespaced_pod_status(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_pod_status(ctx:ctx(), binary(), binary(), kuberl_v1_pod:kuberl_v1_pod(), maps:map()) -> {ok, kuberl_v1_pod:kuberl_v1_pod(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_pod_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/pods/", Name, "/status"],
@@ -4761,7 +4987,7 @@ replace_namespaced_pod_status(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified PodTemplate
@@ -4772,6 +4998,7 @@ replace_namespaced_pod_template(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_pod_template(ctx:ctx(), binary(), binary(), kuberl_v1_pod_template:kuberl_v1_pod_template(), maps:map()) -> {ok, kuberl_v1_pod_template:kuberl_v1_pod_template(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_pod_template(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/podtemplates/", Name, ""],
@@ -4781,7 +5008,7 @@ replace_namespaced_pod_template(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified ReplicationController
@@ -4792,6 +5019,7 @@ replace_namespaced_replication_controller(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_replication_controller(ctx:ctx(), binary(), binary(), kuberl_v1_replication_controller:kuberl_v1_replication_controller(), maps:map()) -> {ok, kuberl_v1_replication_controller:kuberl_v1_replication_controller(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_replication_controller(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/replicationcontrollers/", Name, ""],
@@ -4801,7 +5029,7 @@ replace_namespaced_replication_controller(Ctx, Name, Namespace, Body, Optional) 
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace scale of the specified ReplicationController
@@ -4812,6 +5040,7 @@ replace_namespaced_replication_controller_scale(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_replication_controller_scale(ctx:ctx(), binary(), binary(), kuberl_v1_scale:kuberl_v1_scale(), maps:map()) -> {ok, kuberl_v1_scale:kuberl_v1_scale(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_replication_controller_scale(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/replicationcontrollers/", Name, "/scale"],
@@ -4821,7 +5050,7 @@ replace_namespaced_replication_controller_scale(Ctx, Name, Namespace, Body, Opti
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace status of the specified ReplicationController
@@ -4832,6 +5061,7 @@ replace_namespaced_replication_controller_status(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_replication_controller_status(ctx:ctx(), binary(), binary(), kuberl_v1_replication_controller:kuberl_v1_replication_controller(), maps:map()) -> {ok, kuberl_v1_replication_controller:kuberl_v1_replication_controller(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_replication_controller_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/replicationcontrollers/", Name, "/status"],
@@ -4841,7 +5071,7 @@ replace_namespaced_replication_controller_status(Ctx, Name, Namespace, Body, Opt
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified ResourceQuota
@@ -4852,6 +5082,7 @@ replace_namespaced_resource_quota(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_resource_quota(ctx:ctx(), binary(), binary(), kuberl_v1_resource_quota:kuberl_v1_resource_quota(), maps:map()) -> {ok, kuberl_v1_resource_quota:kuberl_v1_resource_quota(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_resource_quota(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/resourcequotas/", Name, ""],
@@ -4861,7 +5092,7 @@ replace_namespaced_resource_quota(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace status of the specified ResourceQuota
@@ -4872,6 +5103,7 @@ replace_namespaced_resource_quota_status(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_resource_quota_status(ctx:ctx(), binary(), binary(), kuberl_v1_resource_quota:kuberl_v1_resource_quota(), maps:map()) -> {ok, kuberl_v1_resource_quota:kuberl_v1_resource_quota(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_resource_quota_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/resourcequotas/", Name, "/status"],
@@ -4881,7 +5113,7 @@ replace_namespaced_resource_quota_status(Ctx, Name, Namespace, Body, Optional) -
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified Secret
@@ -4892,6 +5124,7 @@ replace_namespaced_secret(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_secret(ctx:ctx(), binary(), binary(), kuberl_v1_secret:kuberl_v1_secret(), maps:map()) -> {ok, kuberl_v1_secret:kuberl_v1_secret(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_secret(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/secrets/", Name, ""],
@@ -4901,7 +5134,7 @@ replace_namespaced_secret(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified Service
@@ -4912,6 +5145,7 @@ replace_namespaced_service(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_service(ctx:ctx(), binary(), binary(), kuberl_v1_service:kuberl_v1_service(), maps:map()) -> {ok, kuberl_v1_service:kuberl_v1_service(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_service(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, ""],
@@ -4921,7 +5155,7 @@ replace_namespaced_service(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified ServiceAccount
@@ -4932,6 +5166,7 @@ replace_namespaced_service_account(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_service_account(ctx:ctx(), binary(), binary(), kuberl_v1_service_account:kuberl_v1_service_account(), maps:map()) -> {ok, kuberl_v1_service_account:kuberl_v1_service_account(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_service_account(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/serviceaccounts/", Name, ""],
@@ -4941,7 +5176,7 @@ replace_namespaced_service_account(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace status of the specified Service
@@ -4952,6 +5187,7 @@ replace_namespaced_service_status(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_service_status(ctx:ctx(), binary(), binary(), kuberl_v1_service:kuberl_v1_service(), maps:map()) -> {ok, kuberl_v1_service:kuberl_v1_service(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_service_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/namespaces/", Namespace, "/services/", Name, "/status"],
@@ -4961,7 +5197,7 @@ replace_namespaced_service_status(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified Node
@@ -4972,6 +5208,7 @@ replace_node(Ctx, Name, Body) ->
 -spec replace_node(ctx:ctx(), binary(), kuberl_v1_node:kuberl_v1_node(), maps:map()) -> {ok, kuberl_v1_node:kuberl_v1_node(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_node(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/nodes/", Name, ""],
@@ -4981,7 +5218,7 @@ replace_node(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace status of the specified Node
@@ -4992,6 +5229,7 @@ replace_node_status(Ctx, Name, Body) ->
 -spec replace_node_status(ctx:ctx(), binary(), kuberl_v1_node:kuberl_v1_node(), maps:map()) -> {ok, kuberl_v1_node:kuberl_v1_node(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_node_status(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/nodes/", Name, "/status"],
@@ -5001,7 +5239,7 @@ replace_node_status(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified PersistentVolume
@@ -5012,6 +5250,7 @@ replace_persistent_volume(Ctx, Name, Body) ->
 -spec replace_persistent_volume(ctx:ctx(), binary(), kuberl_v1_persistent_volume:kuberl_v1_persistent_volume(), maps:map()) -> {ok, kuberl_v1_persistent_volume:kuberl_v1_persistent_volume(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_persistent_volume(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/persistentvolumes/", Name, ""],
@@ -5021,7 +5260,7 @@ replace_persistent_volume(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace status of the specified PersistentVolume
@@ -5032,6 +5271,7 @@ replace_persistent_volume_status(Ctx, Name, Body) ->
 -spec replace_persistent_volume_status(ctx:ctx(), binary(), kuberl_v1_persistent_volume:kuberl_v1_persistent_volume(), maps:map()) -> {ok, kuberl_v1_persistent_volume:kuberl_v1_persistent_volume(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_persistent_volume_status(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/api/v1/persistentvolumes/", Name, "/status"],
@@ -5041,6 +5281,6 @@ replace_persistent_volume_status(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 

@@ -43,6 +43,7 @@ create_cluster_role(Ctx, Body) ->
 -spec create_cluster_role(ctx:ctx(), kuberl_v1beta1_cluster_role:kuberl_v1beta1_cluster_role(), maps:map()) -> {ok, kuberl_v1beta1_cluster_role:kuberl_v1beta1_cluster_role(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_cluster_role(Ctx, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/clusterroles"],
@@ -52,7 +53,7 @@ create_cluster_role(Ctx, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a ClusterRoleBinding
@@ -63,6 +64,7 @@ create_cluster_role_binding(Ctx, Body) ->
 -spec create_cluster_role_binding(ctx:ctx(), kuberl_v1beta1_cluster_role_binding:kuberl_v1beta1_cluster_role_binding(), maps:map()) -> {ok, kuberl_v1beta1_cluster_role_binding:kuberl_v1beta1_cluster_role_binding(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_cluster_role_binding(Ctx, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/clusterrolebindings"],
@@ -72,7 +74,7 @@ create_cluster_role_binding(Ctx, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a Role
@@ -83,6 +85,7 @@ create_namespaced_role(Ctx, Namespace, Body) ->
 -spec create_namespaced_role(ctx:ctx(), binary(), kuberl_v1beta1_role:kuberl_v1beta1_role(), maps:map()) -> {ok, kuberl_v1beta1_role:kuberl_v1beta1_role(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_role(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/namespaces/", Namespace, "/roles"],
@@ -92,7 +95,7 @@ create_namespaced_role(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create a RoleBinding
@@ -103,6 +106,7 @@ create_namespaced_role_binding(Ctx, Namespace, Body) ->
 -spec create_namespaced_role_binding(ctx:ctx(), binary(), kuberl_v1beta1_role_binding:kuberl_v1beta1_role_binding(), maps:map()) -> {ok, kuberl_v1beta1_role_binding:kuberl_v1beta1_role_binding(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_role_binding(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/namespaces/", Namespace, "/rolebindings"],
@@ -112,7 +116,7 @@ create_namespaced_role_binding(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a ClusterRole
@@ -123,6 +127,7 @@ delete_cluster_role(Ctx, Name, Body) ->
 -spec delete_cluster_role(ctx:ctx(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_cluster_role(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/clusterroles/", Name, ""],
@@ -132,7 +137,7 @@ delete_cluster_role(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a ClusterRoleBinding
@@ -143,6 +148,7 @@ delete_cluster_role_binding(Ctx, Name, Body) ->
 -spec delete_cluster_role_binding(ctx:ctx(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_cluster_role_binding(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/clusterrolebindings/", Name, ""],
@@ -152,7 +158,7 @@ delete_cluster_role_binding(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of ClusterRole
@@ -163,6 +169,7 @@ delete_collection_cluster_role(Ctx) ->
 -spec delete_collection_cluster_role(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_cluster_role(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/clusterroles"],
@@ -172,7 +179,7 @@ delete_collection_cluster_role(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of ClusterRoleBinding
@@ -183,6 +190,7 @@ delete_collection_cluster_role_binding(Ctx) ->
 -spec delete_collection_cluster_role_binding(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_cluster_role_binding(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/clusterrolebindings"],
@@ -192,7 +200,7 @@ delete_collection_cluster_role_binding(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of Role
@@ -203,6 +211,7 @@ delete_collection_namespaced_role(Ctx, Namespace) ->
 -spec delete_collection_namespaced_role(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_role(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/namespaces/", Namespace, "/roles"],
@@ -212,7 +221,7 @@ delete_collection_namespaced_role(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of RoleBinding
@@ -223,6 +232,7 @@ delete_collection_namespaced_role_binding(Ctx, Namespace) ->
 -spec delete_collection_namespaced_role_binding(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_role_binding(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/namespaces/", Namespace, "/rolebindings"],
@@ -232,7 +242,7 @@ delete_collection_namespaced_role_binding(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a Role
@@ -243,6 +253,7 @@ delete_namespaced_role(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_role(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_role(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/namespaces/", Namespace, "/roles/", Name, ""],
@@ -252,7 +263,7 @@ delete_namespaced_role(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a RoleBinding
@@ -263,6 +274,7 @@ delete_namespaced_role_binding(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_role_binding(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_role_binding(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/namespaces/", Namespace, "/rolebindings/", Name, ""],
@@ -272,7 +284,7 @@ delete_namespaced_role_binding(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% get available resources
@@ -283,6 +295,7 @@ get_api_resources(Ctx) ->
 -spec get_api_resources(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_api_resource_list:kuberl_v1_api_resource_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 get_api_resources(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/"],
@@ -292,7 +305,7 @@ get_api_resources(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json">>, <<"application/yaml">>, <<"application/vnd.kubernetes.protobuf">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind ClusterRole
@@ -303,6 +316,7 @@ list_cluster_role(Ctx) ->
 -spec list_cluster_role(ctx:ctx(), maps:map()) -> {ok, kuberl_v1beta1_cluster_role_list:kuberl_v1beta1_cluster_role_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_cluster_role(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/clusterroles"],
@@ -312,7 +326,7 @@ list_cluster_role(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind ClusterRoleBinding
@@ -323,6 +337,7 @@ list_cluster_role_binding(Ctx) ->
 -spec list_cluster_role_binding(ctx:ctx(), maps:map()) -> {ok, kuberl_v1beta1_cluster_role_binding_list:kuberl_v1beta1_cluster_role_binding_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_cluster_role_binding(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/clusterrolebindings"],
@@ -332,7 +347,7 @@ list_cluster_role_binding(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind Role
@@ -343,6 +358,7 @@ list_namespaced_role(Ctx, Namespace) ->
 -spec list_namespaced_role(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1beta1_role_list:kuberl_v1beta1_role_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_role(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/namespaces/", Namespace, "/roles"],
@@ -352,7 +368,7 @@ list_namespaced_role(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind RoleBinding
@@ -363,6 +379,7 @@ list_namespaced_role_binding(Ctx, Namespace) ->
 -spec list_namespaced_role_binding(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1beta1_role_binding_list:kuberl_v1beta1_role_binding_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_role_binding(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/namespaces/", Namespace, "/rolebindings"],
@@ -372,7 +389,7 @@ list_namespaced_role_binding(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind RoleBinding
@@ -383,6 +400,7 @@ list_role_binding_for_all_namespaces(Ctx) ->
 -spec list_role_binding_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1beta1_role_binding_list:kuberl_v1beta1_role_binding_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_role_binding_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/rolebindings"],
@@ -392,7 +410,7 @@ list_role_binding_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind Role
@@ -403,6 +421,7 @@ list_role_for_all_namespaces(Ctx) ->
 -spec list_role_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1beta1_role_list:kuberl_v1beta1_role_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_role_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/roles"],
@@ -412,7 +431,7 @@ list_role_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified ClusterRole
@@ -423,6 +442,7 @@ patch_cluster_role(Ctx, Name, Body) ->
 -spec patch_cluster_role(ctx:ctx(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1beta1_cluster_role:kuberl_v1beta1_cluster_role(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_cluster_role(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/clusterroles/", Name, ""],
@@ -432,7 +452,7 @@ patch_cluster_role(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified ClusterRoleBinding
@@ -443,6 +463,7 @@ patch_cluster_role_binding(Ctx, Name, Body) ->
 -spec patch_cluster_role_binding(ctx:ctx(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1beta1_cluster_role_binding:kuberl_v1beta1_cluster_role_binding(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_cluster_role_binding(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/clusterrolebindings/", Name, ""],
@@ -452,7 +473,7 @@ patch_cluster_role_binding(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified Role
@@ -463,6 +484,7 @@ patch_namespaced_role(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_role(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1beta1_role:kuberl_v1beta1_role(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_role(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/namespaces/", Namespace, "/roles/", Name, ""],
@@ -472,7 +494,7 @@ patch_namespaced_role(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified RoleBinding
@@ -483,6 +505,7 @@ patch_namespaced_role_binding(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_role_binding(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1beta1_role_binding:kuberl_v1beta1_role_binding(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_role_binding(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/namespaces/", Namespace, "/rolebindings/", Name, ""],
@@ -492,7 +515,7 @@ patch_namespaced_role_binding(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified ClusterRole
@@ -503,6 +526,7 @@ read_cluster_role(Ctx, Name) ->
 -spec read_cluster_role(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1beta1_cluster_role:kuberl_v1beta1_cluster_role(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_cluster_role(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/clusterroles/", Name, ""],
@@ -512,7 +536,7 @@ read_cluster_role(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified ClusterRoleBinding
@@ -523,6 +547,7 @@ read_cluster_role_binding(Ctx, Name) ->
 -spec read_cluster_role_binding(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1beta1_cluster_role_binding:kuberl_v1beta1_cluster_role_binding(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_cluster_role_binding(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/clusterrolebindings/", Name, ""],
@@ -532,7 +557,7 @@ read_cluster_role_binding(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified Role
@@ -543,6 +568,7 @@ read_namespaced_role(Ctx, Name, Namespace) ->
 -spec read_namespaced_role(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1beta1_role:kuberl_v1beta1_role(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_role(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/namespaces/", Namespace, "/roles/", Name, ""],
@@ -552,7 +578,7 @@ read_namespaced_role(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified RoleBinding
@@ -563,6 +589,7 @@ read_namespaced_role_binding(Ctx, Name, Namespace) ->
 -spec read_namespaced_role_binding(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1beta1_role_binding:kuberl_v1beta1_role_binding(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_role_binding(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/namespaces/", Namespace, "/rolebindings/", Name, ""],
@@ -572,7 +599,7 @@ read_namespaced_role_binding(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified ClusterRole
@@ -583,6 +610,7 @@ replace_cluster_role(Ctx, Name, Body) ->
 -spec replace_cluster_role(ctx:ctx(), binary(), kuberl_v1beta1_cluster_role:kuberl_v1beta1_cluster_role(), maps:map()) -> {ok, kuberl_v1beta1_cluster_role:kuberl_v1beta1_cluster_role(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_cluster_role(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/clusterroles/", Name, ""],
@@ -592,7 +620,7 @@ replace_cluster_role(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified ClusterRoleBinding
@@ -603,6 +631,7 @@ replace_cluster_role_binding(Ctx, Name, Body) ->
 -spec replace_cluster_role_binding(ctx:ctx(), binary(), kuberl_v1beta1_cluster_role_binding:kuberl_v1beta1_cluster_role_binding(), maps:map()) -> {ok, kuberl_v1beta1_cluster_role_binding:kuberl_v1beta1_cluster_role_binding(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_cluster_role_binding(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/clusterrolebindings/", Name, ""],
@@ -612,7 +641,7 @@ replace_cluster_role_binding(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified Role
@@ -623,6 +652,7 @@ replace_namespaced_role(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_role(ctx:ctx(), binary(), binary(), kuberl_v1beta1_role:kuberl_v1beta1_role(), maps:map()) -> {ok, kuberl_v1beta1_role:kuberl_v1beta1_role(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_role(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/namespaces/", Namespace, "/roles/", Name, ""],
@@ -632,7 +662,7 @@ replace_namespaced_role(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified RoleBinding
@@ -643,6 +673,7 @@ replace_namespaced_role_binding(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_role_binding(ctx:ctx(), binary(), binary(), kuberl_v1beta1_role_binding:kuberl_v1beta1_role_binding(), maps:map()) -> {ok, kuberl_v1beta1_role_binding:kuberl_v1beta1_role_binding(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_role_binding(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/rbac.authorization.k8s.io/v1beta1/namespaces/", Namespace, "/rolebindings/", Name, ""],
@@ -652,6 +683,6 @@ replace_namespaced_role_binding(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 

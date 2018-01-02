@@ -24,6 +24,7 @@ create_namespaced_pod_disruption_budget(Ctx, Namespace, Body) ->
 -spec create_namespaced_pod_disruption_budget(ctx:ctx(), binary(), kuberl_v1beta1_pod_disruption_budget:kuberl_v1beta1_pod_disruption_budget(), maps:map()) -> {ok, kuberl_v1beta1_pod_disruption_budget:kuberl_v1beta1_pod_disruption_budget(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_pod_disruption_budget(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/apis/policy/v1beta1/namespaces/", Namespace, "/poddisruptionbudgets"],
@@ -33,7 +34,7 @@ create_namespaced_pod_disruption_budget(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of PodDisruptionBudget
@@ -44,6 +45,7 @@ delete_collection_namespaced_pod_disruption_budget(Ctx, Namespace) ->
 -spec delete_collection_namespaced_pod_disruption_budget(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_pod_disruption_budget(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/policy/v1beta1/namespaces/", Namespace, "/poddisruptionbudgets"],
@@ -53,7 +55,7 @@ delete_collection_namespaced_pod_disruption_budget(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a PodDisruptionBudget
@@ -64,6 +66,7 @@ delete_namespaced_pod_disruption_budget(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_pod_disruption_budget(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_pod_disruption_budget(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/policy/v1beta1/namespaces/", Namespace, "/poddisruptionbudgets/", Name, ""],
@@ -73,7 +76,7 @@ delete_namespaced_pod_disruption_budget(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% get available resources
@@ -84,6 +87,7 @@ get_api_resources(Ctx) ->
 -spec get_api_resources(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_api_resource_list:kuberl_v1_api_resource_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 get_api_resources(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/policy/v1beta1/"],
@@ -93,7 +97,7 @@ get_api_resources(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json">>, <<"application/yaml">>, <<"application/vnd.kubernetes.protobuf">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind PodDisruptionBudget
@@ -104,6 +108,7 @@ list_namespaced_pod_disruption_budget(Ctx, Namespace) ->
 -spec list_namespaced_pod_disruption_budget(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1beta1_pod_disruption_budget_list:kuberl_v1beta1_pod_disruption_budget_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_pod_disruption_budget(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/policy/v1beta1/namespaces/", Namespace, "/poddisruptionbudgets"],
@@ -113,7 +118,7 @@ list_namespaced_pod_disruption_budget(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind PodDisruptionBudget
@@ -124,6 +129,7 @@ list_pod_disruption_budget_for_all_namespaces(Ctx) ->
 -spec list_pod_disruption_budget_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1beta1_pod_disruption_budget_list:kuberl_v1beta1_pod_disruption_budget_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_pod_disruption_budget_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/policy/v1beta1/poddisruptionbudgets"],
@@ -133,7 +139,7 @@ list_pod_disruption_budget_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified PodDisruptionBudget
@@ -144,6 +150,7 @@ patch_namespaced_pod_disruption_budget(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_pod_disruption_budget(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1beta1_pod_disruption_budget:kuberl_v1beta1_pod_disruption_budget(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_pod_disruption_budget(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/policy/v1beta1/namespaces/", Namespace, "/poddisruptionbudgets/", Name, ""],
@@ -153,7 +160,7 @@ patch_namespaced_pod_disruption_budget(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update status of the specified PodDisruptionBudget
@@ -164,6 +171,7 @@ patch_namespaced_pod_disruption_budget_status(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_pod_disruption_budget_status(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1beta1_pod_disruption_budget:kuberl_v1beta1_pod_disruption_budget(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_pod_disruption_budget_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/policy/v1beta1/namespaces/", Namespace, "/poddisruptionbudgets/", Name, "/status"],
@@ -173,7 +181,7 @@ patch_namespaced_pod_disruption_budget_status(Ctx, Name, Namespace, Body, Option
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified PodDisruptionBudget
@@ -184,6 +192,7 @@ read_namespaced_pod_disruption_budget(Ctx, Name, Namespace) ->
 -spec read_namespaced_pod_disruption_budget(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1beta1_pod_disruption_budget:kuberl_v1beta1_pod_disruption_budget(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_pod_disruption_budget(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/policy/v1beta1/namespaces/", Namespace, "/poddisruptionbudgets/", Name, ""],
@@ -193,7 +202,7 @@ read_namespaced_pod_disruption_budget(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read status of the specified PodDisruptionBudget
@@ -204,6 +213,7 @@ read_namespaced_pod_disruption_budget_status(Ctx, Name, Namespace) ->
 -spec read_namespaced_pod_disruption_budget_status(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1beta1_pod_disruption_budget:kuberl_v1beta1_pod_disruption_budget(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_pod_disruption_budget_status(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/policy/v1beta1/namespaces/", Namespace, "/poddisruptionbudgets/", Name, "/status"],
@@ -213,7 +223,7 @@ read_namespaced_pod_disruption_budget_status(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified PodDisruptionBudget
@@ -224,6 +234,7 @@ replace_namespaced_pod_disruption_budget(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_pod_disruption_budget(ctx:ctx(), binary(), binary(), kuberl_v1beta1_pod_disruption_budget:kuberl_v1beta1_pod_disruption_budget(), maps:map()) -> {ok, kuberl_v1beta1_pod_disruption_budget:kuberl_v1beta1_pod_disruption_budget(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_pod_disruption_budget(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/policy/v1beta1/namespaces/", Namespace, "/poddisruptionbudgets/", Name, ""],
@@ -233,7 +244,7 @@ replace_namespaced_pod_disruption_budget(Ctx, Name, Namespace, Body, Optional) -
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace status of the specified PodDisruptionBudget
@@ -244,6 +255,7 @@ replace_namespaced_pod_disruption_budget_status(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_pod_disruption_budget_status(ctx:ctx(), binary(), binary(), kuberl_v1beta1_pod_disruption_budget:kuberl_v1beta1_pod_disruption_budget(), maps:map()) -> {ok, kuberl_v1beta1_pod_disruption_budget:kuberl_v1beta1_pod_disruption_budget(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_pod_disruption_budget_status(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/policy/v1beta1/namespaces/", Namespace, "/poddisruptionbudgets/", Name, "/status"],
@@ -253,6 +265,6 @@ replace_namespaced_pod_disruption_budget_status(Ctx, Name, Namespace, Body, Opti
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 

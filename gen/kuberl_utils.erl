@@ -1,6 +1,6 @@
 -module(kuberl_utils).
 
--export([request/7,
+-export([request/8,
          select_header_content_type/1,
          optional_params/2]).
 
@@ -8,17 +8,20 @@
                            headers := list()}.
 -export_type([response_info/0]).
 
-request(_Ctx, Method, Path, QS, Headers, Body, Opts) ->
-    Url = hackney_url:make_url(application:get_env(kuberl, host, "localhost"), Path, QS),
+request(_Ctx, Method, Path, QS, Headers, Body, Opts, Cfg) ->
+    {Headers1, QS1} = update_params_with_auth(maps:get(auth, Cfg, #{}), Headers, QS),
+    Host = maps:get(host, Cfg, "localhost"),
+    Url = hackney_url:make_url(Host, Path, QS1),
 
-    Body1 = case lists:keyfind(<<"Content-Type">>, 1, Headers) of
+    ConfigHackneyOpts = maps:get(hackney_opts, Cfg, []),
+    Body1 = case lists:keyfind(<<"Content-Type">>, 1, Headers1) of
                 {_, <<"application/json", _/binary>>} ->
                     jsx:encode(Body);
                 _ ->
                     Body
             end,
 
-    case hackney:request(Method, Url, Headers, Body1, Opts) of
+    case hackney:request(Method, Url, Headers1, Body1, Opts++ConfigHackneyOpts) of
         {ok, ClientRef} ->
             %% return value if Opts includes `async`
             {ok, ClientRef};
@@ -57,3 +60,35 @@ select_header_content_type(ContentTypes) ->
         false ->
             [{<<"Content-Type">>, hd(ContentTypes)}]
     end.
+
+auth_with_prefix(Cfg, Key, Token) ->
+    Prefixes = maps:get(api_key_prefix, Cfg, #{}),
+    case maps:get(Key, Prefixes, undefined) of
+        undefined ->
+            Token;
+        Prefix ->
+            <<Prefix/binary, " ", Token/binary>>
+    end.
+
+update_params_with_auth(Cfg, Headers, QS) ->
+    AuthSettings = maps:get(auth, Cfg, #{}),
+    Auths = #{ 'BearerToken' =>
+                #{type => 'apiKey',
+                  key => <<"authorization">>,
+                  in => header}},
+
+    maps:fold(fun(AuthName, #{type := _Type,
+                              in := In,
+                              key := Key}, {HeadersAcc, QSAcc}) ->
+                      case maps:get(AuthName, AuthSettings, undefined) of
+                          undefined ->
+                              {HeadersAcc, QSAcc};
+                          Value ->
+                              case In of
+                                  header ->
+                                      {[{Key, auth_with_prefix(Cfg, Key, Value)} | HeadersAcc], QSAcc};
+                                  query ->
+                                      {HeadersAcc, [{Key, auth_with_prefix(Cfg, Key, Value)} | QSAcc]}
+                              end
+                      end
+              end, {Headers, QS}, Auths).

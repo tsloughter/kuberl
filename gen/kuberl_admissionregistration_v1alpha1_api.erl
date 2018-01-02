@@ -27,6 +27,7 @@ create_external_admission_hook_configuration(Ctx, Body) ->
 -spec create_external_admission_hook_configuration(ctx:ctx(), kuberl_v1alpha1_external_admission_hook_configuration:kuberl_v1alpha1_external_admission_hook_configuration(), maps:map()) -> {ok, kuberl_v1alpha1_external_admission_hook_configuration:kuberl_v1alpha1_external_admission_hook_configuration(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_external_admission_hook_configuration(Ctx, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/apis/admissionregistration.k8s.io/v1alpha1/externaladmissionhookconfigurations"],
@@ -36,7 +37,7 @@ create_external_admission_hook_configuration(Ctx, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% create an InitializerConfiguration
@@ -47,6 +48,7 @@ create_initializer_configuration(Ctx, Body) ->
 -spec create_initializer_configuration(ctx:ctx(), kuberl_v1alpha1_initializer_configuration:kuberl_v1alpha1_initializer_configuration(), maps:map()) -> {ok, kuberl_v1alpha1_initializer_configuration:kuberl_v1alpha1_initializer_configuration(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_initializer_configuration(Ctx, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/apis/admissionregistration.k8s.io/v1alpha1/initializerconfigurations"],
@@ -56,7 +58,7 @@ create_initializer_configuration(Ctx, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of ExternalAdmissionHookConfiguration
@@ -67,6 +69,7 @@ delete_collection_external_admission_hook_configuration(Ctx) ->
 -spec delete_collection_external_admission_hook_configuration(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_external_admission_hook_configuration(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/admissionregistration.k8s.io/v1alpha1/externaladmissionhookconfigurations"],
@@ -76,7 +79,7 @@ delete_collection_external_admission_hook_configuration(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of InitializerConfiguration
@@ -87,6 +90,7 @@ delete_collection_initializer_configuration(Ctx) ->
 -spec delete_collection_initializer_configuration(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_initializer_configuration(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/admissionregistration.k8s.io/v1alpha1/initializerconfigurations"],
@@ -96,7 +100,7 @@ delete_collection_initializer_configuration(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete an ExternalAdmissionHookConfiguration
@@ -107,6 +111,7 @@ delete_external_admission_hook_configuration(Ctx, Name, Body) ->
 -spec delete_external_admission_hook_configuration(ctx:ctx(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_external_admission_hook_configuration(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/admissionregistration.k8s.io/v1alpha1/externaladmissionhookconfigurations/", Name, ""],
@@ -116,7 +121,7 @@ delete_external_admission_hook_configuration(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete an InitializerConfiguration
@@ -127,6 +132,7 @@ delete_initializer_configuration(Ctx, Name, Body) ->
 -spec delete_initializer_configuration(ctx:ctx(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_initializer_configuration(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/admissionregistration.k8s.io/v1alpha1/initializerconfigurations/", Name, ""],
@@ -136,7 +142,7 @@ delete_initializer_configuration(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% get available resources
@@ -147,6 +153,7 @@ get_api_resources(Ctx) ->
 -spec get_api_resources(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_api_resource_list:kuberl_v1_api_resource_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 get_api_resources(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/admissionregistration.k8s.io/v1alpha1/"],
@@ -156,7 +163,7 @@ get_api_resources(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json">>, <<"application/yaml">>, <<"application/vnd.kubernetes.protobuf">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind ExternalAdmissionHookConfiguration
@@ -167,6 +174,7 @@ list_external_admission_hook_configuration(Ctx) ->
 -spec list_external_admission_hook_configuration(ctx:ctx(), maps:map()) -> {ok, kuberl_v1alpha1_external_admission_hook_configuration_list:kuberl_v1alpha1_external_admission_hook_configuration_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_external_admission_hook_configuration(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/admissionregistration.k8s.io/v1alpha1/externaladmissionhookconfigurations"],
@@ -176,7 +184,7 @@ list_external_admission_hook_configuration(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind InitializerConfiguration
@@ -187,6 +195,7 @@ list_initializer_configuration(Ctx) ->
 -spec list_initializer_configuration(ctx:ctx(), maps:map()) -> {ok, kuberl_v1alpha1_initializer_configuration_list:kuberl_v1alpha1_initializer_configuration_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_initializer_configuration(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/admissionregistration.k8s.io/v1alpha1/initializerconfigurations"],
@@ -196,7 +205,7 @@ list_initializer_configuration(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified ExternalAdmissionHookConfiguration
@@ -207,6 +216,7 @@ patch_external_admission_hook_configuration(Ctx, Name, Body) ->
 -spec patch_external_admission_hook_configuration(ctx:ctx(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1alpha1_external_admission_hook_configuration:kuberl_v1alpha1_external_admission_hook_configuration(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_external_admission_hook_configuration(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/admissionregistration.k8s.io/v1alpha1/externaladmissionhookconfigurations/", Name, ""],
@@ -216,7 +226,7 @@ patch_external_admission_hook_configuration(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified InitializerConfiguration
@@ -227,6 +237,7 @@ patch_initializer_configuration(Ctx, Name, Body) ->
 -spec patch_initializer_configuration(ctx:ctx(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1alpha1_initializer_configuration:kuberl_v1alpha1_initializer_configuration(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_initializer_configuration(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/admissionregistration.k8s.io/v1alpha1/initializerconfigurations/", Name, ""],
@@ -236,7 +247,7 @@ patch_initializer_configuration(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified ExternalAdmissionHookConfiguration
@@ -247,6 +258,7 @@ read_external_admission_hook_configuration(Ctx, Name) ->
 -spec read_external_admission_hook_configuration(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1alpha1_external_admission_hook_configuration:kuberl_v1alpha1_external_admission_hook_configuration(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_external_admission_hook_configuration(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/admissionregistration.k8s.io/v1alpha1/externaladmissionhookconfigurations/", Name, ""],
@@ -256,7 +268,7 @@ read_external_admission_hook_configuration(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified InitializerConfiguration
@@ -267,6 +279,7 @@ read_initializer_configuration(Ctx, Name) ->
 -spec read_initializer_configuration(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1alpha1_initializer_configuration:kuberl_v1alpha1_initializer_configuration(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_initializer_configuration(Ctx, Name, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/admissionregistration.k8s.io/v1alpha1/initializerconfigurations/", Name, ""],
@@ -276,7 +289,7 @@ read_initializer_configuration(Ctx, Name, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified ExternalAdmissionHookConfiguration
@@ -287,6 +300,7 @@ replace_external_admission_hook_configuration(Ctx, Name, Body) ->
 -spec replace_external_admission_hook_configuration(ctx:ctx(), binary(), kuberl_v1alpha1_external_admission_hook_configuration:kuberl_v1alpha1_external_admission_hook_configuration(), maps:map()) -> {ok, kuberl_v1alpha1_external_admission_hook_configuration:kuberl_v1alpha1_external_admission_hook_configuration(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_external_admission_hook_configuration(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/admissionregistration.k8s.io/v1alpha1/externaladmissionhookconfigurations/", Name, ""],
@@ -296,7 +310,7 @@ replace_external_admission_hook_configuration(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified InitializerConfiguration
@@ -307,6 +321,7 @@ replace_initializer_configuration(Ctx, Name, Body) ->
 -spec replace_initializer_configuration(ctx:ctx(), binary(), kuberl_v1alpha1_initializer_configuration:kuberl_v1alpha1_initializer_configuration(), maps:map()) -> {ok, kuberl_v1alpha1_initializer_configuration:kuberl_v1alpha1_initializer_configuration(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_initializer_configuration(Ctx, Name, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/admissionregistration.k8s.io/v1alpha1/initializerconfigurations/", Name, ""],
@@ -316,6 +331,6 @@ replace_initializer_configuration(Ctx, Name, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 

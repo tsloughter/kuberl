@@ -21,6 +21,7 @@ create_namespaced_pod_preset(Ctx, Namespace, Body) ->
 -spec create_namespaced_pod_preset(ctx:ctx(), binary(), kuberl_v1alpha1_pod_preset:kuberl_v1alpha1_pod_preset(), maps:map()) -> {ok, kuberl_v1alpha1_pod_preset:kuberl_v1alpha1_pod_preset(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 create_namespaced_pod_preset(Ctx, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = post,
     Path = ["/apis/settings.k8s.io/v1alpha1/namespaces/", Namespace, "/podpresets"],
@@ -30,7 +31,7 @@ create_namespaced_pod_preset(Ctx, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete collection of PodPreset
@@ -41,6 +42,7 @@ delete_collection_namespaced_pod_preset(Ctx, Namespace) ->
 -spec delete_collection_namespaced_pod_preset(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_collection_namespaced_pod_preset(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/settings.k8s.io/v1alpha1/namespaces/", Namespace, "/podpresets"],
@@ -50,7 +52,7 @@ delete_collection_namespaced_pod_preset(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% delete a PodPreset
@@ -61,6 +63,7 @@ delete_namespaced_pod_preset(Ctx, Name, Namespace, Body) ->
 -spec delete_namespaced_pod_preset(ctx:ctx(), binary(), binary(), kuberl_v1_delete_options:kuberl_v1_delete_options(), maps:map()) -> {ok, kuberl_v1_status:kuberl_v1_status(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 delete_namespaced_pod_preset(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = delete,
     Path = ["/apis/settings.k8s.io/v1alpha1/namespaces/", Namespace, "/podpresets/", Name, ""],
@@ -70,7 +73,7 @@ delete_namespaced_pod_preset(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% get available resources
@@ -81,6 +84,7 @@ get_api_resources(Ctx) ->
 -spec get_api_resources(ctx:ctx(), maps:map()) -> {ok, kuberl_v1_api_resource_list:kuberl_v1_api_resource_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 get_api_resources(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/settings.k8s.io/v1alpha1/"],
@@ -90,7 +94,7 @@ get_api_resources(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json">>, <<"application/yaml">>, <<"application/vnd.kubernetes.protobuf">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind PodPreset
@@ -101,6 +105,7 @@ list_namespaced_pod_preset(Ctx, Namespace) ->
 -spec list_namespaced_pod_preset(ctx:ctx(), binary(), maps:map()) -> {ok, kuberl_v1alpha1_pod_preset_list:kuberl_v1alpha1_pod_preset_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_namespaced_pod_preset(Ctx, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/settings.k8s.io/v1alpha1/namespaces/", Namespace, "/podpresets"],
@@ -110,7 +115,7 @@ list_namespaced_pod_preset(Ctx, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% list or watch objects of kind PodPreset
@@ -121,6 +126,7 @@ list_pod_preset_for_all_namespaces(Ctx) ->
 -spec list_pod_preset_for_all_namespaces(ctx:ctx(), maps:map()) -> {ok, kuberl_v1alpha1_pod_preset_list:kuberl_v1alpha1_pod_preset_list(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 list_pod_preset_for_all_namespaces(Ctx, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/settings.k8s.io/v1alpha1/podpresets"],
@@ -130,7 +136,7 @@ list_pod_preset_for_all_namespaces(Ctx, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% partially update the specified PodPreset
@@ -141,6 +147,7 @@ patch_namespaced_pod_preset(Ctx, Name, Namespace, Body) ->
 -spec patch_namespaced_pod_preset(ctx:ctx(), binary(), binary(), maps:map(), maps:map()) -> {ok, kuberl_v1alpha1_pod_preset:kuberl_v1alpha1_pod_preset(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 patch_namespaced_pod_preset(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = patch,
     Path = ["/apis/settings.k8s.io/v1alpha1/namespaces/", Namespace, "/podpresets/", Name, ""],
@@ -150,7 +157,7 @@ patch_namespaced_pod_preset(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"application/json-patch+json">>, <<"application/merge-patch+json">>, <<"application/strategic-merge-patch+json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% read the specified PodPreset
@@ -161,6 +168,7 @@ read_namespaced_pod_preset(Ctx, Name, Namespace) ->
 -spec read_namespaced_pod_preset(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, kuberl_v1alpha1_pod_preset:kuberl_v1alpha1_pod_preset(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 read_namespaced_pod_preset(Ctx, Name, Namespace, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = ["/apis/settings.k8s.io/v1alpha1/namespaces/", Namespace, "/podpresets/", Name, ""],
@@ -170,7 +178,7 @@ read_namespaced_pod_preset(Ctx, Name, Namespace, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc 
 %% replace the specified PodPreset
@@ -181,6 +189,7 @@ replace_namespaced_pod_preset(Ctx, Name, Namespace, Body) ->
 -spec replace_namespaced_pod_preset(ctx:ctx(), binary(), binary(), kuberl_v1alpha1_pod_preset:kuberl_v1alpha1_pod_preset(), maps:map()) -> {ok, kuberl_v1alpha1_pod_preset:kuberl_v1alpha1_pod_preset(), kuberl_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), kuberl_utils:response_info()}.
 replace_namespaced_pod_preset(Ctx, Name, Namespace, Body, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = put,
     Path = ["/apis/settings.k8s.io/v1alpha1/namespaces/", Namespace, "/podpresets/", Name, ""],
@@ -190,6 +199,6 @@ replace_namespaced_pod_preset(Ctx, Name, Namespace, Body, Optional) ->
     ContentTypeHeader = kuberl_utils:select_header_content_type([<<"*/*">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 
-    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts).
+    kuberl_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 
