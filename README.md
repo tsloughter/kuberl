@@ -24,7 +24,7 @@ A new configuration can be created with functions in `kuberl`:
 
 ```erlang
 Cfg = kuberl:cfg_with_bearer_token(kuberl:cfg_with_host("https://x.x.x.x"), <<"... bearer token ...">>),
-kuberl_core_api:get_api_versions(ctx:background(), Cfg).
+kuberl_core_api:get_api_versions(ctx:background(), #{cfg => Cfg}).
 ```
 
 Optionally the environment config can be override at runtime:
