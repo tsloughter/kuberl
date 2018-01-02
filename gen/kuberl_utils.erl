@@ -9,8 +9,8 @@
 -export_type([response_info/0]).
 
 request(_Ctx, Method, Path, QS, Headers, Body, Opts, Cfg) ->
-    {Headers1, QS1} = update_params_with_auth(maps:get(auth, Cfg, #{}), Headers, QS),
-    Host = maps:get(host, Cfg, "localhost"),
+    {Headers1, QS1} = update_params_with_auth(Cfg, Headers, QS),
+    Host = maps:get(host, Cfg, "localhost:8001"),
     Url = hackney_url:make_url(Host, Path, QS1),
 
     ConfigHackneyOpts = maps:get(hackney_opts, Cfg, []),
