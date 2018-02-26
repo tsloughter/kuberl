@@ -7,7 +7,7 @@
 -type kuberl_v1_pod_affinity_term() ::
     #{ 'labelSelector' => kuberl_v1_label_selector:kuberl_v1_label_selector(),
        'namespaces' => list(),
-       'topologyKey' => binary()
+       'topologyKey' := binary()
      }.
 
 encode(#{ 'labelSelector' := LabelSelector,

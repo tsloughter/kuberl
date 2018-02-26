@@ -8,7 +8,7 @@
     #{ 'podManagementPolicy' => binary(),
        'replicas' => integer(),
        'revisionHistoryLimit' => integer(),
-       'selector' => kuberl_v1_label_selector:kuberl_v1_label_selector(),
+       'selector' := kuberl_v1_label_selector:kuberl_v1_label_selector(),
        'serviceName' := binary(),
        'template' := kuberl_v1_pod_template_spec:kuberl_v1_pod_template_spec(),
        'updateStrategy' => kuberl_v1beta2_stateful_set_update_strategy:kuberl_v1beta2_stateful_set_update_strategy(),

@@ -12,7 +12,8 @@
        'mountOptions' => list(),
        'parameters' => maps:map(),
        'provisioner' := binary(),
-       'reclaimPolicy' => binary()
+       'reclaimPolicy' => binary(),
+       'volumeBindingMode' => binary()
      }.
 
 encode(#{ 'allowVolumeExpansion' := AllowVolumeExpansion,
@@ -22,7 +23,8 @@ encode(#{ 'allowVolumeExpansion' := AllowVolumeExpansion,
           'mountOptions' := MountOptions,
           'parameters' := Parameters,
           'provisioner' := Provisioner,
-          'reclaimPolicy' := ReclaimPolicy
+          'reclaimPolicy' := ReclaimPolicy,
+          'volumeBindingMode' := VolumeBindingMode
         }) ->
     #{ 'allowVolumeExpansion' => AllowVolumeExpansion,
        'apiVersion' => ApiVersion,
@@ -31,5 +33,6 @@ encode(#{ 'allowVolumeExpansion' := AllowVolumeExpansion,
        'mountOptions' => MountOptions,
        'parameters' => Parameters,
        'provisioner' => Provisioner,
-       'reclaimPolicy' => ReclaimPolicy
+       'reclaimPolicy' => ReclaimPolicy,
+       'volumeBindingMode' => VolumeBindingMode
      }.

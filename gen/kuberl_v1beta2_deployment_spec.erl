@@ -10,7 +10,7 @@
        'progressDeadlineSeconds' => integer(),
        'replicas' => integer(),
        'revisionHistoryLimit' => integer(),
-       'selector' => kuberl_v1_label_selector:kuberl_v1_label_selector(),
+       'selector' := kuberl_v1_label_selector:kuberl_v1_label_selector(),
        'strategy' => kuberl_v1beta2_deployment_strategy:kuberl_v1beta2_deployment_strategy(),
        'template' := kuberl_v1_pod_template_spec:kuberl_v1_pod_template_spec()
      }.

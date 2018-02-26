@@ -6,6 +6,7 @@
 
 -type kuberl_v1beta2_stateful_set_status() ::
     #{ 'collisionCount' => integer(),
+       'conditions' => list(),
        'currentReplicas' => integer(),
        'currentRevision' => binary(),
        'observedGeneration' => integer(),
@@ -16,6 +17,7 @@
      }.
 
 encode(#{ 'collisionCount' := CollisionCount,
+          'conditions' := Conditions,
           'currentReplicas' := CurrentReplicas,
           'currentRevision' := CurrentRevision,
           'observedGeneration' := ObservedGeneration,
@@ -25,6 +27,7 @@ encode(#{ 'collisionCount' := CollisionCount,
           'updatedReplicas' := UpdatedReplicas
         }) ->
     #{ 'collisionCount' => CollisionCount,
+       'conditions' => Conditions,
        'currentReplicas' => CurrentReplicas,
        'currentRevision' => CurrentRevision,
        'observedGeneration' => ObservedGeneration,

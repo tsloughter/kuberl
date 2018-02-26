@@ -6,6 +6,7 @@
 
 -type kuberl_v1beta2_daemon_set_status() ::
     #{ 'collisionCount' => integer(),
+       'conditions' => list(),
        'currentNumberScheduled' := integer(),
        'desiredNumberScheduled' := integer(),
        'numberAvailable' => integer(),
@@ -17,6 +18,7 @@
      }.
 
 encode(#{ 'collisionCount' := CollisionCount,
+          'conditions' := Conditions,
           'currentNumberScheduled' := CurrentNumberScheduled,
           'desiredNumberScheduled' := DesiredNumberScheduled,
           'numberAvailable' := NumberAvailable,
@@ -27,6 +29,7 @@ encode(#{ 'collisionCount' := CollisionCount,
           'updatedNumberScheduled' := UpdatedNumberScheduled
         }) ->
     #{ 'collisionCount' => CollisionCount,
+       'conditions' => Conditions,
        'currentNumberScheduled' => CurrentNumberScheduled,
        'desiredNumberScheduled' => DesiredNumberScheduled,
        'numberAvailable' => NumberAvailable,

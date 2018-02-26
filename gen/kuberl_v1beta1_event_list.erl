@@ -1,10 +1,10 @@
--module(kuberl_v1alpha1_external_admission_hook_configuration_list).
+-module(kuberl_v1beta1_event_list).
 
 -export([encode/1]).
 
--export_type([kuberl_v1alpha1_external_admission_hook_configuration_list/0]).
+-export_type([kuberl_v1beta1_event_list/0]).
 
--type kuberl_v1alpha1_external_admission_hook_configuration_list() ::
+-type kuberl_v1beta1_event_list() ::
     #{ 'apiVersion' => binary(),
        'items' := list(),
        'kind' => binary(),

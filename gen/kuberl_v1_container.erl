@@ -23,6 +23,7 @@
        'terminationMessagePath' => binary(),
        'terminationMessagePolicy' => binary(),
        'tty' => boolean(),
+       'volumeDevices' => list(),
        'volumeMounts' => list(),
        'workingDir' => binary()
      }.
@@ -45,6 +46,7 @@ encode(#{ 'args' := Args,
           'terminationMessagePath' := TerminationMessagePath,
           'terminationMessagePolicy' := TerminationMessagePolicy,
           'tty' := Tty,
+          'volumeDevices' := VolumeDevices,
           'volumeMounts' := VolumeMounts,
           'workingDir' := WorkingDir
         }) ->
@@ -66,6 +68,7 @@ encode(#{ 'args' := Args,
        'terminationMessagePath' => TerminationMessagePath,
        'terminationMessagePolicy' => TerminationMessagePolicy,
        'tty' => Tty,
+       'volumeDevices' => VolumeDevices,
        'volumeMounts' => VolumeMounts,
        'workingDir' => WorkingDir
      }.

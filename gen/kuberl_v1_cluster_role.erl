@@ -5,18 +5,21 @@
 -export_type([kuberl_v1_cluster_role/0]).
 
 -type kuberl_v1_cluster_role() ::
-    #{ 'apiVersion' => binary(),
+    #{ 'aggregationRule' => kuberl_v1_aggregation_rule:kuberl_v1_aggregation_rule(),
+       'apiVersion' => binary(),
        'kind' => binary(),
        'metadata' => kuberl_v1_object_meta:kuberl_v1_object_meta(),
        'rules' := list()
      }.
 
-encode(#{ 'apiVersion' := ApiVersion,
+encode(#{ 'aggregationRule' := AggregationRule,
+          'apiVersion' := ApiVersion,
           'kind' := Kind,
           'metadata' := Metadata,
           'rules' := Rules
         }) ->
-    #{ 'apiVersion' => ApiVersion,
+    #{ 'aggregationRule' => AggregationRule,
+       'apiVersion' => ApiVersion,
        'kind' => Kind,
        'metadata' => Metadata,
        'rules' => Rules

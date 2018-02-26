@@ -9,6 +9,7 @@
        'resources' => kuberl_v1_resource_requirements:kuberl_v1_resource_requirements(),
        'selector' => kuberl_v1_label_selector:kuberl_v1_label_selector(),
        'storageClassName' => binary(),
+       'volumeMode' => binary(),
        'volumeName' => binary()
      }.
 
@@ -16,11 +17,13 @@ encode(#{ 'accessModes' := AccessModes,
           'resources' := Resources,
           'selector' := Selector,
           'storageClassName' := StorageClassName,
+          'volumeMode' := VolumeMode,
           'volumeName' := VolumeName
         }) ->
     #{ 'accessModes' => AccessModes,
        'resources' => Resources,
        'selector' => Selector,
        'storageClassName' => StorageClassName,
+       'volumeMode' => VolumeMode,
        'volumeName' => VolumeName
      }.

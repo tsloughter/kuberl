@@ -9,7 +9,7 @@
        'group' => binary(),
        'groupPriorityMinimum' := integer(),
        'insecureSkipTLSVerify' => boolean(),
-       'service' := kuberl_v1beta1_service_reference:kuberl_v1beta1_service_reference(),
+       'service' := kuberl_apiregistration_v1beta1_service_reference:kuberl_apiregistration_v1beta1_service_reference(),
        'version' => binary(),
        'versionPriority' := integer()
      }.

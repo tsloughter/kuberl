@@ -7,6 +7,7 @@
 -type kuberl_v1beta1_pod_security_policy_spec() ::
     #{ 'allowPrivilegeEscalation' => boolean(),
        'allowedCapabilities' => list(),
+       'allowedFlexVolumes' => list(),
        'allowedHostPaths' => list(),
        'defaultAddCapabilities' => list(),
        'defaultAllowPrivilegeEscalation' => boolean(),
@@ -26,6 +27,7 @@
 
 encode(#{ 'allowPrivilegeEscalation' := AllowPrivilegeEscalation,
           'allowedCapabilities' := AllowedCapabilities,
+          'allowedFlexVolumes' := AllowedFlexVolumes,
           'allowedHostPaths' := AllowedHostPaths,
           'defaultAddCapabilities' := DefaultAddCapabilities,
           'defaultAllowPrivilegeEscalation' := DefaultAllowPrivilegeEscalation,
@@ -44,6 +46,7 @@ encode(#{ 'allowPrivilegeEscalation' := AllowPrivilegeEscalation,
         }) ->
     #{ 'allowPrivilegeEscalation' => AllowPrivilegeEscalation,
        'allowedCapabilities' => AllowedCapabilities,
+       'allowedFlexVolumes' => AllowedFlexVolumes,
        'allowedHostPaths' => AllowedHostPaths,
        'defaultAddCapabilities' => DefaultAddCapabilities,
        'defaultAllowPrivilegeEscalation' => DefaultAllowPrivilegeEscalation,

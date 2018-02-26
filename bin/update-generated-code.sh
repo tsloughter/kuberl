@@ -2,6 +2,8 @@
 
 set -e
 
+# https://raw.githubusercontent.com/kubernetes-client/python/master/scripts/swagger.json
+
 output_dir=`mktemp -d`
 
 # for now it assumes swagger is in the same parent directory

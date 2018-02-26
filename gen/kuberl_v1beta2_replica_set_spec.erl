@@ -7,7 +7,7 @@
 -type kuberl_v1beta2_replica_set_spec() ::
     #{ 'minReadySeconds' => integer(),
        'replicas' => integer(),
-       'selector' => kuberl_v1_label_selector:kuberl_v1_label_selector(),
+       'selector' := kuberl_v1_label_selector:kuberl_v1_label_selector(),
        'template' => kuberl_v1_pod_template_spec:kuberl_v1_pod_template_spec()
      }.
 
