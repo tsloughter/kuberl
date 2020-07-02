@@ -37,7 +37,7 @@ cfg_with_bearer_token(Token) ->
 %% @doc Add a bearer `Token' to a given config.
 -spec cfg_with_bearer_token(cfg(), binary()) -> cfg().
 cfg_with_bearer_token(Cfg, Token) when is_binary(Token) ->
-    maps:merge(Cfg, #{auth => #{'BearerToken' => Token},
+    update_cfg(Cfg, #{auth => #{'BearerToken' => Token},
                       api_key_prefix => #{<<"authorization">> => <<"Bearer">>}}).
 
 %% @equiv cfg_with_host(new_cfg(), Host)
@@ -65,7 +65,7 @@ update_cfg(Cfg, Map) ->
 %% @doc Update and set the default config with values in `Map'.
 -spec update_default_cfg(map()) -> ok.
 update_default_cfg(Map) ->
-    set_default_cfg(maps:merge(new_cfg(), Map)).
+    set_default_cfg(update_cfg(Map)).
 
 %% @equiv set_default_cfg(new_cfg())
 -spec set_default_cfg() -> ok.
