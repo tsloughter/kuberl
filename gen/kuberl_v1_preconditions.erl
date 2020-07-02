@@ -5,10 +5,13 @@
 -export_type([kuberl_v1_preconditions/0]).
 
 -type kuberl_v1_preconditions() ::
-    #{ 'uid' => binary()
+    #{ 'resourceVersion' => binary(),
+       'uid' => binary()
      }.
 
-encode(#{ 'uid' := Uid
+encode(#{ 'resourceVersion' := ResourceVersion,
+          'uid' := Uid
         }) ->
-    #{ 'uid' => Uid
+    #{ 'resourceVersion' => ResourceVersion,
+       'uid' => Uid
      }.

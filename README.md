@@ -1,6 +1,6 @@
 # Erlang Kubernetes client
 
-Erlang client for Kubernetes 1.9.3 generated through Swagger.
+Erlang client for Kubernetes 1.16 generated through Swagger.
 
 ## Watch Behaviour
 

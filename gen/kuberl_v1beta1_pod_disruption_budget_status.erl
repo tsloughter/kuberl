@@ -7,7 +7,7 @@
 -type kuberl_v1beta1_pod_disruption_budget_status() ::
     #{ 'currentHealthy' := integer(),
        'desiredHealthy' := integer(),
-       'disruptedPods' := maps:map(),
+       'disruptedPods' => maps:map(),
        'disruptionsAllowed' := integer(),
        'expectedPods' := integer(),
        'observedGeneration' => integer()

@@ -8,7 +8,7 @@
     #{ 'apiVersion' => binary(),
        'kind' => binary(),
        'metadata' => kuberl_v1_object_meta:kuberl_v1_object_meta(),
-       'subsets' := list()
+       'subsets' => list()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

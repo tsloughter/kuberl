@@ -8,16 +8,19 @@
     #{ 'apiGroups' => list(),
        'apiVersions' => list(),
        'operations' => list(),
-       'resources' => list()
+       'resources' => list(),
+       'scope' => binary()
      }.
 
 encode(#{ 'apiGroups' := ApiGroups,
           'apiVersions' := ApiVersions,
           'operations' := Operations,
-          'resources' := Resources
+          'resources' := Resources,
+          'scope' := Scope
         }) ->
     #{ 'apiGroups' => ApiGroups,
        'apiVersions' => ApiVersions,
        'operations' => Operations,
-       'resources' => Resources
+       'resources' => Resources,
+       'scope' => Scope
      }.

@@ -5,7 +5,7 @@
 -export_type([kuberl_v1beta1_api_service_spec/0]).
 
 -type kuberl_v1beta1_api_service_spec() ::
-    #{ 'caBundle' := kuberl_byte_array:kuberl_byte_array(),
+    #{ 'caBundle' => kuberl_byte_array:kuberl_byte_array(),
        'group' => binary(),
        'groupPriorityMinimum' := integer(),
        'insecureSkipTLSVerify' => boolean(),

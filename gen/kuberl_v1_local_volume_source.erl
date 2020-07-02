@@ -5,10 +5,13 @@
 -export_type([kuberl_v1_local_volume_source/0]).
 
 -type kuberl_v1_local_volume_source() ::
-    #{ 'path' := binary()
+    #{ 'fsType' => binary(),
+       'path' := binary()
      }.
 
-encode(#{ 'path' := Path
+encode(#{ 'fsType' := FsType,
+          'path' := Path
         }) ->
-    #{ 'path' => Path
+    #{ 'fsType' => FsType,
+       'path' => Path
      }.

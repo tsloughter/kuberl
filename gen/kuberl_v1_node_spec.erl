@@ -8,6 +8,7 @@
     #{ 'configSource' => kuberl_v1_node_config_source:kuberl_v1_node_config_source(),
        'externalID' => binary(),
        'podCIDR' => binary(),
+       'podCIDRs' => list(),
        'providerID' => binary(),
        'taints' => list(),
        'unschedulable' => boolean()
@@ -16,6 +17,7 @@
 encode(#{ 'configSource' := ConfigSource,
           'externalID' := ExternalID,
           'podCIDR' := PodCIDR,
+          'podCIDRs' := PodCIDRs,
           'providerID' := ProviderID,
           'taints' := Taints,
           'unschedulable' := Unschedulable
@@ -23,6 +25,7 @@ encode(#{ 'configSource' := ConfigSource,
     #{ 'configSource' => ConfigSource,
        'externalID' => ExternalID,
        'podCIDR' => PodCIDR,
+       'podCIDRs' => PodCIDRs,
        'providerID' => ProviderID,
        'taints' => Taints,
        'unschedulable' => Unschedulable

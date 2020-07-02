@@ -6,6 +6,7 @@
 
 -type kuberl_v1_delete_options() ::
     #{ 'apiVersion' => binary(),
+       'dryRun' => list(),
        'gracePeriodSeconds' => integer(),
        'kind' => binary(),
        'orphanDependents' => boolean(),
@@ -14,6 +15,7 @@
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,
+          'dryRun' := DryRun,
           'gracePeriodSeconds' := GracePeriodSeconds,
           'kind' := Kind,
           'orphanDependents' := OrphanDependents,
@@ -21,6 +23,7 @@ encode(#{ 'apiVersion' := ApiVersion,
           'propagationPolicy' := PropagationPolicy
         }) ->
     #{ 'apiVersion' => ApiVersion,
+       'dryRun' => DryRun,
        'gracePeriodSeconds' => GracePeriodSeconds,
        'kind' => Kind,
        'orphanDependents' => OrphanDependents,

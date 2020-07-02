@@ -5,16 +5,10 @@
 -export_type([kuberl_v1_node_config_source/0]).
 
 -type kuberl_v1_node_config_source() ::
-    #{ 'apiVersion' => binary(),
-       'configMapRef' => kuberl_v1_object_reference:kuberl_v1_object_reference(),
-       'kind' => binary()
+    #{ 'configMap' => kuberl_v1_config_map_node_config_source:kuberl_v1_config_map_node_config_source()
      }.
 
-encode(#{ 'apiVersion' := ApiVersion,
-          'configMapRef' := ConfigMapRef,
-          'kind' := Kind
+encode(#{ 'configMap' := ConfigMap
         }) ->
-    #{ 'apiVersion' => ApiVersion,
-       'configMapRef' => ConfigMapRef,
-       'kind' => Kind
+    #{ 'configMap' => ConfigMap
      }.

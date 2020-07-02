@@ -6,7 +6,7 @@
 
 -type kuberl_v2beta1_horizontal_pod_autoscaler_status() ::
     #{ 'conditions' := list(),
-       'currentMetrics' := list(),
+       'currentMetrics' => list(),
        'currentReplicas' := integer(),
        'desiredReplicas' := integer(),
        'lastScaleTime' => kuberl_date_time:kuberl_date_time(),

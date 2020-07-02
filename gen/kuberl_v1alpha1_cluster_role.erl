@@ -9,7 +9,7 @@
        'apiVersion' => binary(),
        'kind' => binary(),
        'metadata' => kuberl_v1_object_meta:kuberl_v1_object_meta(),
-       'rules' := list()
+       'rules' => list()
      }.
 
 encode(#{ 'aggregationRule' := AggregationRule,

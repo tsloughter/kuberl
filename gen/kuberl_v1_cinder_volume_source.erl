@@ -7,14 +7,17 @@
 -type kuberl_v1_cinder_volume_source() ::
     #{ 'fsType' => binary(),
        'readOnly' => boolean(),
+       'secretRef' => kuberl_v1_local_object_reference:kuberl_v1_local_object_reference(),
        'volumeID' := binary()
      }.
 
 encode(#{ 'fsType' := FsType,
           'readOnly' := ReadOnly,
+          'secretRef' := SecretRef,
           'volumeID' := VolumeID
         }) ->
     #{ 'fsType' => FsType,
        'readOnly' => ReadOnly,
+       'secretRef' => SecretRef,
        'volumeID' => VolumeID
      }.

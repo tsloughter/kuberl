@@ -9,7 +9,7 @@
        'kind' => binary(),
        'metadata' => kuberl_v1_object_meta:kuberl_v1_object_meta(),
        'roleRef' := kuberl_v1alpha1_role_ref:kuberl_v1alpha1_role_ref(),
-       'subjects' := list()
+       'subjects' => list()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

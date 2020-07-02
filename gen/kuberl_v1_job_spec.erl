@@ -11,7 +11,8 @@
        'manualSelector' => boolean(),
        'parallelism' => integer(),
        'selector' => kuberl_v1_label_selector:kuberl_v1_label_selector(),
-       'template' := kuberl_v1_pod_template_spec:kuberl_v1_pod_template_spec()
+       'template' := kuberl_v1_pod_template_spec:kuberl_v1_pod_template_spec(),
+       'ttlSecondsAfterFinished' => integer()
      }.
 
 encode(#{ 'activeDeadlineSeconds' := ActiveDeadlineSeconds,
@@ -20,7 +21,8 @@ encode(#{ 'activeDeadlineSeconds' := ActiveDeadlineSeconds,
           'manualSelector' := ManualSelector,
           'parallelism' := Parallelism,
           'selector' := Selector,
-          'template' := Template
+          'template' := Template,
+          'ttlSecondsAfterFinished' := TtlSecondsAfterFinished
         }) ->
     #{ 'activeDeadlineSeconds' => ActiveDeadlineSeconds,
        'backoffLimit' => BackoffLimit,
@@ -28,5 +30,6 @@ encode(#{ 'activeDeadlineSeconds' := ActiveDeadlineSeconds,
        'manualSelector' => ManualSelector,
        'parallelism' => Parallelism,
        'selector' => Selector,
-       'template' => Template
+       'template' => Template,
+       'ttlSecondsAfterFinished' => TtlSecondsAfterFinished
      }.
