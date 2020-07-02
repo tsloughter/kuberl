@@ -27,7 +27,7 @@ cfg() = map()
 ## Function Index ##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#cfg_with_bearer_token-1">cfg_with_bearer_token/1</a></td><td>Create a config using a given bearer <code>Token</code>.</td></tr><tr><td valign="top"><a href="#cfg_with_bearer_token-2">cfg_with_bearer_token/2</a></td><td>Add a bearer <code>Token</code> to a given config.</td></tr><tr><td valign="top"><a href="#cfg_with_host-1">cfg_with_host/1</a></td><td>Create a config with a given <code>Host</code>.</td></tr><tr><td valign="top"><a href="#cfg_with_host-2">cfg_with_host/2</a></td><td>Add a bearer <code>Token</code> to a given config.</td></tr><tr><td valign="top"><a href="#new_cfg-0">new_cfg/0</a></td><td>The default config.</td></tr><tr><td valign="top"><a href="#set_default_cfg-0">set_default_cfg/0</a></td><td>Equivalent to <a href="#set_default_cfg-1"><tt>set_default_cfg(new_cfg())</tt></a>.</td></tr><tr><td valign="top"><a href="#set_default_cfg-1">set_default_cfg/1</a></td><td>Set the default config to <code>Cfg</code>.</td></tr><tr><td valign="top"><a href="#update_cfg-1">update_cfg/1</a></td><td>Update a default config with values in <code>Map</code>.</td></tr><tr><td valign="top"><a href="#update_default_cfg-1">update_default_cfg/1</a></td><td>Update and set the default config with values in <code>Map</code>.</td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#cfg_with_bearer_token-1">cfg_with_bearer_token/1</a></td><td>Create a config using a given bearer <code>Token</code>.</td></tr><tr><td valign="top"><a href="#cfg_with_bearer_token-2">cfg_with_bearer_token/2</a></td><td>Add a bearer <code>Token</code> to a given config.</td></tr><tr><td valign="top"><a href="#cfg_with_host-1">cfg_with_host/1</a></td><td>Create a config with a given <code>Host</code>.</td></tr><tr><td valign="top"><a href="#cfg_with_host-2">cfg_with_host/2</a></td><td>Add a bearer <code>Token</code> to a given config.</td></tr><tr><td valign="top"><a href="#new_cfg-0">new_cfg/0</a></td><td>The default config.</td></tr><tr><td valign="top"><a href="#set_default_cfg-0">set_default_cfg/0</a></td><td>Equivalent to <a href="#set_default_cfg-1"><tt>set_default_cfg(new_cfg())</tt></a>.</td></tr><tr><td valign="top"><a href="#set_default_cfg-1">set_default_cfg/1</a></td><td>Set the default config to <code>Cfg</code>.</td></tr><tr><td valign="top"><a href="#update_cfg-1">update_cfg/1</a></td><td>Update a default config with values in <code>Map</code>.</td></tr><tr><td valign="top"><a href="#update_cfg-2">update_cfg/2</a></td><td>Update a config with values in <code>Map</code>.</td></tr><tr><td valign="top"><a href="#update_default_cfg-1">update_default_cfg/1</a></td><td>Update and set the default config with values in <code>Map</code>.</td></tr></table>
 
 
 <a name="functions"></a>
@@ -124,7 +124,20 @@ update_cfg(Map::map()) -&gt; <a href="#type-cfg">cfg()</a>
 </code></pre>
 <br />
 
+Equivalent to [`update_cfg(new_cfg(), Map)`](#update_cfg-2).
+
 Update a default config with values in `Map`.
+
+<a name="update_cfg-2"></a>
+
+### update_cfg/2 ###
+
+<pre><code>
+update_cfg(Cfg::<a href="#type-cfg">cfg()</a>, Map::map()) -&gt; <a href="#type-cfg">cfg()</a>
+</code></pre>
+<br />
+
+Update a config with values in `Map`.
 
 <a name="update_default_cfg-1"></a>
 

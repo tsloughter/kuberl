@@ -5,6 +5,7 @@
 %% API
 -export([new_cfg/0,
          update_cfg/1,
+         update_cfg/2,
          cfg_with_bearer_token/1,
          cfg_with_bearer_token/2,
          cfg_with_host/1,
@@ -48,12 +49,18 @@ cfg_with_host(Host) ->
 %% @doc Add a bearer `Token' to a given config.
 -spec cfg_with_host(cfg(), string()) -> cfg().
 cfg_with_host(Cfg, Host) ->
-    maps:merge(Cfg, #{host => Host}).
+    update_cfg(Cfg, #{host => Host}).
 
+%% @equiv update_cfg(new_cfg(), Map)
 %% @doc Update a default config with values in `Map'.
 -spec update_cfg(map()) -> cfg().
 update_cfg(Map) ->
-    maps:merge(new_cfg(), Map).
+    update_cfg(new_cfg(), Map).
+
+%% @doc Update a config with values in `Map'.
+-spec update_cfg(cfg(), map()) -> cfg().
+update_cfg(Cfg, Map) ->
+    maps:merge(Cfg, Map).
 
 %% @doc Update and set the default config with values in `Map'.
 -spec update_default_cfg(map()) -> ok.
