@@ -35,6 +35,18 @@ kuberl:set_default_cfg(Cfg).
 
 ## Update Generated Code
 
+### Without Nix
+
+With [swagger-codegen] built under `../swagger-codegen` the script in the `bin` directory can be used to update the generated Erlang modules:
+
+```shell
+bin/update-generated-code.sh
+```
+
+This script will generate the code to a temporary directory under `/tmp` and then copy only the modules to `gen/`.
+
+### With Nix
+
 Install [Nix], [direnv], and [lorri].
 
 ```shell
@@ -58,3 +70,4 @@ kuberl_gen
 [Nix]: https://nixos.org/
 [direnv]: https://direnv.net/
 [lorri]: https://github.com/target/lorri/
+[swagger-codegen]: https://github.com/swagger-api/swagger-codegen/
