@@ -5,10 +5,13 @@
 -export_type([kuberl_v1_node_selector_term/0]).
 
 -type kuberl_v1_node_selector_term() ::
-    #{ 'matchExpressions' := list()
+    #{ 'matchExpressions' => list(),
+       'matchFields' => list()
      }.
 
-encode(#{ 'matchExpressions' := MatchExpressions
+encode(#{ 'matchExpressions' := MatchExpressions,
+          'matchFields' := MatchFields
         }) ->
-    #{ 'matchExpressions' => MatchExpressions
+    #{ 'matchExpressions' => MatchExpressions,
+       'matchFields' => MatchFields
      }.

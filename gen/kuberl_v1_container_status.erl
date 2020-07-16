@@ -12,6 +12,7 @@
        'name' := binary(),
        'ready' := boolean(),
        'restartCount' := integer(),
+       'started' => boolean(),
        'state' => kuberl_v1_container_state:kuberl_v1_container_state()
      }.
 
@@ -22,6 +23,7 @@ encode(#{ 'containerID' := ContainerID,
           'name' := Name,
           'ready' := Ready,
           'restartCount' := RestartCount,
+          'started' := Started,
           'state' := State
         }) ->
     #{ 'containerID' => ContainerID,
@@ -31,5 +33,6 @@ encode(#{ 'containerID' := ContainerID,
        'name' => Name,
        'ready' => Ready,
        'restartCount' => RestartCount,
+       'started' => Started,
        'state' => State
      }.

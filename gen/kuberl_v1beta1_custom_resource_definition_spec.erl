@@ -5,22 +5,37 @@
 -export_type([kuberl_v1beta1_custom_resource_definition_spec/0]).
 
 -type kuberl_v1beta1_custom_resource_definition_spec() ::
-    #{ 'group' := binary(),
+    #{ 'additionalPrinterColumns' => list(),
+       'conversion' => kuberl_v1beta1_custom_resource_conversion:kuberl_v1beta1_custom_resource_conversion(),
+       'group' := binary(),
        'names' := kuberl_v1beta1_custom_resource_definition_names:kuberl_v1beta1_custom_resource_definition_names(),
+       'preserveUnknownFields' => boolean(),
        'scope' := binary(),
+       'subresources' => kuberl_v1beta1_custom_resource_subresources:kuberl_v1beta1_custom_resource_subresources(),
        'validation' => kuberl_v1beta1_custom_resource_validation:kuberl_v1beta1_custom_resource_validation(),
-       'version' := binary()
+       'version' => binary(),
+       'versions' => list()
      }.
 
-encode(#{ 'group' := Group,
+encode(#{ 'additionalPrinterColumns' := AdditionalPrinterColumns,
+          'conversion' := Conversion,
+          'group' := Group,
           'names' := Names,
+          'preserveUnknownFields' := PreserveUnknownFields,
           'scope' := Scope,
+          'subresources' := Subresources,
           'validation' := Validation,
-          'version' := Version
+          'version' := Version,
+          'versions' := Versions
         }) ->
-    #{ 'group' => Group,
+    #{ 'additionalPrinterColumns' => AdditionalPrinterColumns,
+       'conversion' => Conversion,
+       'group' => Group,
        'names' => Names,
+       'preserveUnknownFields' => PreserveUnknownFields,
        'scope' => Scope,
+       'subresources' => Subresources,
        'validation' => Validation,
-       'version' => Version
+       'version' => Version,
+       'versions' => Versions
      }.

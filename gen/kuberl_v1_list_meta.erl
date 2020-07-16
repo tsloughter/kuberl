@@ -6,15 +6,18 @@
 
 -type kuberl_v1_list_meta() ::
     #{ 'continue' => binary(),
+       'remainingItemCount' => integer(),
        'resourceVersion' => binary(),
        'selfLink' => binary()
      }.
 
 encode(#{ 'continue' := Continue,
+          'remainingItemCount' := RemainingItemCount,
           'resourceVersion' := ResourceVersion,
           'selfLink' := SelfLink
         }) ->
     #{ 'continue' => Continue,
+       'remainingItemCount' => RemainingItemCount,
        'resourceVersion' => ResourceVersion,
        'selfLink' => SelfLink
      }.

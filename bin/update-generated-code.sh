@@ -1,10 +1,10 @@
-#!/bin/sh
+#! /usr/bin/env sh
 
 set -e
 
 # https://raw.githubusercontent.com/kubernetes-client/python/master/scripts/swagger.json
 
-output_dir=`mktemp -d`
+output_dir=$(mktemp -d)
 
 # for now it assumes swagger is in the same parent directory
 executable="../swagger-codegen/modules/swagger-codegen-cli/target/swagger-codegen-cli.jar"
@@ -14,6 +14,6 @@ export JAVA_OPTS="${JAVA_OPTS} -XX:MaxPermSize=256M -Xmx1024M -DloggerPath=conf/
 ags="$@ generate -t ../swagger-codegen/modules/swagger-codegen/src/main/resources/erlang-client -DpackageName=kuberl \
         -i swagger.json -l erlang-client -o ${output_dir}"
 
-java $JAVA_OPTS -jar $executable $ags
+java $JAVA_OPTS -jar "$executable" $ags
 
-cp $output_dir/src/*.erl gen/
+cp "$output_dir"/src/*.erl gen/

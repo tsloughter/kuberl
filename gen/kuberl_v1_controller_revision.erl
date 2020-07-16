@@ -6,7 +6,7 @@
 
 -type kuberl_v1_controller_revision() ::
     #{ 'apiVersion' => binary(),
-       'data' => kuberl_runtime_raw_extension:kuberl_runtime_raw_extension(),
+       'data' => maps:map(),
        'kind' => binary(),
        'metadata' => kuberl_v1_object_meta:kuberl_v1_object_meta(),
        'revision' := integer()

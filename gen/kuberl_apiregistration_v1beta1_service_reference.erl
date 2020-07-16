@@ -6,12 +6,15 @@
 
 -type kuberl_apiregistration_v1beta1_service_reference() ::
     #{ 'name' => binary(),
-       'namespace' => binary()
+       'namespace' => binary(),
+       'port' => integer()
      }.
 
 encode(#{ 'name' := Name,
-          'namespace' := Namespace
+          'namespace' := Namespace,
+          'port' := Port
         }) ->
     #{ 'name' => Name,
-       'namespace' => Namespace
+       'namespace' => Namespace,
+       'port' => Port
      }.

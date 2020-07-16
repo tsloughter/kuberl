@@ -9,7 +9,7 @@
        'kind' => binary(),
        'name' := binary(),
        'preferredVersion' => kuberl_v1_group_version_for_discovery:kuberl_v1_group_version_for_discovery(),
-       'serverAddressByClientCIDRs' := list(),
+       'serverAddressByClientCIDRs' => list(),
        'versions' := list()
      }.
 

@@ -9,18 +9,21 @@
        'mountPropagation' => binary(),
        'name' := binary(),
        'readOnly' => boolean(),
-       'subPath' => binary()
+       'subPath' => binary(),
+       'subPathExpr' => binary()
      }.
 
 encode(#{ 'mountPath' := MountPath,
           'mountPropagation' := MountPropagation,
           'name' := Name,
           'readOnly' := ReadOnly,
-          'subPath' := SubPath
+          'subPath' := SubPath,
+          'subPathExpr' := SubPathExpr
         }) ->
     #{ 'mountPath' => MountPath,
        'mountPropagation' => MountPropagation,
        'name' => Name,
        'readOnly' => ReadOnly,
-       'subPath' => SubPath
+       'subPath' => SubPath,
+       'subPathExpr' => SubPathExpr
      }.

@@ -6,6 +6,7 @@
 
 -type kuberl_v1_storage_class() ::
     #{ 'allowVolumeExpansion' => boolean(),
+       'allowedTopologies' => list(),
        'apiVersion' => binary(),
        'kind' => binary(),
        'metadata' => kuberl_v1_object_meta:kuberl_v1_object_meta(),
@@ -17,6 +18,7 @@
      }.
 
 encode(#{ 'allowVolumeExpansion' := AllowVolumeExpansion,
+          'allowedTopologies' := AllowedTopologies,
           'apiVersion' := ApiVersion,
           'kind' := Kind,
           'metadata' := Metadata,
@@ -27,6 +29,7 @@ encode(#{ 'allowVolumeExpansion' := AllowVolumeExpansion,
           'volumeBindingMode' := VolumeBindingMode
         }) ->
     #{ 'allowVolumeExpansion' => AllowVolumeExpansion,
+       'allowedTopologies' => AllowedTopologies,
        'apiVersion' => ApiVersion,
        'kind' => Kind,
        'metadata' => Metadata,

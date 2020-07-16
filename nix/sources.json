@@ -1,0 +1,50 @@
+{
+    "mavenix": {
+        "branch": "v2.3.3",
+        "description": "Deterministic Maven builds using Nix [maintainer=@icetan]",
+        "homepage": "",
+        "owner": "nix-community",
+        "repo": "mavenix",
+        "rev": "1b23281b4686c03151ca096300deeeb6ae4f12f6",
+        "sha256": "1l653ac3ka4apm7s4qrbm4kx7ij7n2zk3b67p9l0nki8vxxi8jv7",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/mavenix/archive/1b23281b4686c03151ca096300deeeb6ae4f12f6.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "niv": {
+        "branch": "master",
+        "description": "Easy dependency management for Nix projects",
+        "homepage": "https://github.com/nmattia/niv",
+        "owner": "nmattia",
+        "repo": "niv",
+        "rev": "f73bf8d584148677b01859677a63191c31911eae",
+        "sha256": "0jlmrx633jvqrqlyhlzpvdrnim128gc81q5psz2lpp2af8p8q9qs",
+        "type": "tarball",
+        "url": "https://github.com/nmattia/niv/archive/f73bf8d584148677b01859677a63191c31911eae.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs": {
+        "branch": "nixos-20.03",
+        "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
+        "homepage": "https://github.com/NixOS/nixpkgs",
+        "owner": "NixOS",
+        "repo": "nixpkgs-channels",
+        "rev": "f1a79c86358c5464c64b4fad00fca07a10e62a74",
+        "sha256": "1rjhw32j0bi464d4nwywcbnb1qi4gj27cqdpbqx9r61975zv84mm",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs-channels/archive/f1a79c86358c5464c64b4fad00fca07a10e62a74.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "swagger-codegen": {
+        "branch": "v2.4.14",
+        "description": "swagger-codegen contains a template-driven engine to generate documentation, API clients and server stubs in different languages by parsing your OpenAPI / Swagger definition.",
+        "homepage": "http://swagger.io",
+        "owner": "swagger-api",
+        "repo": "swagger-codegen",
+        "rev": "48fbcb46573e2d4256bef6661c51c8a071e507d5",
+        "sha256": "1jjaai80gvphjzl6kr5caap5ii4l7fjdg0qf555n93rm7d4wxiai",
+        "type": "tarball",
+        "url": "https://github.com/swagger-api/swagger-codegen/archive/48fbcb46573e2d4256bef6661c51c8a071e507d5.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}

@@ -12,6 +12,7 @@
        'namespaced' := boolean(),
        'shortNames' => list(),
        'singularName' := binary(),
+       'storageVersionHash' => binary(),
        'verbs' := list(),
        'version' => binary()
      }.
@@ -23,6 +24,7 @@ encode(#{ 'categories' := Categories,
           'namespaced' := Namespaced,
           'shortNames' := ShortNames,
           'singularName' := SingularName,
+          'storageVersionHash' := StorageVersionHash,
           'verbs' := Verbs,
           'version' := Version
         }) ->
@@ -33,6 +35,7 @@ encode(#{ 'categories' := Categories,
        'namespaced' => Namespaced,
        'shortNames' => ShortNames,
        'singularName' => SingularName,
+       'storageVersionHash' => StorageVersionHash,
        'verbs' => Verbs,
        'version' => Version
      }.

@@ -10,6 +10,7 @@
        'globalDefault' => boolean(),
        'kind' => binary(),
        'metadata' => kuberl_v1_object_meta:kuberl_v1_object_meta(),
+       'preemptionPolicy' => binary(),
        'value' := integer()
      }.
 
@@ -18,6 +19,7 @@ encode(#{ 'apiVersion' := ApiVersion,
           'globalDefault' := GlobalDefault,
           'kind' := Kind,
           'metadata' := Metadata,
+          'preemptionPolicy' := PreemptionPolicy,
           'value' := Value
         }) ->
     #{ 'apiVersion' => ApiVersion,
@@ -25,5 +27,6 @@ encode(#{ 'apiVersion' := ApiVersion,
        'globalDefault' => GlobalDefault,
        'kind' => Kind,
        'metadata' => Metadata,
+       'preemptionPolicy' => PreemptionPolicy,
        'value' => Value
      }.

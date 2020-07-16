@@ -5,20 +5,23 @@
 -export_type([kuberl_v1beta1_custom_resource_definition_names/0]).
 
 -type kuberl_v1beta1_custom_resource_definition_names() ::
-    #{ 'kind' := binary(),
+    #{ 'categories' => list(),
+       'kind' := binary(),
        'listKind' => binary(),
        'plural' := binary(),
        'shortNames' => list(),
        'singular' => binary()
      }.
 
-encode(#{ 'kind' := Kind,
+encode(#{ 'categories' := Categories,
+          'kind' := Kind,
           'listKind' := ListKind,
           'plural' := Plural,
           'shortNames' := ShortNames,
           'singular' := Singular
         }) ->
-    #{ 'kind' => Kind,
+    #{ 'categories' => Categories,
+       'kind' => Kind,
        'listKind' => ListKind,
        'plural' => Plural,
        'shortNames' => ShortNames,

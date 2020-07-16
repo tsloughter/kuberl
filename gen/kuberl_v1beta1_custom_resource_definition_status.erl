@@ -6,12 +6,15 @@
 
 -type kuberl_v1beta1_custom_resource_definition_status() ::
     #{ 'acceptedNames' := kuberl_v1beta1_custom_resource_definition_names:kuberl_v1beta1_custom_resource_definition_names(),
-       'conditions' := list()
+       'conditions' => list(),
+       'storedVersions' := list()
      }.
 
 encode(#{ 'acceptedNames' := AcceptedNames,
-          'conditions' := Conditions
+          'conditions' := Conditions,
+          'storedVersions' := StoredVersions
         }) ->
     #{ 'acceptedNames' => AcceptedNames,
-       'conditions' => Conditions
+       'conditions' => Conditions,
+       'storedVersions' => StoredVersions
      }.
